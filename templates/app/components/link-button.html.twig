@@ -1,0 +1,3 @@
+{% macro renderLinkButton(content) %}
+  <a href="{{ content.url }}" class="btn-{{ content.type }}" {% if content.external is defined and content.external is not null %}target="_blank"{% endif %} {% if content.ariaLabel is defined and content.ariaLabel is not null %}aria-label="{{ content.ariaLabel }}"{% endif %}>{{ content.label }}</a>
+{% endmacro %}

@@ -1,0 +1,17 @@
+{% extends 'app/task_base.html.twig' %}
+{% block form %}
+    <h1>{{ title|raw }}</h1>
+
+    {% block prefix %}
+        <p id="{{ type }}-hint" class="govuk-hint">
+        {% if type == 'email' %}
+            The email may take a few minutes to arrive. Check your spam or junk folder. If it still has not arrived, you can request a new code.
+        {% else %}
+            Text messages sometimes take a few minutes to arrive. If you do not receive the text message, you can request a new one.
+        {% endif %}
+        </p>
+    {% endblock %}
+
+    {% import 'app/components/link-button.html.twig' as linkButton %}
+    {{ linkButton.renderLinkButton({ label: "Request new code", type: "primary", url: path('app_wizard_verification_resend') }) }}
+{% endblock %}

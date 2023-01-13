@@ -1,0 +1,281 @@
+#site-header--desktop {
+  @include mq(0, $menu-switch-breakpoint) {
+    display: none;
+  }
+
+  @include mq($menu-switch-breakpoint) {
+    display: block;
+    margin-bottom: $spacing-l-plus;
+
+    @include print {
+      display: none;
+    }
+  }
+}
+
+#site-header__desktop-menu {
+  background-color: $grey--light;
+
+  @include print {
+    display: none;
+  }
+
+  .site-main-menu__list {
+    @include content-area;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .site-main-menu__item {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .site-main-menu__link {
+    @include open-semi-bold;
+
+    flex-grow: 1;
+    flex-basis: calc(100% / 7);
+    display: block;
+    color: $black;
+    padding: 20px 6px;
+    margin: 0;
+    min-height: 72px;
+
+    @include mq($break-max-width) {
+      padding: 20px 8px;
+    }
+
+    &:hover {
+      background-color: $white;
+      text-decoration: none;
+    }
+
+    &:focus {
+      @include open-bold;
+
+      background-color: $brand-primary;
+      color: $white;
+      text-decoration: none;
+      outline-offset: 0;
+    }
+  }
+
+  .site-main-menu__link--active {
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border: 3px solid $brand-primary;
+      height: 1px;
+    }
+  }
+}
+
+#site-header__desktop-search-and-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: $brand-primary;
+  padding-top: $spacing-m;
+  padding-bottom: $spacing-m;
+  min-height: 90px;
+
+  @include print {
+    background-color: transparent;
+  }
+
+  .site-header__desktop-logo-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+
+    svg {
+      max-width: 158px;
+    }
+  }
+
+  .search-and-links__wrapper {
+    @include content-area;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  @mixin common-desktop-header-link-styling {
+    display: inline-flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    color: $white;
+    margin-right: $spacing-xxl;
+
+    @include mq($break-max-width) {
+      margin-right: $spacing-xxxl;
+    }
+
+    &:hover,
+    &:focus {
+      // prevents ugly text decoration between icon & text
+      text-decoration: none;
+
+      .site-header__desktop-extra-link--text {
+        text-decoration: underline;
+      }
+    }
+
+    .site-header__desktop-extra-link--icon {
+      // prevent layout shift
+      width: 22px;
+      height: 22px;
+      font-size: 22px;
+      overflow: visible;
+      display: inline-block;
+    }
+
+    .site-header__desktop-extra-link--text {
+      display: inline-block;
+      margin-left: $spacing-m;
+    }
+  }
+
+  .site-header__desktop-extra-link {
+    @include common-desktop-header-link-styling;
+
+    font-size: 16px;
+    line-height: 22px;
+    @include print {
+      display: none;
+    }
+
+    .fa-comment-alt-lines {
+      transform: rotateY(180deg);
+    }
+  }
+}
+
+.site-header__desktop-search-wrapper {
+  @include print {
+    display: none;
+  }
+
+  @include mq($break-desktop) {
+    max-width: 352px;
+  }
+}
+
+.site-header {
+  .search-form {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border: none;
+
+    @include mq(0, $break-desktop) {
+      flex-flow: row wrap;
+    }
+
+    @include mq($break-desktop) {
+      flex-flow: row nowrap;
+    }
+
+    .search-form__input-wrapper {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+
+      @include mq(0, $break-desktop) {
+        border: 1px solid $black;
+        width: 100%;
+      }
+    }
+
+    .search-form__input {
+      // 42px for submit button + some space so text doesn't go through button
+      padding-right: 45px;
+      height: 44px;
+
+      @include mq(0, $break-desktop) {
+        width: 100%;
+        border: none;
+      }
+
+      @include mq($break-desktop) {
+        min-width: 238px;
+        border: 1px solid $black;
+      }
+
+      &::placeholder {
+        font-size: 16px;
+        line-height: 16px;
+        color: $grey--medium;
+      }
+    }
+
+    .search-form__submit {
+      display: inline-block;
+      position: absolute;
+      z-index: $z-desktop-seach-icon;
+      top: 0;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border: none;
+
+      @include mq(0, $break-desktop) {
+        background-color: $brand-primary;
+        color: $white;
+      }
+
+      @include mq($break-desktop) {
+        background-color: transparent;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .search-form__dropdown {
+      background-color: $white;
+      width: 100%;
+      height: 44px;
+      color: $grey--dark;
+      min-width: auto;
+
+      @include mq(0, $break-desktop) {
+        margin-bottom: $spacing-l-plus;
+      }
+
+      @include mq($break-desktop) {
+        border: 1px solid $black;
+        padding-left: $spacing-m;
+        padding-right: $spacing-m;
+        width: 113px;
+        border-right: none;
+      }
+
+      &:focus {
+        @include common-focus-styles;
+      }
+    }
+  }
+}

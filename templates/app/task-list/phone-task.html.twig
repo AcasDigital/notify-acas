@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+    {% import 'app/components/back-link.html.twig' as backLink %}
+    {{ backLink.renderBack(backUrl) }}
+{% endblock %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block page_title %}{% endblock %}
+{% block content %}
+    {% form_theme form 'app/govuk_form_theme.html.twig' %}
+    {{ form_start(form) }}
+
+    <fieldset class="govuk-fieldset">
+        <legend>
+            <h1>{{ title|raw }}</h1>
+        </legend>
+        {% block prefix %}
+              {% if templateOptions.prefix is defined %}
+                  <p>{{ templateOptions.prefix|raw }}</p>
+              {% endif %}
+            {% endblock %}
+        <div class="govuk-form-group">
+            {{ form_row(form.phone.phoneNumber) }}
+            {% if form.phone.mobileConfirmation is defined %}
+                <p class="govuk-hint">If you give your mobile number, we will send you a text message to confirm your number. This is so we can check you are a real person and not a robot.</p>
+                {{ form_row(form.phone.mobileConfirmation) }}
+            {% endif %}
+        </div>
+        <div class="govuk-form-group">
+            <div class="phone__alternative-number{% if form.phone.alternativeNumber.vars.value == '' %} hidden{% endif %}">
+                {{ form_row(form.phone.alternativeNumber) }}
+            </div>
+            <button type="button" id="add_item" class="btn-secondary">Add another number</button>
+        </div>
+        <div class="govuk-form-group">
+            <label class="govuk-hint" for="form_phone_extraInformation">Please tell us if you cannot hear or speak on the phone or have difficulty using a phone. For example, if you need a language interpreter or to use a textphone.</label>
+            {{ form_row(form.phone.extraInformation) }}
+        </div>
+    </fieldset>
+    <div class="govuk-form-group">
+        {% import 'app/components/button.html.twig' as linkButton %}
+        {{ linkButton.renderButton({ label: "Save and continue", type: "primary"}) }}
+    </div>
+    {{ form_end(form) }}
+
+    <script>
+        const addButton = document.getElementById('add_item');
+        const alternativeNumber = document.querySelector('.phone__alternative-number');
+
+        if (!alternativeNumber.classList.contains('hidden')) {
+            addButton.classList.add('hidden');
+        }
+
+        const displayAlternativePhoneField = () => {
+            alternativeNumber.classList.remove('hidden');
+            addButton.classList.add('hidden');
+        };
+
+        addButton.addEventListener("click", displayAlternativePhoneField);
+    </script>
+{% endblock %}

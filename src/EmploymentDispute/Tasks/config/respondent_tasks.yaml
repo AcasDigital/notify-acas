@@ -1,0 +1,92 @@
+tasks:
+  respondent:
+    data_key: respondent
+    template_options:
+      prefix: <p class="govuk-hint">In most cases the claim should be made against the organisation named on the payslip, not HR or a line manager.</p>
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          label: false
+          expanded: true
+          empty_data: organisation
+          choices:
+            Organisation: organisation
+            Person: person
+    data_class: App\EmploymentDispute\Tasks\Data\StringTaskData
+    label: Organisation or person
+    title: Is the claim against an organisation or a person? (optional)
+    review: Organisations or persons
+  respondent_person_name:
+    data_key: person_name
+    template_options:
+      prefix: It is important to get the name correct. An incorrect name might lead to the claim being rejected if it goes to an employment tribunal.
+    form:
+      fullName:
+        type: App\Form\Type\FullNameType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\RespondentFullNameTaskData
+    label: Person's name
+    title: What is the person's legal name?
+  respondent_person_address:
+    data_key: person_address
+    template: app/task-list/address-task.html.twig
+    template_options:
+      address_hint: You can also enter the address below.
+    form:
+      address:
+        type: App\Form\Type\AddressType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\AddressTaskData
+    label: Person's address
+    title: What is this person's address?
+  respondent_org_name:
+    data_key: org_name
+    template: app/task-list/org-name-task.html.twig
+    template_options:
+      prefix: >
+        <p class="govuk-hint">The legal name can be found on a recent payslip, P60 or P45. For example, BLUE BOX LIMITED.</p>
+        <p><strong>It is important to get the name correct. An incorrect name might lead to the claim being rejected if it goes to an employment tribunal.</strong></p>
+    form:
+      orgName:
+        type: Symfony\Component\Form\Extension\Core\Type\TextType
+        options:
+          label: Full name
+      stillWorkingForOrg:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: "Tick this box if [you are|the claimant is] still working for this organisation (optional)"
+    data_class: App\EmploymentDispute\Tasks\Data\OrgNameTaskData
+    label: Organisation name
+    title: What is the organisation's legal name?
+  respondent_org_address:
+    data_key: org_address
+    template: app/task-list/address-task.html.twig
+    template_options:
+      address_hint: You can also enter the address below.
+    form:
+      address:
+        type: App\Form\Type\AddressType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\AddressTaskData
+    label: Organisation address
+    title: What is the organisation's address?
+  respondent_org_in_business:
+    data_key: org_in_business
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          choices:
+            Yes: yes
+            No: no
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Organisation still in business
+    title: Is the organisation still in business? (optional)
+    review: Organisation still in business
+    template_options:
+      prefix: If this organisation has gone out of business, we may not be able to contact them and see if they want to reach an agreement with [you|the claimant].

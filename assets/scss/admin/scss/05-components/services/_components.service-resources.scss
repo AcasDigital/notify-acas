@@ -1,0 +1,68 @@
+.add-ratings__section {
+  margin-bottom: $spacing-xxl;
+}
+
+// Download posters
+.poster {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: $spacing-l;
+
+  .poster__link {
+    margin-top: -5px;
+    margin-bottom: 0;
+  }
+}
+
+.poster__icon-wrapper {
+  font-size: 36px;
+  margin-right: $spacing-l;
+}
+
+.poster__content {
+  .poster__text {
+    margin: 0;
+  }
+}
+
+.resources__section {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xxxl;
+
+  h3 {
+    margin-bottom: $spacing-xl;
+  }
+
+  &.resources__section--on-this-page {
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+
+  .cqc-widget,
+  code {
+    margin-top: $spacing-xl;
+  }
+}
+
+.resources__section--about,
+.resources__section--get-code {
+  padding-bottom: $spacing-xxxl;
+  border-bottom: 4px solid $grey--light;
+}
+
+.add-ratings__section {
+  h4 {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-m;
+  }
+}
+
+.resources__section--posters {
+  h4 {
+    margin-top: $spacing-xxxl;
+    margin-bottom: $spacing-m;
+  }
+}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+    {% import 'app/components/back-link.html.twig' as backLink %}
+    {{ backLink.renderBack(backUrl) }}
+{% endblock %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<fieldset class="govuk-fieldset">
+    <legend class="sr-only">Lookup your address (optional)</legend>
+    <label for="form_postcode">Search by postcode or address</label>
+    <p id="postcode-lookup" class="govuk-hint">For example, NR14 7PZ</p>
+    {% form_theme form 'app/govuk_form_theme.html.twig' %}
+
+    <div class="govuk-form-group">
+        {# input with Id #}
+        <input type="text" id="form_postcode" name="form[postcode]" class="govuk-input" data-url="{{ path('get_postcode') }}">
+        {% import 'app/components/button.html.twig' as linkButton %}
+        {{ linkButton.renderButton({ label: "Find address", type: "primary", id: "postcode-ajax"}) }}
+    </div>
+    <div class="govuk-form-group" id="address_results" style="display: none;">
+        <label class="govuk-label" for="postcode_list">Choose an address</label>
+        <select class="govuk-select" id="postcode_list" name="postcode_list">
+            <option value="0">Select an address</option>
+        </select>
+    </div>
+</fieldset>
+<fieldset class="govuk-fieldset">
+    <legend class="sr-only">Your address details</legend>
+    {% import 'app/components/button.html.twig' as linkButton %}
+    <p id="address-lines" class="govuk-hint">
+    	{% if templateOptions.address_hint is defined %}
+            {{ templateOptions.address_hint }}
+        {% else %}
+            You can also enter your address below. You will need to do this if you do not live in the UK.
+        {% endif %}
+    </p>
+    <hr aria-hidden="true">
+    {{ form_start(form) }}
+    <div class="govuk-form-group">
+        {{ form_row(form.address) }}
+    </div>
+</fieldset>
+    {{ linkButton.renderButton({ label: "Save and continue", type: "primary"}) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('postcodeajax') }}
+
+{% endblock %}

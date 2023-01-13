@@ -1,0 +1,18 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Edit Text
+{% endblock %}
+
+{% set activeRoute = 'translation_index' %}
+
+{% block body %}
+    <a class="govuk-back-link" href="{{ path('translation_index') }}">back to list</a>
+
+    <h1>Edit Text</h1>
+
+    {{ include('admin/translation/_form.html.twig', {'button_label': 'Update', 'translation': true, 'formType': 'edit' }) }}
+
+
+    {{ include('admin/translation/_delete_form.html.twig') }}
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+    {% import 'app/components/back-link.html.twig' as backLink %}
+    {{ backLink.renderBack(backUrl) }}
+{% endblock %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block page_title %}{% endblock %}
+{% block content %}
+    {% block form %}
+        {% form_theme form 'app/govuk_form_theme.html.twig' %}
+        {{ form_start(form) }}
+        {% set representing = disputeForm.representing %}
+
+        <fieldset class="govuk-fieldset govuk-fieldset--rfd-page">
+            <legend>
+                <h1>{{ title|raw }}</h1>
+            </legend>
+            {% block prefix %}
+                <p class="govuk-hint">Tick all that apply. You will be asked relevant questions based on what you select after you save and continue.</p>
+            {% endblock %}
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.wages) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.holiday) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.redundancy) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.discrimination) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.unfair_dismissal) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.constructive_dismissal) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.wrongful_dismissal) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.equal_pay) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_row(form.whistleblowing) }}
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                        {{ form_widget(form.other, {attr: {'data-aria-controls': 'form_other_conditional'}}) }}
+                        {{ form_label(form.other, null, {'label_attr': {'class': 'govuk-checkboxes__label'} }) }}
+                    </div>
+                    <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="form_other_conditional">
+                        {{ form_label(form.other_text, 'Specify the reason. For example, payslips or trade union activity.') }}
+                        {{ form_widget(form.other_text) }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        {% import 'app/components/button.html.twig' as linkButton %}
+        {{ linkButton.renderButton({ label: "Save and continue", type: "primary"}) }}
+        {{ form_end(form) }}
+    {% endblock %}
+{% endblock %}

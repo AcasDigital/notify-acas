@@ -1,0 +1,83 @@
+.service-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $spacing-xl;
+
+  @include mq(0, $break-desktop) {
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+  }
+
+  @include mq($break-desktop) {
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+
+  @include print {
+    flex-flow: row nowrap;
+  }
+
+  .service-layout__sub-nav {
+    flex-grow: 0;
+
+    @include print {
+      display: none;
+    }
+
+    @include mq(0, $break-desktop) {
+      margin-top: $spacing-l;
+      margin-bottom: $spacing-s;
+      flex-shrink: 0;
+      flex-basis: 100%;
+    }
+
+    @include mq($break-desktop) {
+      margin-top: 0;
+      margin-bottom: 0;
+      flex-basis: calc(33.333% - #{$spacing-l});
+      max-width: calc(33.333% - #{$spacing-l});
+    }
+  }
+
+  .service-layout__main-content {
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: 100%;
+
+    @include mq(0, $break-desktop) {
+      flex-basis: 100%;
+    }
+
+    @include mq($break-desktop) {
+      flex-basis: calc(66.667% - #{$spacing-l});
+      max-width: calc(66.667% - #{$spacing-l});
+    }
+  }
+}
+
+.service__section-header {
+  margin-top: 0;
+}
+
+// Location page sub-nav
+.service-sub-nav__item {
+  margin-bottom: $spacing-m;
+
+  @include mq($break-desktop) {
+    margin-bottom: 20px;
+  }
+}
+
+.service-sub-nav__link {
+  @include link-no-underline-unless-hover;
+
+  word-break: break-word;
+
+  &.service-sub-nav__link--active {
+    @include link-no-underline-unless-hover;
+    @include open-semi-bold;
+
+    color: $grey--medium;
+  }
+}

@@ -1,0 +1,65 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Scheduled jobs"  %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block body %}
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
+    <div class="govuk-inset-text">These are tasks that run in the background to provide the site with extra functionality. If these jobs are not running the site will have limited functionality.
+    </div>
+    <dl class="govuk-summary-list">
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header govuk-!-width-one-half"></th>
+                    <th scope="col" class="govuk-table__header">Last run</th>
+                    <th scope="col" class="govuk-table__header">Next run</th>
+                    <th scope="col" class="govuk-table__header">Status</th>
+                    <th scope="col" class="govuk-table__header"></th>
+                    <th scope="col" class="govuk-table__header"></th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for key, job in jobs %}
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">{{ job.getLabel }}
+                            <p>{{ job.getDescription }}</p>
+                        </th>
+                        <td class="govuk-table__cell">
+                            {% if job.getLastRunTime %}
+                                {{ job.getLastRunTime|date('j M Y H:i') }}{% else %}Never
+                            {% endif %}
+                        </td>
+                        <td class="govuk-table__cell">{{ job.getNextRunTime|date('j M Y H:i') }}</td>
+                        <td class="govuk-table__cell">
+                            {% if status[key] == 'running'  %}
+                                <strong class="govuk-tag govuk-tag--blue">
+                                    Running
+                                </strong>
+                            {% elseif status[key] == 'queued'  %}
+                                <strong class="govuk-tag govuk-tag--grey">
+                                    Queued
+                                </strong>
+                            {% elseif job.isHealthy %}
+                                <strong class="govuk-tag govuk-tag--green">
+                                    Healthy
+                                </strong>
+                            {% else %}
+                                <strong class="govuk-tag govuk-tag--red">
+                                    Unhealthy
+                                </strong>
+                            {% endif %}
+                        </td>
+                        <td class="govuk-table__cell">
+                            <a href="{{ path('admin_jobs_history', { q: key }) }}">History</a>
+                            </form>
+                        </td>
+                        <td class="govuk-table__cell">
+                            <form action="{{ path('admin_jobs') }}" method="POST"><input type="hidden" name="type" value="{{ key }}"/><button>Run</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}

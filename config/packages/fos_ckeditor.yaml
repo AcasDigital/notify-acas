@@ -1,0 +1,21 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+# Items options: vendor/friendsofsymfony/ckeditor-bundle/src/Config/CKEditorConfiguration.php
+# https://symfony.com/bundles/FOSCKEditorBundle/current/usage/toolbar.html
+twig:
+  form_themes:
+    - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
+fos_ck_editor:
+  base_path: "build/ckeditor4"
+  js_path: "build/ckeditor4/ckeditor.js"
+  configs:
+    editable_text_config:
+      toolbar: "editable_text_toolbar"
+  toolbars:
+    configs:
+      editable_text_toolbar: ["@headings", "@styles", "@lists", "@links"]
+    items:
+      styles: ["Bold", "Italic", "Underline"]
+      lists: ["NumberedList", "BulletedList"]
+      headings: ["Format"]
+      links: ["Link", "Unlink"]
+

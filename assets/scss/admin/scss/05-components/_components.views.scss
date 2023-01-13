@@ -1,0 +1,88 @@
+/* **********************************
+* two-col view
+*  **********************************
+*/
+.view--two-col {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: $spacing-xxl;
+}
+
+.two-col-wrapper {
+  @include mq(0, $break-desktop) {
+    flex-basis: 100%;
+  }
+
+  @include mq($break-desktop) {
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-grow: 1;
+    flex-basis: calc(50% - #{$spacing-l});
+  }
+}
+
+.two-col__heading {
+  @include h3;
+
+  margin-top: 0;
+}
+
+.two-col__list-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: $spacing-l;
+
+  + .two-col__list-item {
+    margin-top: $spacing-l;
+  }
+}
+
+.two-col__icon-wrapper {
+  display: flex;
+  overflow: visible;
+  margin-right: $spacing-m;
+  font-size: $icon-size--m;
+
+  .icon {
+    min-width: $icon-size--l;
+  }
+}
+
+// Specialisms (within overview section of a location)
+.two-col-wrapper--specialisms {
+  .two-col__list--specialisms {
+    @include initial-ul-list-styling;
+
+    padding-left: 23px;
+  }
+
+  .two-col__list-item--specialisms {
+    @include cqc-bullets;
+  }
+}
+
+// Who Runs Service (within overview section of a location)
+.two-col-wrapper--who-runs-service {
+  @include mq(0, $break-desktop) {
+    margin-top: $spacing-xl;
+  }
+
+  .two-col__title--who-runs-service {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* **********************************
+* End of two-col view
+*  **********************************
+*/
+
+/* **********************************
+* Next view, below here
+*  **********************************
+*/

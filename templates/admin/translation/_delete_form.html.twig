@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('translation_delete', {'key': translation.key}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ translation.key) }}">
+    <button class="govuk-button govuk-button--warning" data-module="govuk-button">
+        Delete
+    </button>
+</form>

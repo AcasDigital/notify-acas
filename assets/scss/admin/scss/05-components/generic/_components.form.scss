@@ -1,0 +1,56 @@
+.form-group {
+  margin-bottom: $spacing-xl;
+}
+
+.facet-container + .facet-container,
+.govuk-form-group + .govuk-form-group {
+  margin-top: $spacing-l-plus;
+
+  @include mq($break-phablet) {
+    margin-top: $spacing-xl;
+  }
+}
+
+.facet-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  + .facet-item {
+    margin-top: $spacing-l;
+  }
+
+  label {
+    margin-bottom: 0;
+  }
+}
+
+.facet-item--dropdown {
+  select {
+    width: 100%;
+  }
+}
+
+form[data-form-type="newsletter"] {
+  input {
+    margin-top: $spacing-s;
+    margin-bottom: $spacing-l;
+    width: 100%;
+  }
+
+  label {
+    @include open-semi-bold;
+
+    &.required {
+      &::after {
+        display: inline-block;
+        color: red;
+        content: "*";
+      }
+    }
+  }
+
+  button[type="submit"] {
+    margin-top: $spacing-l;
+  }
+}

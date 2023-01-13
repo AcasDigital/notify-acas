@@ -1,0 +1,37 @@
+.phase-banner {
+  @include content-area;
+
+  padding-top: $spacing-m;
+  margin-top: -$spacing-s;
+  margin-bottom: $spacing-l;
+}
+.phase-banner__content__tag {
+  display: inline-block;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  color: $white;
+  background-color: #1d70b8;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1;
+  padding-top: 5px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  margin-top: 2px;
+}
+
+.phase-banner__content {
+  margin: 0;
+  padding-bottom: $spacing-m;
+  border-bottom: 1px solid $grey--light;
+}
+
+.phase-banner--beta {
+  @include print {
+    display: none;
+  }
+}

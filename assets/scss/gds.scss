@@ -1,0 +1,4 @@
+@import '01-settings/settings.typography';
+
+$govuk-font-family: $font-family-base;
+@import "node_modules/govuk-frontend/govuk/all.scss";

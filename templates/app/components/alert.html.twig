@@ -1,0 +1,16 @@
+{% macro renderAlert(alert) %}
+    <div class="alert alert--{{ alert.type }}" aria-live="polite">
+        {% if alert.icon is defined and alert.icon is not null %}
+            <div class="alert__icon">
+                <i class="{{ alert.icon }}"></i>
+            </div>
+        {% endif %}
+        <div class="alert__content">
+            {{ alert.title|raw }}
+
+            {% if alert.editableTextKey is defined and alert.editableTextKey is not null %}
+                <p class="alert__description">{{ editableText(alert.editableTextKey) }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}

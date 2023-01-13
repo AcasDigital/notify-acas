@@ -1,0 +1,62 @@
+@mixin shared-progress-styling {
+  @include text-small;
+  clear: both;
+  color: acas-color("gray-dark");
+  display: inline-block;
+  text-align: right;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.form-progress {
+  @include shared-progress-styling;
+}
+
+.text--progress {
+  @include shared-progress-styling;
+}
+
+.webform-progress {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: 40px;
+  clear: both;
+}
+
+.fieldgroup {
+  margin-bottom: 40px;
+
+  padding: 0;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    &.form-title {
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 0;
+    }
+    &.form-wrapper {
+      margin-bottom: 0;
+    }
+  }
+  legend {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0;
+    margin-left: 0;
+    display: block;
+  }
+}
+
+.fieldset-legend {
+  @include shared-label-legend-styling;
+}
+
+.control-label {
+  @include shared-label-legend-styling;
+}

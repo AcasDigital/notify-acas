@@ -1,0 +1,80 @@
+.sr-only {
+  @include sr-only;
+}
+
+.h1 {
+  @include h1;
+}
+
+.h2 {
+  @include h2;
+}
+
+.h3 {
+  @include h3;
+}
+
+.h4 {
+  @include h4;
+}
+
+.h5 {
+  @include h5;
+}
+
+.h6 {
+  @include h6;
+}
+
+.p {
+  @include p;
+}
+
+.bold {
+  @include open-bold;
+}
+
+.text-with-icon {
+  @include list-item-with-icon-and-text__list-item;
+}
+
+.text-with-icon__icon-wrapper {
+  @include list-item-with-icon-and-text__icon-wrapper;
+
+  .fa-check {
+    color: $rating-green;
+  }
+}
+
+.text-with-icon__text {
+  @include list-item-with-icon-and-text__content;
+
+  margin: 0;
+}
+
+.skip-link-wrapper {
+  background-color: $link-focus;
+
+  @include print {
+    display: none;
+  }
+
+  .govuk-skip-link {
+    @include content-area;
+
+    display: block;
+    width: 100%;
+    padding-top: $spacing-m;
+    padding-bottom: $spacing-m;
+    color: $black;
+
+    &:not(:focus) {
+      @include sr-only;
+    }
+
+    &:focus {
+      text-decoration: none;
+      outline: none;
+    }
+  }
+}

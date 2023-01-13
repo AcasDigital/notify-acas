@@ -1,0 +1,130 @@
+{% macro renderTask(respondentData) %}
+	<li>
+		{% if respondentData['org_name'] is defined and respondentData['org_name']['orgName'] is defined %}
+			{{ respondentData['org_name']['orgName'] }}
+
+		{% elseif respondentData['person_name'] is defined and respondentData['person_name']['fullName'] is defined %}
+			{% set fullName = respondentData['person_name']['fullName'] %}
+			{% if fullName['lastName'] is defined %}
+				{% set lastName = fullName['lastName'] %}
+			{% endif %}
+
+			{% if fullName['firstName'] is defined %}
+				{% set firstName = fullName['firstName'] %}
+			{% endif %}
+			{% set personName = firstName ~ ' ' ~ lastName %}
+
+			{{ personName }}
+		{% endif %}
+	</li>
+{% endmacro %}
+{% extends 'base.html.twig' %}
+{% block formBanner %}{% endblock %}
+{% block page_title %}{% endblock %}
+{% block title %}Application complete
+{% endblock %}
+{% block content %}
+	<div class="govuk-width-container">
+		<main class="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
+			<div class="govuk-grid-row">
+
+				<div class="govuk-panel govuk-panel--confirmation">
+					<h1 class="govuk-panel__title">
+						You've notified Acas
+					</h1>
+					<div class="govuk-panel__body">
+						Your reference number<br><strong>
+							{% if caseNumber %}
+								{{ caseNumber }}
+							{% endif %}
+						</strong>
+					</div>
+				</div>
+
+				<p class="govuk-body">
+					You've added the following people or organisations to your form:
+				</p>
+
+				{% if respondentSectionData is defined %}
+					<ul>
+						{% for respondentData in respondentSectionData %}
+							{{ _self.renderTask(respondentData) }}
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+				<h2>What happens next</h2>
+				{% if flowType == 'early-conciliation' %}
+					{% if contactMethod == 'email' or contactMethod == 'phone-email' %}
+						<p class="govuk-body">
+							You'll receive an email with your reference number and details of what happens next.
+						</p>
+						<p class="govuk-body">
+							You'll need your reference number when you speak to an Acas conciliator.
+						</p>
+						<p class="govuk-body">
+							If you have not received the email:
+						</p>
+						<ul>
+							<li>
+								check your spam or junk folder
+							</li>
+							<li>
+								call the Acas early conciliation team: 0300 123 1122, Monday to Friday, 9am to 5pm
+							</li>
+						</ul>
+						<p class="govuk-body">
+							If you cannot hear or speak on the phone, contact us using Relay UK text relay: 18001 0300 123 1122.
+						</p>
+					{% endif %}
+					{% if contactMethod == 'phone-post' or contactMethod == 'post' %}
+						<p class="govuk-body">
+							Make a note of your reference number. You'll need this when you speak to an Acas conciliator.
+						</p>
+						<p class="govuk-body">
+							We'll contact you to discuss your claim and what happens next.
+						</p>
+					{% endif %}
+
+				{% endif %}
+				{% if flowType == 'certificate' %}
+					{% if contactMethod == 'email' %}
+						<p class="govuk-body">
+							You'll receive an email with your certificate attached. This will include your certificate number and details of what you need to do next.
+						</p>
+						<p class="govuk-body">
+							If you have not received the email:
+						</p>
+						<ul>
+							<li>
+								check your spam or junk folder
+							</li>
+							<li>
+								call the Acas early conciliation team: 0300 123 1122, Monday to Friday, 9am to 5pm
+							</li>
+						</ul>
+						<p class="govuk-body">
+							If you cannot hear or speak on the phone, contact us using Relay UK text relay: 18001 0300 123 1122.
+						</p>
+					{% endif %}
+					{% if contactMethod == 'post' %}
+						<p class="govuk-body">
+							We'll post your certificate to the address you provided. This will include your certificate number.
+						</p>
+						<p class="govuk-body">
+							If you have not received your certificate within 5 working days, call the Acas early conciliation team on 0300 123 1122, Monday to Friday, 9am to 5pm.
+						</p>
+                    	<p class="govuk-body">
+							If you cannot hear or speak on the phone, contact us using Relay UK text relay: 18001 0300 123 1122.
+						</p>
+					{% endif %}
+				{% endif %}
+				<p class="govuk-body">If you need it, there are ways of getting <a class="govuk-link" href="https://www.acas.org.uk/getting-emotional-support">emotional support</a>.</p>
+				{% include 'app/layout/print-page.html.twig' %}
+				<a href="https://www.acas.org.uk/form/tell-satisfaction" target="_blank" class="govuk-link print-page">
+					What do you think of this service? (takes 30 seconds)
+				</a>
+			</div>
+		</main>
+	</div>
+{% endblock %}

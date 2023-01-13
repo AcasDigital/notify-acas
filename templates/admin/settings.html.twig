@@ -1,0 +1,24 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Editable text list"  %}
+{% block title %}
+	Settings
+{% endblock %}
+{% block body %}
+	<h1 class="govuk-heading-xl">Settings</h1>
+	<dl class="govuk-summary-list">
+		<div class="govuk-summary-list__row">
+			<dt class="govuk-summary-list__key">
+				CRM Endpoint
+			</dt>
+			<dd class="govuk-summary-list__value">
+				{{ crmEndpoint }}
+			</dd>
+		</div>
+	</dl>
+	{{ form_start(form) }}
+	{{ form_row(form.submission_pause, {'label': 'Pause form submissions to CRM', 'help': 'This will temporarily pause all submissions to Dynamics. When unpausing it can take up to 5 minutes for submissions to start processing again.'})}}
+	{{ form_row(form.submission_cleanup, {'label': 'Submission deletion after', 'help': 'This will set how many days after a submission is getting deleted from this system.'})}}
+
+	<button type="submit" class="govuk-button">Save settings</button>
+	{{ form_end(form) }}
+{% endblock %}

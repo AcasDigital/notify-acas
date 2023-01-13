@@ -1,0 +1,26 @@
+@import "node_modules/govuk-frontend/govuk/all.scss";
+
+// Settings & Tools - Required for every main SCSS file
+@import './admin/scss/01-settings/settings.breakpoints';
+@import './admin/scss/01-settings/settings.z-index';
+@import './admin/scss/01-settings/settings.colours';
+@import './admin/scss/01-settings/settings.spacing';
+
+
+@import './admin/scss/02-tools/tools.layout';
+@import './admin/scss/02-tools/tools.fonts';
+@import './admin/scss/02-tools/tools.common-component-layout';
+
+// Specific SCSS imports for this file
+// normalize.css / box-sizing rules etc.
+@import './admin/scss/03-generic/normalize.css';
+@import './admin/scss/03-generic/generic.box-sizing';
+
+// Utilities
+@import './admin/scss/06-utilities/utilities.misc';
+
+// Admin specific styling (some of which is copy & paste from GDS frontend compiled CSS)
+@import "./admin/scss/admin.misc";
+@import "./admin/scss/admin.layout";
+@import "./admin/scss/admin.pagination";
+@import "./admin/scss/admin.navigation";

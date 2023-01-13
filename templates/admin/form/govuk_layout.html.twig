@@ -1,0 +1,249 @@
+{% use "form_div_layout.html.twig" %}
+
+
+{% block textarea_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-textarea')|trim}) %}
+    {{- parent() -}}
+{%- endblock textarea_widget %}
+
+{% block charactercount_row %}
+    {% set widget_attr = {} %}
+    {% if help is not empty %}
+        {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
+    {% endif %}
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="{{ maxlength }}">
+        <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' govuk-form-group' ~ (not valid ? ' govuk-form-group--error'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+            {{ form_label(form) }}
+            {{ form_help(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form, widget_attr) }}
+            <div id="{{ id }}-info" class="govuk-hint govuk-character-count__message" aria-live="polite" role="status">
+                You can enter up to {{ maxlength }} characters
+            </div>
+        </div>
+    </div>
+{%- endblock charactercount_row %}
+
+{% block charactercount_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-textarea govuk-js-character-count')|trim}) %}
+    <textarea rows="{{rows}}" {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock charactercount_widget %}
+
+{%- block govukdate_row -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' govuk-form-group' ~ (not valid ? ' govuk-form-group--error'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{ form_label(form) }}
+    	{{ form_help(form) }}
+        {{ form_errors(form) }}
+        <div class="govuk-date-input">
+            <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="form_start_day">
+                    Day
+                </label>
+                {{ form_widget(form.day, { attr: { class: "govuk-input govuk-date-input__input govuk-input--width-2", inputmode: "numeric" } }) }}
+                </div>
+            </div>
+            <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="form_start_month">
+                    Month
+                </label>
+                {{ form_widget(form.month, { attr: { class: "govuk-input govuk-date-input__input govuk-input--width-2", inputmode: "numeric" } }) }}
+                </div>
+            </div>
+            <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                <label class="govuk-label govuk-date-input__label" for="form_start_year">
+                    Year
+                </label>
+                {{ form_widget(form.year, { attr: { class: "govuk-input govuk-date-input__input govuk-input--width-4", inputmode: "numeric" } }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endblock govukdate_row -%}
+
+{%- block choice_widget_collapsed -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-select')|trim}) %}
+    {{- parent() -}}
+{%- endblock choice_widget_collapsed -%}
+
+{% block form_widget_simple -%}
+    {% if type is defined and type == 'radio' %}
+        <div class="govuk-radios__item">
+    {% endif %}
+
+    {% if type is not defined or type not in ['file', 'hidden'] %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-input')|trim}) -%}
+    {% endif %}
+    {{- parent() -}}
+    {% if type is defined and type == 'radio' %}
+        </div>
+    {% endif %}
+
+{%- endblock form_widget_simple %}
+
+{% block choice_widget_expanded %}
+    {% if multiple %}
+        <div class="govuk-checkboxes">
+            <div {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    <div class="govuk-checkboxes__item">
+                        {{ form_widget(child) }}
+                        {{ form_label(child, null, {translation_domain: choice_translation_domain, label_attr: {'class': 'govuk-checkboxes__label'} }) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="govuk-radios">
+            <div {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    <div class="govuk-radios__item">
+                        {{ form_widget(child) }}
+                        {{ form_label(child, null, {translation_domain: choice_translation_domain, label_attr: {'class': 'govuk-radios__label'} }) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock choice_widget_expanded %}
+
+
+{%- block radio_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-radios__input')|trim}) %}
+    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{%- endblock radio_widget -%}
+
+{% block form_label -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' govuk-label')|trim}) -%}
+    {{- parent() -}}
+{%- endblock form_label %}
+
+
+{# Rows #}
+
+{% block form_row %}
+    {% set widget_attr = {} %}
+    {% if help is not empty %}
+        {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
+    {% endif %}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' govuk-form-group' ~ (not valid ? ' govuk-form-group--error'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{ form_label(form) }}
+        {{ form_help(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, widget_attr) }}
+    </div>
+{% endblock form_row %}
+
+
+{# Errors #}
+
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+		<span id="" role="alert" aria-live="polite" class="govuk-error-message">
+		{%- for error in errors -%}
+			<span class="govuk-visually-hidden">Error:</span> {{ error.message }}
+		{% endfor %}
+		</span>
+	{% endif %}
+{%- endblock form_errors %}
+
+
+{% block form_help %}
+  {%- if help is not empty -%}
+  <div class="govuk-hint">
+    {{ help  }}
+  </div>
+  {% endif %}
+{% endblock form_help %}
+
+
+{% block money_widget %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-date-input__input govuk-input--width-5')|trim}) %}
+    {% set prepend = not (money_pattern starts with '{{') %}
+    {% set append = not (money_pattern ends with '}}') %}
+    {% if prepend or append %}
+        <div class="govuk-input__wrapper">
+            {% if prepend %}
+                <div class="govuk-input__prefix" aria-hidden="true">{{ money_pattern|form_encode_currency }}</div>
+            {% endif -%}
+            {{ block('form_widget_simple') }}
+            {% if append -%}
+                <span class="input-group-text">{{ money_pattern|form_encode_currency }}</span>
+            {% endif %}
+        </div>
+    {% else %}
+        {{ block('form_widget_simple') }}
+    {% endif %}
+{% endblock money_widget %}
+
+
+{%- block checkbox_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' govuk-checkboxes__input')|trim}) %}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{%- endblock checkbox_widget -%}
+
+{%- block checkbox_row -%}
+    {% set widget_attr = {} %}
+    {% if help is not empty %}
+        {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
+    {% endif %}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' govuk-form-group' ~ (not valid ? ' govuk-form-group--error'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+                {{ form_errors(form) }}
+                {{ form_widget(form, widget_attr) }}
+                {{ form_label(form, null, {'label_attr': {'class': 'govuk-checkboxes__label'} }) }}
+                {{ form_help(form) }}
+            </div>
+        </div>
+    </div>
+{%- endblock checkbox_row -%}
+
+{% block checkbox_help %}
+    {%- if help is not empty -%}
+    <div class="govuk-hint govuk-checkboxes__hint">
+        {{ help|raw }}
+    </div>
+    {% endif %}
+{% endblock checkbox_help %}
+
+{% block extrainformation_row %}
+    {% set widget_attr = {} %}
+    {% if help is not empty %}
+        {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
+    {% endif %}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' govuk-form-group' ~ (not valid ? ' govuk-form-group--error'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{ form_label(form) }}
+        {{ form_help(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, widget_attr) }}
+    </div>
+{% endblock extrainformation_row %}
+
+{% block extrainformation_widget %}
+    <div class="govuk-radios" data-module="govuk-radios">
+        <div {{ block('widget_container_attributes') }}>
+        {% for child in form.hasExtra %}
+
+            <div class="govuk-radios__item">
+                {{ form_widget(child, {attr: {'data-aria-controls': 'conditional-'~child.vars.value } }) }}
+                {{ form_label(child, null, {label_attr: {'class': 'govuk-radios__label' } }) }}
+            </div>
+            {% if child.vars.value == 'yes' %}
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-yes">
+                <div class="govuk-form-group">
+                	{{ form_row(form.extraInformation) }}
+                </div>
+            </div>
+            {% else %}
+                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-no">
+                    {{ no_text|raw }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+{% endblock extrainformation_widget %}

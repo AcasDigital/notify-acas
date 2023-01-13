@@ -1,0 +1,85 @@
+{% extends 'admin/login.html.twig' %}
+{% set title = "Admin authentication" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block login %}
+    <div class="govuk-width-container ">
+        <main class="govuk-main-wrapper " id="main-content" role="main">
+
+        {# Authentication errors #}
+        {% if authenticationError %}
+        <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" aria-live="polite" tabindex="-1" data-module="govuk-error-summary">
+            <div class="govuk-error-summary__body">
+                <p>{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {# Let the user select the authentication method #}
+        {% if availableTwoFactorProviders|length > 1 %}
+            <p>{{ "choose_provider"|trans({}, 'SchebTwoFactorBundle') }}:
+                {% for provider in availableTwoFactorProviders %}
+                    <a href="{{ path("2fa_login", {"preferProvider": provider}) }}">{{ provider }}</a>
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        {# Display current two-factor provider #}
+        {# <p class="label"><label class="govuk-label govuk-label--m" for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }}{{ twoFactorProvider }}:</label></p> #}
+
+        <h1>Admin authentication</h1>
+        {% for message in app.flashes('info') %}
+            <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" aria-live="polite" tabindex="-1" data-module="govuk-error-summary">
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                           {{ message }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-danger"></div>
+        {% endfor %}
+
+        <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post">
+            <p class="widget">
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="_auth_code">
+                        {{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} received via {{ twoFactorProvider }}
+                    </label>
+                <input
+                    id="_auth_code"
+                    class="govuk-input authentication-code"
+                    type="text"
+                    name="{{ authCodeParameterName }}"
+                    autocomplete="one-time-code"
+                    autofocus
+                    {#
+                    https://www.twilio.com/blog/html-attributes-two-factor-authentication-autocomplete
+                    If your 2fa methods are using numeric codes only, add these attributes for better user experience:
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    #}
+                />
+                </div>
+            </p>
+
+            {% if displayTrustedOption %}
+                <p class="widget"><label for="_trusted"><input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" /> {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label></p>
+            {% endif %}
+            {% if isCsrfProtectionEnabled %}
+                <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+            {% endif %}
+            <div class="govuk-form-group">
+                <button class="govuk-button" type="submit">{{ "login"|trans({}, 'SchebTwoFactorBundle') }}</button>
+            </div>
+        </form>
+
+        <a href="{{ path('app_resend_login_auth_code') }}">Request a new code</a>
+        {# The logout link gives the user a way out if they can't complete two-factor authentication #}
+        <p class="cancel"><a href="{{ logoutPath }}">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a></p>
+        </main>
+    </div>
+{% endblock %}

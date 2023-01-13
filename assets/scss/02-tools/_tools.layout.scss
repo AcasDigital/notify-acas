@@ -1,0 +1,128 @@
+@mixin mq($min, $max: 0) {
+  @if $min == 0 {
+    @media all and (max-width: #{$max - 1}) {
+      @content;
+    }
+  } @else if $max == 0 {
+    @media all and (min-width: #{$min}) {
+      @content;
+    }
+  } @else {
+    @media all and (min-width: #{$min}) and (max-width: #{$max - 1}) {
+      @content;
+    }
+  }
+}
+
+@mixin print {
+  @media only print {
+    @content;
+  }
+}
+
+@mixin print-hide {
+  @include print {
+    display: none !important;
+  }
+}
+
+@mixin print-show {
+  @include print {
+    display: block !important;
+  }
+}
+
+@mixin content-area {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+  @include mq($break-tablet, $break-desktop) {
+    max-width: 750px;
+  }
+  @include mq($break-desktop, $break-desktop--large) {
+    max-width: 970px;
+  }
+  @include mq($break-desktop--large, $break-max-width) {
+    max-width: $break-desktop--large;
+  }
+  @include mq($break-max-width) {
+    max-width: $break-max-width;
+  }
+}
+
+@mixin content-area--restricted {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+  @include mq($break-tablet, $break-desktop) {
+    max-width: 75%;
+  }
+  @include mq($break-desktop, $break-desktop--large) {
+    max-width: 66.6667%;
+    max-width: calc(calc(100% / 3) * 2);
+  }
+  @include mq($break-desktop--large) {
+    max-width: 58.333%;
+    max-width: calc(calc(100% / 12) * 7);
+  }
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@mixin ie11 {
+  @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+@mixin word-wrapping {
+  // Preferentially hyphenates, otherwise will break the word.
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+@mixin old-edge {
+  /* Microsoft Edge Browser 12-18 (All versions before Chromium) */
+  @supports (-ms-ime-align: auto) {
+    @content;
+  }
+}
+
+@mixin handle-overflow {
+  // Handling text overflow
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  // End of text overflow handling
+}

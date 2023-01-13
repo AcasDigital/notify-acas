@@ -1,0 +1,125 @@
+
+.location__section-wrapper {
+  .archive-summary {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    @include mq($break-desktop) {
+      margin-top: $spacing-xxl;
+    }
+  }
+}
+
+
+.archive-summary__item {
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
+
+  .archive-summary__title {
+    margin-top: 0;
+  }
+
+  .archive-summary__header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .archive-summary__value-wrapper {
+    display: inline-flex;
+    width: auto;
+    margin-left: $spacing-l;
+    margin-top: $spacing-s;
+  }
+
+  .text-with-icon__icon-wrapper {
+    font-size: $icon-size--m;
+  }
+
+  .archive-summary__ordered-list {
+    border-bottom: 1px solid $grey--light;
+    margin-bottom: $spacing-l;
+    padding-bottom: $spacing-l;
+  }
+
+  .archive-summary__ordered-list-item {
+    margin-bottom: $spacing-xl;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .text-with-icon {
+      margin-top: $spacing-m;
+      margin-bottom: $spacing-m;
+    }
+  }
+}
+
+.inspection-summary-article {
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
+  padding-top: $spacing-l;
+  padding-bottom: $spacing-l;
+  border-bottom: 4px solid $grey--light;
+
+  &:first-of-type {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
+.view--latest-inspection-summary {
+  margin-top: $spacing-xl;
+
+  @include mq($break-desktop) {
+    margin-top: $spacing-xxxl;
+  }
+
+  .rating {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: 0;
+    margin-bottom: 0;
+  }
+
+  .rating__title-span {
+    color: $brand-primary;
+  }
+
+  .inspection-summary-article__updated-date {
+    margin-top: $spacing-xs;
+  }
+}
+
+.service-overview-meta {
+  margin: 0;
+}
+
+.inspection-summary-toc__list-item {
+  margin-bottom: $spacing-l;
+}
+
+.inspection-summary-toc__link {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  
+  .fas {
+    color: $black;
+    line-height: inherit;
+    margin-right: $spacing-m;
+    display: inline-block;
+  }
+
+  &:hover,
+  &:focus { 
+    text-decoration: none;
+
+    .inspection-summary-toc__text {
+      text-decoration: underline;
+    }
+  }
+}

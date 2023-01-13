@@ -1,0 +1,40 @@
+{% extends 'app/task_base.html.twig' %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+{# <p class="govuk-hint">You will need your save and return number, and memorable word, to return to your form</p> #}
+{% form_theme form 'app/govuk_form_theme.html.twig' %}
+{{ form_start(form) }}
+
+<fieldset class="govuk-fieldset">
+    <legend>
+        <h1>{{ title|raw }}</h1>
+    </legend>
+    <div id="validation" class="govuk-form-group">
+        {% set validationMessage = null %}
+        {% if errors|length > 0 %}
+        {% for error in errors %}
+            {% set validationMessage = error.message %}
+            {# business logic validation error div start #}
+            <div class="govuk-form-group govuk-form-group--error">
+                <span id="" role="alert" aria-live="polite" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>
+                    {{error.message}}
+                </span>
+        {% endfor %}
+        {% endif %}
+
+        {{ form_row(form.memorableWord) }}
+
+        {# confirmation code business logic validation error div end #}
+        {% if validationMessage %}
+            </div>
+        {% endif %}
+    {# </div> #}
+</fieldset>
+
+{% import 'app/components/button.html.twig' as linkButton %}
+{{ linkButton.renderButton({ label: "Set memorable word", type: "primary"}) }}
+{{ form_end(form) }}
+
+{% endblock %}
+

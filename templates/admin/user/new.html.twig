@@ -1,0 +1,13 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}New User
+{% endblock %}
+
+{% set activeRoute = 'admin_users' %}
+
+{% block body %}
+    <a class="govuk-back-link" href="{{ path('admin_users') }}">back to list</a>
+    <h1>Create new User</h1>
+
+    {{ include('admin/user/_form.html.twig') }}
+{% endblock %}

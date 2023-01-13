@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block formBanner %}{% endblock %}
+{% block title %}Notify Acas about making a claim to an employment tribunal{% endblock %}
+
+{% block body %}
+    <h1>Notify Acas about making a claim to an employment tribunal</h1>
+    <p>If you've decided to make a claim to an employment tribunal you must first notify Acas.</p>
+    <p>If you're considering making a claim to an employment tribunal, you can notify Acas. We'll then offer you our early conciliation service to try and resolve the problem without you having to go to an employment tribunal.</p>
+
+    <h2>Employment tribunal time limits</h2>
+    <p>There are time limits for employment tribunal claims. You must notify Acas within the time limit - this is usually 3 months minus 1 day.</p>
+    <a href="https://www.acas.org.uk/employment-tribunal-time-limits">Find out more about employment tribunal time limits</a>
+
+    <h2>Before you notify Acas</h2>
+    <p>If you have time, you could try to resolve the problem with your employer first. You could do this by:</p>
+    <ul>
+    <li><a href="https://www.acas.org.uk/how-to-raise-a-problem-at-work">raising the problem informally</a> – for example with your line manager</li>
+    <li><a href="https://www.acas.org.uk/grievance-procedure-step-by-step/step-2-raising-a-formal-grievance">raising a formal grievance</a> – this is where you make a formal complaint to your employer and they should follow a formal procedure</li>
+    <li><a href="https://www.acas.org.uk/appealing-a-disciplinary-or-grievance-outcome">raising an appeal</a> – this is where you appeal to your employer if you feel your disciplinary or grievance outcome was wrong or unfair</li>
+    </ul>
+    <p>If you raise the problem with your employer first, the time limits for making an employment tribunal claim do not change. You should make sure you have enough time before deciding whether to raise the problem with your employer.</p>
+
+    <h2>Early conciliation</h2>
+    <p>When you notify Acas, we'll offer you <a href="https://www.acas.org.uk/early-conciliation/how-early-conciliation-works">early conciliation</a>. This is a free service where Acas speaks with you and your employer separately to try and resolve the problem without you having to go to an employment tribunal.</p>
+
+    <h2>Notify Acas online</h2>
+    <p>You can notify Acas using our online form.</p>
+    {% import 'app/components/link-button.html.twig' as linkButton %}
+    {{ linkButton.renderLinkButton({ label: "Start now", type: "primary", url: path('app_wizard_start')}) }}
+
+    <h2>Return to your form</h2>
+    <p>If you started the form and created a memorable word, your information will be saved as you go through. You can return to your form at any time.</p>
+    {{ linkButton.renderLinkButton({ label: "Return to your form", type: "secondary", url: path('return_from_start') }) }}
+
+    <h2>Other ways to notify Acas</h2>
+    <p>If you cannot use the online form, you can notify Acas by contacting the early conciliation team.</p>
+    <p>
+    Telephone: <a href="tel:0300 123 1122">0300 123 1122</a><br/>
+    Relay UK text relay: 18001 0300 123 1122<br/>
+    Monday to Friday, 9am to 5pm
+    </p>
+    <p>Use <a href="https://www.relayuk.bt.com/how-to-use-relay-uk.html">Relay UK</a> text relay if you cannot hear or speak on the phone.</p>
+
+    <h2>Other languages</h2>
+    <p>This service is available in <a class="govuk-link" href="https://www.acas.org.uk/cymraeg">Welsh (Cymraeg)</a>.</p>
+    <p>If you (or someone you're calling on behalf of) speak another language, call the early conciliation team and we can provide an interpreter.</p>
+
+{% endblock %}

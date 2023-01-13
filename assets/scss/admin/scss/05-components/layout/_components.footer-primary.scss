@@ -1,0 +1,127 @@
+.primary-and-secondary-footer-wrapper {
+  background-color: $grey--light;
+  margin-top: $spacing-xxxxxl;
+  padding-top: $spacing-l;
+  padding-bottom: $spacing-xxxl;
+
+  @include mq($break-desktop) {
+    padding-top: $spacing-xxl;
+  }
+}
+
+#footer--primary {
+  @include content-area;
+
+  background-color: $grey--light;
+  padding-top: $spacing-xxxl;
+
+  @include print {
+    display: none;
+  }
+
+  .footer-primary__content {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  .primary-footer-menu {
+    @include mq(0, $break-desktop) {
+      flex-basis: 100%;
+      margin-bottom: $spacing-xl;
+    }
+
+    @include mq($break-desktop) {
+      flex-basis: 20%;
+      margin-right: 5%;
+      margin-bottom: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .primary-footer-menu--mobile-inactive {
+    .primary-footer-menu__title {
+      @include mq(0, $break-desktop) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .primary-footer-menu__title {
+    cursor: pointer;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: $spacing-xl;
+    padding-right: $spacing-l;
+
+    .fa-chevron-down {
+      display: none;
+    }
+
+    .fa-chevron-up {
+      display: inline;
+    }
+
+    @include mq(0, $break-desktop) {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @include mq($break-desktop) {
+      padding-right: 0;
+      position: static;
+      cursor: default;
+      margin-bottom: $spacing-xl;
+    }
+
+    .fa-chevron-down,
+    .fa-chevron-up {
+      color: $black;
+
+      @include mq($break-desktop) {
+        display: none !important;
+      }
+    }
+  }
+
+  .primary-footer-menu__list-item {
+    margin-top: 0;
+    margin-bottom: $spacing-s;
+  }
+
+  .primary-footer-menu__link {
+    @include link-no-underline-unless-hover;
+
+    font-weight: normal;
+    color: $black;
+
+    &:hover,
+    &:focus {
+      color: $links;
+    }
+  }
+
+  .primary-footer-menu--mobile-inactive {
+    .primary-footer-menu__list {
+      @include mq(0, $break-desktop) {
+        @include sr-only;
+      }
+    }
+
+    .primary-footer-menu__title {
+      .fa-chevron-down {
+        display: inline;
+      }
+
+      .fa-chevron-up {
+        display: none;
+      }
+    }
+  }
+}

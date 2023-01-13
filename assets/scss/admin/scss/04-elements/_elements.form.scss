@@ -1,0 +1,115 @@
+@mixin common-form-element-styles {
+  padding: $spacing-m;
+  border: 1px solid $black;
+  border-radius: 2px;
+  background-color: $white;
+  height: 44px;
+  width: 100%;
+
+  @include mq(0, $break-desktop) {
+    min-width: 200px;
+  }
+
+  &:focus {
+    @include common-focus-styles;
+  }
+
+  &::placeholder {
+    color: $grey--medium;
+    opacity: 1;
+  }
+}
+
+.main-content-wrapper {
+  form {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+form {
+  button[type="submit"] {
+    flex-basis: auto;
+    border-radius: 0;
+    min-height: 44px;
+    min-width: 38px;
+    flex-grow: 0;
+    padding-right: $spacing-m;
+    padding-left: $spacing-m;
+
+    @include mq($search-switch) {
+      margin-left: $spacing-l;
+    }
+  }
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  margin-bottom: $spacing-m;
+}
+
+label {
+  @include open-semi-bold;
+
+  display: block;
+  width: 100%;
+  letter-spacing: -0.25px;
+  margin-bottom: $spacing-m;
+
+  @include mq($break-desktop) {
+    letter-spacing: -0.3px;
+  }
+}
+
+input[type="email"] {
+  @include common-form-element-styles;
+}
+input[type="text"] {
+  @include common-form-element-styles;
+}
+input[type="password"] {
+  @include common-form-element-styles;
+}
+input[type="search"] {
+  @include common-form-element-styles;
+}
+input[type="number"] {
+  @include common-form-element-styles;
+}
+select {
+  @include common-form-element-styles;
+
+  width: auto;
+  color: $grey--medium;
+
+  option {
+    color: $grey--dark;
+  }
+}
+
+input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  margin-right: $spacing-m;
+}
+
+input[type="radio"] {
+  width: 22px;
+  height: 22px;
+  margin-right: $spacing-m;
+}
+
+.govuk-hint .govuk-radios__hint .description,
+.description {
+  margin-top: $spacing-xs;
+  margin-left: 0;
+  padding-left: 0;
+  color: $grey--dark;
+}

@@ -1,0 +1,5 @@
+{% macro renderButton(content) %}
+  <button class="btn-{{ content.type }}" {% if content.id|default %} id="{{ content.id }}" {% endif %}>
+    {{ content.label }}
+  </button>
+{% endmacro %}

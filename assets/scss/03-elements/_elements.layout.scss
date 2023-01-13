@@ -1,0 +1,40 @@
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $font-family-base;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.region--header {
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.region--footer {
+  border-top: 5px solid #007c85;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.region--main {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.main__content {
+  @include content-area;
+
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: block;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.main-content-wrapper {
+  @include content-area--restricted;
+}

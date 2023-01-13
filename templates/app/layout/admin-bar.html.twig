@@ -1,0 +1,8 @@
+<div class="admin-header">
+    <div class="admin-header--links">
+        <a href="{{ path('healthcheck') }}">System Health</a>
+        <a href="{{ path('admin_submission_list') }}">View all forms</a>
+        {# <a href="#" id="js-toggle-cms">Toggle Editable</a> #}
+        <a href="{{ path('app_logout', {'destination': app.request.uri }) }}">Logout</a>
+    </div>
+</div>

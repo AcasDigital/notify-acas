@@ -1,0 +1,109 @@
+// @TODO REFACTOR
+.field--name-field-promoted-links {
+  @include mq($break-tablet) {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .field--item {
+    @include mq(0, $break-tablet) {
+      flex-basis: 100%;
+    }
+    @include mq($break-tablet) {
+      flex-basis: 50%;
+      padding-right: 15px;
+    }
+  }
+}
+
+div.field--name-field-promoted-links {
+  margin-bottom: 50px;
+  clear: left;
+  overflow: auto;
+}
+
+div.field--name-field-promoted-links {
+  div.field--item {
+    margin-bottom: 30px;
+    padding-left: 0px;
+
+    h2 {
+      font-size: $font-size-standard;
+      margin-top: 0px;
+    }
+
+    .promoted-link__wrapper {
+      padding-top: 15px;
+      padding-right: 20px;
+      padding-bottom: 15px;
+      padding-left: 20px;
+      border: 4px solid acas-color("lime");
+      border-radius: 6px;
+      position: relative;
+
+      &:hover,
+      &:focus {
+        background: acas-color("gray-light");
+      }
+    }
+
+    .promoted-link__content {
+      @include text-small;
+
+      color: acas-color("black");
+      width: 100%;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@include mq($container-sm) {
+  div.field--name-field-promoted-links {
+    div.field--item {
+      .promoted-link__wrapper {
+        min-height: 12em;
+      }
+
+      .promoted-link__content {
+        bottom: 1em;
+        left: 0;
+        overflow: hidden;
+        padding: 0 20px;
+        position: absolute;
+      }
+    }
+  }
+}
+
+@include mq($container-md) {
+  div.field--name-field-promoted-links {
+    div.field--item {
+      .promoted-link__wrapper {
+        min-height: 11em;
+      }
+    }
+  }
+}
+@include mq($container-xl) {
+  div.field--name-field-promoted-links {
+    div.field--item {
+      div.promoted-link__wrapper {
+        min-height: 10em;
+      }
+    }
+  }
+}
+
+@include mq($container-lg) {
+  div.field--name-field-promoted-links {
+    div.field--item {
+      .promoted-link__wrapper {
+        min-height: 11em;
+      }
+    }
+  }
+}

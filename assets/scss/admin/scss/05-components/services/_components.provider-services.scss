@@ -1,0 +1,69 @@
+.provider-services-list {
+  .provider-services-list__list-item {
+    margin-bottom: $spacing-xl;
+
+    @include mq($break-desktop) {
+      margin-bottom: $spacing-xxl;
+    }
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 120px;
+      height: 5px;
+      background-color: $brand-primary;
+      margin-top: $spacing-xl;
+
+      @include mq($break-desktop) {
+        margin-top: $spacing-xxl;
+      }
+    }
+
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+
+    .service-header__overall-rating {
+      margin-top: 0;
+    }
+  }
+
+  .provider-services-list__actions {
+    margin-top: $spacing-xl;
+  }
+}
+
+.hods-pagination {
+  text-align: center;
+}
+
+.hods-pagination__list-items {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+.hods-pagination__item {
+  margin-right: $spacing-l;
+}
+
+.hods-pagination__link--current {
+  @include open-bold;
+
+  text-decoration: underline;
+}
+
+.hods-pagination__link {
+  font-size: 19px;
+}
+
+#nextButton,
+#prevButton {
+  .fa {
+    display: inline-block;
+    margin: 0 $spacing-m;
+    font-size: 16px;
+  }
+}

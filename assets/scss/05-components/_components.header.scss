@@ -1,0 +1,91 @@
+#header-main {
+  .container {
+    @include content-area;
+  }
+
+  img {
+    display: inline-block;
+    max-width: 10em;
+    vertical-align: text-top;
+  }
+
+  .logo {
+    @include link-no-focus;
+  }
+
+  .branding-block__logo {
+    display: block;
+  }
+
+  .region-branding-bar {
+    padding-top: 0.75em;
+    padding-bottom: 0.25em;
+
+    .print-hide {
+      @include print-hide;
+    }
+
+    .logo-hide {
+      display: none;
+      @include print-show;
+    }
+  }
+
+  .header--top {
+    border-bottom: 2px solid acas-color('teal');
+
+    @include print {
+      border-bottom: none;
+    }
+  }
+
+  .region--header-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding-bottom: $spacing-m;
+
+    @include mq($break-tablet) {
+      flex-direction: row;
+      align-items: center;
+      gap: 7.2%;
+      padding-bottom: 0;
+    }
+  }
+}
+
+@include mq($container-md) {
+  #header-main {
+    .region-branding-bar {
+      padding-bottom: 0.75em;
+    }
+  }
+}
+
+.region-form-banner {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #000;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+
+  .container {
+    @include content-area;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+h1.govuk-panel__title {
+  color: $white;
+
+  @include print {
+    color: acas-color('black');
+  }
+}
+
+.form-banner__text {
+  font-family: $font-family-semibold;
+}

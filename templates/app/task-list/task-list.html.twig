@@ -1,0 +1,135 @@
+{% macro renderTask (disputeForm, status, task, heading, data = null) %}
+    {% set friendlyStatusText = "" %}
+    {% set statusTagColour = "grey" %}
+    {% if status == 'complete' %}
+        {% set friendlyStatusText = "Completed" %}
+        {% set statusTagColour = "primary" %}
+    {% elseif status == 'optional' %}
+        {% set friendlyStatusText = "Optional" %}
+        {% set statusTagColour = "blue" %}
+    {% elseif status == 'not-started' %}
+        {% set friendlyStatusText = "Not started" %}
+        {% set statusTagColour = "grey" %}
+    {% elseif status == 'not-valid' %}
+        {% set friendlyStatusText = "Not valid" %}
+        {% set statusTagColour = "red" %}
+    {% endif %}
+
+    <li class="app-task-list__item">
+        <span class="app-task-list__task-name">
+            <a href="{{ path('app_render_task', { id: disputeForm.id, sectionId: task.sectionId, taskId: task.id, sectionAnchor: 'section-'~heading }) }}" aria-label="{{ task.label|raw }} ({{ friendlyStatusText }})">{{ task.label|raw }}</a>
+            {% if data and task.id == 'reasons_for_dispute' %}
+                <span>{{data}}</span>
+            {% else %}
+                <span class="app-task-list__respondent-type-choice">{{data}}</span>
+            {% endif %}
+        </span>
+        <strong class="govuk-tag govuk-tag--{{ statusTagColour }} app-task-list__tag" aria-hidden="true">{{ friendlyStatusText }}</strong>
+    </li>
+{% endmacro %}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block headerSection %}
+    {% include 'app/layout/header.html.twig' %}
+{% endblock %}
+{% block breadcrumbs %}
+{% endblock %}
+{% block content %}
+    {% import 'app/components/link-button.html.twig' as linkButton %}
+    <ol class="app-task-list">
+        {% set lastIndex = 0 %}
+        {% for section in sections %}
+            {% set lastIndex = loop.index %}
+            <li id="section-{{ loop.index }}" class="app-task-list__section">
+                <h2 class="app-task-list__section-title">
+                    <span class="app-task-list__section-number">{{ loop.index }}.
+                    </span>
+                    <span id="heading--{{ loop.index }}">{{ section.label|raw }}</span>
+                </h2>
+                {% if section.id == 'multiple' %}
+                    <nav aria-describedby="heading--{{ loop.index }}" class="task-list-repeated">
+                        {% set repeatedSectionId = '' %}
+                        {% set lastSectionTaskNumber = 0 %}
+                        {% set removeSectionAriaLabel = '' %}
+
+                        {% for repeatedSection in section.getSections() %}
+                            {% set repeatedSectionId = repeatedSection.id %}
+                            {% set removeSectionAriaLabel = "Remove " ~ repeatedSection.getSwitcherTaskData %}
+
+                            <section class="app-task-list__items {% if repeatedSection.tasks()|length > 1 %} app-task-list__items--has-selected-type {% else %} app-task-list__items--no-selection {% endif %}">
+                                <ul class="claims-against-list">
+                                    {% for task in repeatedSection.tasks %}
+                                    {% set taskCount = 0 %}
+                                        {% if task.id == "respondent" %}
+                                            {{ _self.renderTask(disputeForm, status[task.sectionId][task.id], task, lastIndex, repeatedSection.getSwitcherTaskData) }}
+                                        {% else %}
+                                            {{ _self.renderTask(disputeForm, status[task.sectionId][task.id], task, lastIndex) }}
+                                        {% endif %}
+                                        {% set lastSectionTaskNumber = repeatedSection.tasks()|length %}
+                                    {% endfor %}
+                                </ul>
+                            </section>
+                        {% endfor %}
+                        {# removes the last respondent section #}
+                        {% if section.getSections()|length > 1 %}
+                            {% set ariaLabel = removeSectionAriaLabel %}
+                            {{ linkButton.renderLinkButton({ ariaLabel: ariaLabel,  label: "Remove", type: "secondary", url:path('app_remove_section', {id: disputeForm.id, sectionId: repeatedSectionId, sectionAnchor: "section-"~lastIndex })}) }}
+                        {% endif %}
+
+                        {# Adds a new respondent - only dispayed when the last respondent section has all tasks displayed already #}
+                        {% if lastSectionTaskNumber > 1 %}
+                            {{ linkButton.renderLinkButton({ label: "Add another organisation or person", type: "primary", url:path('app_add_section', {id: disputeForm.id, sectionId: section.type, sectionAnchor: "section-"~lastIndex })}) }}
+                        {% endif %}
+                    </nav>
+                {% else %}
+                    {% if section.id == 'representative' and disputeForm.representing == 'myself' and disputeForm.type == 'early-conciliation' %}
+                        <p class="app-task-list govuk-hint">A ‘representative' is someone who takes part in talks and makes decisions on your behalf. This could be a trade union representative, a legal representative, friend, family member, or someone else. If you enter your ‘representative''s details here, we will contact them directly about your claim instead of contacting you.</p>
+                    {% elseif section.id == 'rfd' and disputeForm.type == 'early-conciliation' %}
+                        <p class="app-task-list govuk-hint">Tell us as much information as you can. This means an Acas conciliator will receive your case quicker and can have an informed first conversation with you.</p>
+                    {% endif %}
+                    <ul class="app-task-list__items">
+                        {% for task in section.tasks %}
+                            {% set notClaimantVerifiedEmail = (task.id != 'claimant_email_optional' and disputeForm.representing == 'myself') %}
+                            {% set notRepresentativeVerifiedEmail = (task.id != 'representative_email_optional' and disputeForm.representing == 'other') %}
+                            {% if task.id == "reasons_for_dispute" %}
+                                {{ _self.renderTask(disputeForm, status[task.sectionId][task.id], task, lastIndex, section.getSwitcherTaskLabels(storage, false)) }}
+                            {% elseif notClaimantVerifiedEmail or notRepresentativeVerifiedEmail %}
+                                {{ _self.renderTask(disputeForm, status[task.sectionId][task.id], task, lastIndex) }}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        <li class="app-task-list__section">
+            <h2 class="app-task-list__section-title">
+                <span class="app-task-list__section-number">
+                    {{ lastIndex + 1 }}.
+                </span>
+                <span id="heading--final">Check your answer and send to Acas</span>
+            </h2>
+            {# {{ editableText('check_section.task_list.section_label') }}</h2> #}
+            <ul class="app-task-list__items" aria-describedby="heading--final">
+                <li class="app-task-list__item">
+                    <span class="app-task-list__task-name">
+                        {% if valid %}
+                            <a href="{{ path('app_review', { id: disputeForm.id }) }}">Check your answer and send</a>
+                        {% else %}
+                            Check your answer and send
+                        {% endif %}
+                    </span>
+                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">
+                        {% if valid == false %}
+                            Cannot start yet
+                        {% else %}
+                            Not started
+                        {% endif %}
+                    </strong>
+                </li>
+            </ul>
+        </li>
+    </ol>
+{% endblock %}

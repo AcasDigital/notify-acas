@@ -1,0 +1,149 @@
+@mixin similar-services-and-about-care-heading {
+  @include h3;
+
+  margin-top: 0;
+  margin-bottom: $spacing-l;
+
+  @include mq($break-desktop) {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.similar-service__heading {
+  @include similar-services-and-about-care-heading;
+}
+
+.similar-service__list {
+  @include list-item-with-icon-and-text__list;
+}
+
+.similar-service__list-item {
+  @include list-item-with-icon-and-text__list-item;
+}
+
+.similar-service__content {
+  @include list-item-with-icon-and-text__content;
+}
+
+.similar-service__icon-wrapper {
+  @include list-item-with-icon-and-text__icon-wrapper;
+}
+
+.similar-service__icon {
+  @include list-item-with-icon-and-text__icon(44px);
+
+  + .similar-service__icon {
+    margin-left: $spacing-l;
+  }
+}
+
+.similar-service__title {
+  @include list-item-with-icon-and-text__title;
+}
+
+.similar-service__description {
+  @include list-item-with-icon-and-text__description;
+}
+
+.about-care__heading {
+  @include similar-services-and-about-care-heading;
+}
+
+.about-care__list {
+  @include list-item-with-icon-and-text__list;
+}
+
+.about-care__list-item {
+  @include list-item-with-icon-and-text__list-item;
+}
+
+.about-care__content {
+  @include list-item-with-icon-and-text__content;
+}
+
+.about-care__icon-wrapper {
+  @include list-item-with-icon-and-text__icon-wrapper;
+}
+
+.about-care__icon {
+  @include list-item-with-icon-and-text__icon(44px);
+}
+
+.about-care__title {
+  @include list-item-with-icon-and-text__title;
+}
+
+.about-care__description {
+  @include list-item-with-icon-and-text__description;
+}
+
+#view--similar-services-and-about-care {
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
+  padding-top: $spacing-l;
+  border-top: 3px solid $brand-primary;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @include mq($break-desktop) {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-xl;
+  }
+
+  @include print {
+    display: inline-flex;
+    border-top: 1px dashed $brand-primary;
+    border-bottom: 1px dashed $brand-primary;
+    margin-top: $spacing-s;
+    margin-bottom: $spacing-s;
+    padding-top: $spacing-s;
+    padding-bottom: $spacing-s;
+  }
+
+  #about-care {
+    flex-grow: 1;
+
+    @include mq(0, $break-desktop) {
+      flex-basis: 100%;
+      margin-top: $spacing-xl;
+    }
+
+    @include mq($break-desktop) {
+      flex-basis: 40%;
+      margin-left: $spacing-l;
+    }
+
+    @include print {
+      display: none;
+    }
+  }
+
+  #similar-services {
+    flex-grow: 1;
+
+    @include mq(0, $break-desktop) {
+      flex-basis: 100%;
+    }
+
+    @include mq($break-desktop) {
+      flex-basis: 50%;
+      margin-right: $spacing-l;
+    }
+  }
+
+  &.view--similar-services-and-about-care--no-similar-services {
+    #about-care {
+      @include mq(0, $break-desktop) {
+        border-top: none;
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      @include mq($break-desktop) {
+        margin-left: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    notify.email_verification_flow.api_key: "%env(GOV_NOTIFY_EMAIL_VERIFICATION_API_KEY)%"
+    notify.sms_verification_flow.api_key: "%env(GOV_NOTIFY_SMS_VERIFICATION_API_KEY)%"
+    notify.verification_code_override: "%env(GOV_NOTIFY_VERIFICATION_CODE_OVERRIDE)%"
+    notify.verification_code_expiry_minutes: "%env(GOV_NOTIFY_VERIFICATION_CODE_EXPIRY_MINUTES)%"
+    notify.reset_memorable_word_link_expiry_minutes: "%env(RESET_MEMORABLE_WORD_LINK_EXPIRY_MINUTES)%"
+    postcode.lookup_url: "%env(POSTCODE_LOOKUP_ENDPOINT)%"
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            string $notifyEmailVerificationFlowApiKey: "%notify.email_verification_flow.api_key%"
+            string $notifySMSVerificationFlowApiKey: "%notify.sms_verification_flow.api_key%"
+            string $crmSubmissionEndpoint: "%env(CRM_SUBMISSION_ENDPOINT)%"
+            string $crmSubmissionSubscriptionKey: "%env(CRM_SUBMISSION_SUBSCRIPTION_KEY)%"
+            string $caseReferenceGeneratorEndpoint: "%env(CASE_REFERENCE_GENERATOR_ENDPOINT)%"
+            string $subpath: "%env(SUBPATH)%"
+            string $failureMessageNotificationEmail: "%env(FAILURE_MESSAGE_NOTIFICATION_EMAIL)%"
+            string $adminAuthCodeOverride: "%env(GOV_NOTIFY_ADMIN_AUTH_CODE_OVERRIDE)%"
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    translation.loader.db:
+        class: App\Translation\DbLoader
+        tags:
+            - { name: translation.loader, alias: db }
+    App\EmploymentDispute\Validator\VerificationCodeIsValidValidator:
+        arguments:
+            - '%notify.verification_code_expiry_minutes%'
+            - '@App\EmploymentDispute\Wizard\WizardCreator'
+    App\EmploymentDispute\Wizard\EventListener\VerificationSubscriber:
+        arguments:
+            - '%notify.verification_code_override%'
+    App\EmploymentDispute\EventSubscriber\ResetMemorableLinkSubscriber:
+        arguments:
+            - '%notify.reset_memorable_word_link_expiry_minutes%'
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(DATABASE_URL)%'
+

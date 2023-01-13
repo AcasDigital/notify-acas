@@ -1,0 +1,52 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Editable text list"  %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+    <a href="{{ path('translation_new') }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+        Add new
+    </a>
+
+    <form>
+        <div class="govuk-form-group">
+            <label class="govuk-label" for="search">
+                Search
+            </label>
+            <input class="govuk-input govuk-input--width-20" id="search" name="{{ options.queryKey }}" type="text" value="{{ options.query }}">
+        </div>
+        <div class="govuk-form-group">
+            <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Filter
+            </button>
+        </div>
+    </form>
+    <dl class="govuk-summary-list">
+        <table class="govuk-table govuk-table--translations">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">Key</th>
+                    <th scope="col" class="govuk-table__header">Text</th>
+                    <th scope="col" class="govuk-table__header">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for translation in pagination %}
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header govuk-table__header--translation-key">{{ translation.key }}</th>
+                        <td class="govuk-table__cell govuk-table__cell--translation-content">{{ translation.translation|raw }}</td>
+                        <td class="govuk-table__cell">
+                            <a class="govuk-link" href="{{ path('translation_edit', { key: translation.key }) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ knp_pagination_render(pagination) }}
+
+
+        {# {{ include('admin/admin-pagination.html.twig') }} #}
+    {% endblock %}

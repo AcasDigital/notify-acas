@@ -1,0 +1,69 @@
+// Timeline (All Inspections) page
+.timeline-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-bottom: $spacing-xxl;
+
+  &:last-child {
+    margin-bottom: 0;
+
+    .timeline-item__circle-and-line {
+      &::after {
+        content: none !important;
+      }
+    }
+
+    .timeline-item__content {
+      margin-bottom: 0;
+    }
+  }
+
+  .timeline-item__circle-and-line {
+    margin-right: $spacing-l;
+
+    @include mq($break-desktop) {
+      font-size: 36px;
+    }
+
+    &::after {
+      content: " ";
+      display: block;
+      border-right: 1px solid $brand-primary;
+      margin-right: 8px;
+      height: calc(100% + 11px);
+      margin-top: -4px;
+
+      @include mq($break-desktop) {
+        margin-right: 17px;
+      }
+    }
+
+    .fa-circle {
+      color: $brand-primary;
+    }
+  }
+}
+
+.timeline-item__header-date {
+  @include p;
+
+  font-weight: normal;
+  margin-top: $spacing-s;
+  margin-bottom: 0;
+}
+
+.timeline-item__header-title {
+  @include h3;
+
+  margin-top: 0;
+  margin-bottom: $spacing-l;
+}
+
+.timeline-item__content {
+  @include p;
+
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
+}

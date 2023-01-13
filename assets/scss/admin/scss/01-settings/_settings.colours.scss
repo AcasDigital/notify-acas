@@ -1,0 +1,53 @@
+// GDS Colours
+$gov-details: #1d70b8 !default;
+$gov-details--hover: #003078 !default;
+$gov-error: #b10e1e !default;
+$gov-confirmation: #00703c !default;
+$gov-secondary: #f3f2f1 !default;
+$gov-secondary--hover: #dbdad9 !default;
+$gov-warning: #d4351c !default;
+$gov-warning--hover: #aa2a16 !default;
+$gov-focus: #fd0 !default;
+
+
+// CQC Brand Colours
+$brand-primary: #6c276a;
+$brand-primary--dark: #441742;
+
+$grey--light--lighter: #f8f8f8;
+$grey--light: #f2f2f2;
+$grey--light--darker: #e8e8e8; // Brand grey dark
+
+$grey--medium--light: #aaa9aa;
+$grey--medium: #565656;
+$grey--dark: #212121;
+$white: #fefefe;
+$black: #111;
+
+$links: #004d90;
+$link-focus: $gov-focus;
+
+
+$rating-green: #458f00;
+$rating-orange: #ff9900;
+$rating-red: #bf1000;
+$rating-grey: #999999;
+
+$panel--cqc: #f0e9f0;
+$panel--third-party: #e5edf3;
+$panel--error: #f8e7e5;
+
+$twitter: #1da1f2;
+$facebook: #3b5998;
+$youtube: #c4302b;
+
+// Migrated from Council but to be refactored out:
+$button-hover-color: $gov-focus !default;
+$button-hover-text: $black !default;
+$brand-button--hover: $brand-primary--dark !default;
+$brand-secondary--hover: rgba($brand-primary, 0.8) !default;
+$brand-primary--hover: $brand-primary--dark !default;
+$default_button_background_colour: $brand-primary !default;
+$default_button_text_colour: $white !default;
+
+

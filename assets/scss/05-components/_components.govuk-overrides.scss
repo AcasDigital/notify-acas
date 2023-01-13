@@ -1,0 +1,400 @@
+main {
+  // BEGINNING OF OVERRIDING RADIO BUTTONS
+  .govuk-radios {
+    $acas-radio-size: 25px;
+
+    .govuk-radios__item {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      min-height: 23px;
+      margin-bottom: 10px;
+      padding-left: $acas-radio-size;
+    }
+
+    .govuk-radios__input {
+      width: $acas-radio-size;
+      height: $acas-radio-size;
+
+      &:focus,
+      &:hover {
+        + .govuk-radios__label {
+          &::before {
+            border-width: 2px;
+            box-shadow: 0 0 0 4px #00838d;
+          }
+        }
+      }
+    }
+
+    .govuk-radios__label {
+      font-family: $font-family-semibold;
+      font-size: 19px;
+      padding: 0 15px;
+
+      &::before {
+        width: 26px;
+        height: 26px;
+      }
+
+      &::after {
+        top: 5px;
+        left: 5px;
+        width: 0;
+        height: 0;
+        border: 8px solid #005eb8;
+        border-radius: 50%;
+      }
+
+      &:hover {
+        &::before {
+          border-width: 2px;
+          box-shadow: 0 0 0 4px #00838d;
+        }
+      }
+    }
+  }
+  // END OF OVERRIDING RADIO BUTTONS
+
+  // BEGINNING OF OVERRIDING CHECKBOXES
+  .govuk-checkboxes {
+    .govuk-checkboxes__item {
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    .govuk-checkboxes__input {
+      @include checkbox-styling;
+
+      &:hover,
+      &:focus {
+        ~ .govuk-checkboxes__label {
+          &::before {
+            box-shadow: 0 0 0 3px #00838d;
+            border-width: 2px;
+          }
+        }
+      }
+    }
+
+    .govuk-checkboxes__label {
+      font-family: 'Open Sans Semibold', sans-serif;
+      font-size: 19px;
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 8px 15px 5px;
+      cursor: pointer;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      line-height: 1.25;
+      display: block;
+      position: relative;
+      min-height: 23px;
+      margin-bottom: 10px;
+      padding: 0px 0 0 40px;
+      clear: left;
+
+      &:hover,
+      &:focus {
+        &::before {
+          box-shadow: 0 0 0 3px acas-color('teal');
+          border-width: 2px;
+        }
+      }
+
+      &::before {
+        width: 24px;
+        height: 24px;
+      }
+
+      &::after {
+        top: 7px;
+        left: 6px;
+        width: 12px;
+        height: 6.5px;
+        border-width: 0 0 3px 3px;
+      }
+
+      
+    }
+  }
+  // END OF OVERRIDING CHECKBOXES
+
+  .govuk-fieldset--rfd-page {
+    p {
+      padding-left: 0;
+      color: $govuk-hint;
+    }
+  }
+  // BEGINNING OF OVERRIDING TEXT, EMAIL, PASSWORD, etc. INPUTS
+  .govuk-label {
+    font-family: $font-family-semibold;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .govuk-input {
+    font-family: $font-family-base;
+    min-height: 40px;
+    padding: 0.25em 0.5em;
+    height: auto;
+    border-radius: 4.75px;
+    font-size: 19px;
+    min-width: 190px;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      outline: -webkit-focus-ring-color auto 1px;
+      outline-color: -webkit-focus-ring-color;
+      outline-style: auto;
+      outline-width: 1px;
+    }
+  }
+  // END OF OVERRIDING TEXT, EMAIL, PASSWORD, etc. INPUTS
+
+  // BEGINNING OF OVERRIDING DETAILS && SUMMARY
+  .govuk-details__summary {
+    @include p(false);
+    
+    color: acas-color('teal');
+
+    &:hover {
+      color: acas-color('teal');
+
+      .govuk-details__summary-text {
+        text-decoration: none;
+      }
+    }
+
+    &:focus {
+      color: $white;
+      background-color: acas-color('teal');
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      outline: -webkit-focus-ring-color auto 1px;
+      outline-color: -webkit-focus-ring-color;
+      outline-style: auto;
+      outline-width: 1px;
+    }
+  }
+  // END OF OVERRIDING DETAILS && SUMMARY
+
+  // START OF OVERRIDING TASK STATUS BOXES
+  .govuk-tag--blue {
+    color: acas-color('teal-dark');
+    background: #eeefef;
+  }
+
+  .govuk-tag--primary {
+    background-color: acas-color('teal-dark');
+  }
+  // END OF OVERRIDING TASK STATUS BOXES
+
+  // START OF OVERRIDING CHOOSE AN ADDRESS
+  .govuk-select {
+    font-size: $font-size-standard;
+    height: 40px;
+    border: 1px solid acas-color('gray-dark');
+    border-radius: 4.75px;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  // END OF OVERRIDING CHOOSE AN ADDRESS
+
+
+  // START OF OVERRIDING MONEY - AMOUNT BOXES
+  .govuk-input__wrapper {
+    align-items: center;
+  }
+
+  .govuk-input__prefix {
+    background: acas-color('white');
+    font-size: 19px;
+    vertical-align: middle;
+    display: inline;
+    border: none;
+    padding-top: 10px;
+    min-width: auto;
+    width: auto;
+  }
+  // END OF OVERRIDING MONEY - AMOUNT BOXES
+
+  // START OF OVERRIDING TEXTAREA
+  .govuk-textarea {
+    border: 1px solid acas-color('gray-dark');
+    border-radius: 4.75px;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  // END OF OVERRIDING TEXTAREA
+
+  // START OF OVERRIDING SUBMISSION COMPLETE
+  .govuk-panel--confirmation {
+    background: acas-color('teal-dark');
+  }
+
+
+  .govuk-panel__body {
+    @include heading-font;
+  }
+
+  .govuk-panel__title {
+    @include heading-font;
+  }
+  // END OF OVERRIDING SUBMISSION COMPLETE
+
+  // START OF OVERRIDING TASK LIST - ORGANISATION ADD/REMOVE
+  .btn-primary,
+  .btn-secondary {
+    text-decoration: none;
+  }
+  // END OF OVERRIDING TASK LIST - ORGANISATION ADD/REMOVE
+
+  // START OF OVERRIDING TASK LIST - HINT TEXT
+  .govuk-hint {
+    font-family: $font-family-base;
+    font-size: $font-size-standard;
+  }
+  // END OF OVERRIDING TASK LIST - HINT TEXT
+
+  // START OF OVERRIDING TASK LIST - HINT TEXT
+  .govuk-summary-list__actions {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @include print-hide;
+  }
+  // END OF OVERRIDING TASK LIST - HINT TEXT
+
+  // START OF OVERRIDING CONFIRMATION H1 BORDER
+  .govuk-panel h1 {
+    border-left: none;
+  }
+  // END OF OVERRIDING CONFIRMATION H1 BORDER
+
+  .btn-secondary {
+    font-family: $font-family;
+  }
+}
+
+// GDS APP TASK LIST IMPLEMENTATION
+// not an override because it's not an approved GDS component (but is widely used by them)
+.app-task-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @include mq($break-tablet) {
+    min-width: 550px;
+  }
+}
+
+.app-task-list__section {
+  margin-bottom: 3rem;
+}
+
+.app-task-list__section-title {
+  @include heading-font;
+
+  display: table;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.11111;
+  margin-top: 0;
+
+  @include mq($break-tablet) {
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+}
+
+.app-task-list__items,
+.app-task-list {
+  font-family: $font-family-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-bottom: 40px;
+  list-style: none;
+  padding-left: 0;
+
+  @include mq($break-tablet) {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.31579;
+    margin-bottom: 60px;
+    padding-left: 30px;
+  }
+}
+
+.app-task-list__item {
+  border-bottom: 1px solid #b1b4b6;
+  margin-bottom: 0 !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  &:first-child {
+    border-top: 1px solid #b1b4b6;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+.app-task-list__task-name {
+  flex-basis: 20%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 20%;
+
+  @include mq(0, $break-mobile) {
+    flex-basis: 100%;
+  }
+}
+
+.app-task-list__task-name {
+  display: block;
+  margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+.app-task-list__tag {
+  @include mq(0, $break-tablet) {
+    flex-basis: auto;
+  }
+
+  @include mq($break-tablet) {
+    order: 0;
+    flex-basis: auto;
+    flex-grow: 0;
+  }
+}
+
+.app-task-list__respondent-type-choice {
+  text-transform: capitalize;
+}

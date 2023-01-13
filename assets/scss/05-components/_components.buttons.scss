@@ -1,0 +1,91 @@
+@mixin shared-button-styling {
+  @include print-hide;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: $font-size-standard;
+  padding: 0.75em;
+  min-width: 7em;
+  text-align: center;
+  width: fit-content;
+}
+
+@mixin button-colour--primary {
+  background: acas-color("teal-dark");
+  border: 1px solid acas-color("teal-dark");
+  color: acas-color("white");
+
+  &:hover,
+  &:focus {
+    background: acas-color("white");
+    border: 1px solid acas-color("teal-dark");
+    color: acas-color("teal-dark");
+  }
+
+
+  @include print {
+    background: acas-color("white");
+    border: 1px solid acas-color("teal-dark");
+    color: acas-color("teal-dark");
+  }
+}
+
+@mixin primary-button {
+  @include button-colour--primary;
+  @include shared-button-styling;
+}
+
+button:not([class]) {
+  @include primary-button;
+}
+
+input[type="submit"]:not([class]) {
+  @include primary-button;
+}
+
+input[type="reset"]:not([class]) {
+  @include primary-button;
+}
+
+input[type="button"]:not([class]) {
+  @include primary-button;
+}
+
+.btn-primary {
+  @include primary-button;
+}
+
+.btn-secondary {
+  @include shared-button-styling;
+
+  background: acas-color("white");
+  border: 1px solid acas-color("teal-dark");
+  color: acas-color("teal-dark");
+
+  &:hover,
+  &:focus {
+    background: acas-color("teal-dark");
+    color: acas-color("white");
+  }
+}
+
+.btn-group {
+  .btn-cta {
+    display: inline-block;
+  }
+}
+
+.btn-primary[disabled="true"],
+.btn-primary[disabled] {
+  cursor: default;
+  opacity: 0.3;
+
+  &:hover,
+  &:focus {
+    background-color: acas-color("teal-dark");
+    color: acas-color("white");
+    border: 1px solid acas-color("teal-dark");
+  }
+}

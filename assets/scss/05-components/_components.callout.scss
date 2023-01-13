@@ -1,0 +1,117 @@
+.acas-warning-callout {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  padding-right: 24px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  outline: 2px solid #007c85;
+  color: black;
+
+  @include mq($break-tablet) {
+    padding-top: 24px;
+    margin-bottom: 48px;
+    margin-top: 48px;
+    padding-top: 0;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    padding-left: 32px;
+  }
+
+  @include print {
+    border: 1px solid #007c85;
+    page-break-inside: avoid;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  > p {
+    font-size: 19px;
+    font-family: $font-family-base;
+    margin-top: 5px;
+    padding-top: 0.5em;
+  }
+}
+
+.visually-hidden-callout {
+  border: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.acas-warning-callout__label {
+  line-height: 1.4;
+  background-color: #007c85;
+  color: #ffffff;
+  display: inline-block;
+  margin: 0 0 -32px;
+  padding: 12px 32px;
+  position: relative;
+  top: -23px;
+  margin-left: -34px;
+  font-size: 19px;
+
+  @include mq(0, 398px) {
+    margin-left: -26px;
+    margin-right: 0;
+    padding: 12px 24px;
+  }
+
+  @include mq(0, $break-tablet) {
+    margin-left: -26px;
+    margin-right: 0;
+    padding: 12px 24px;
+    top: -23px;
+  }
+
+  @include mq(0, $break-tablet) {
+    line-height: 1.33333;
+    margin-left: -26px;
+    margin-right: 0;
+    padding: 12px 24px;
+    top: -23px;
+  }
+
+  @include print {
+    font-size: 19pt;
+    line-height: 1.15;
+    background: none;
+    color: black;
+    top: 0;
+    padding: 22px;
+    color: #007c85;
+  }
+
+  > h2 {
+    color: white;
+    font-size: 19px !important;
+    line-height: 1.4;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-family: "Century Gothic Bold", "AppleGothic", sans-serif;
+  }
+
+  > h3 {
+    color: white;
+    font-size: 19px !important;
+    line-height: 1.4;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-family: "Century Gothic Bold", "AppleGothic", sans-serif;
+  }
+}

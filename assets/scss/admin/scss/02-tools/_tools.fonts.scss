@@ -1,0 +1,195 @@
+@mixin open-regular {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+}
+
+@mixin open-regular--italic {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@mixin open-semi-bold {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 600;
+}
+
+@mixin open-bold {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: bold;
+  font-weight: 700;
+}
+
+@mixin h1($include-margin: true) {
+  @include open-regular;
+
+  color: $grey--dark;
+
+  @if $include-margin {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
+
+  @include mq(0, $break-phablet) {
+    font-size: 32px;
+    line-height: 44px;
+    letter-spacing: -0.7px;
+
+    @include print {
+      font-size: 44px;
+      line-height: 60px;
+    }
+  }
+
+  @include mq($break-phablet) {
+    font-size: 44px;
+    line-height: 60px;
+    letter-spacing: -1px;
+  }
+}
+
+@mixin h2($include-margin: true) {
+  @include open-regular;
+
+  color: $brand-primary;
+
+  @if $include-margin {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-l-plus;
+  }
+
+  @include mq(0, $break-phablet) {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.4px;
+  }
+
+  @include mq($break-phablet) {
+    font-size: 34px;
+    line-height: 46px;
+    letter-spacing: -0.5px;
+  }
+}
+
+@mixin h3($include-margin: true) {
+  @include open-regular;
+
+  color: $brand-primary;
+
+  @if $include-margin {
+    margin-top: $spacing-l;
+    margin-bottom: $spacing-l;
+  }
+
+  @include mq(0, $break-phablet) {
+    font-size: 22px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+
+  @include mq($break-phablet) {
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.4px;
+  }
+}
+
+@mixin h4($include-margin: true) {
+  @include open-regular;
+
+  color: $grey--dark;
+  letter-spacing: -0.3px;
+  font-size: 20px;
+  line-height: 26px;
+
+  @if $include-margin {
+    margin-top: $spacing-m;
+    margin-bottom: $spacing-s;
+  }
+
+  @include mq(0, $break-phablet) {
+    // none specified in designs
+  }
+
+  @include mq($break-phablet) {
+    // using desktop designs for mobile & tablet
+  }
+}
+
+@mixin h5($include-margin: true) {
+  @include open-semi-bold;
+
+  color: $grey--dark;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+
+  @if $include-margin {
+    margin-top: $spacing-s;
+    margin-bottom: $spacing-xs;
+  }
+
+  @include mq(0, $break-phablet) {
+    // none specified in designs
+  }
+
+  @include mq($break-phablet) {
+    // using desktop designs for mobile & tablet
+  }
+}
+
+@mixin h6($include-margin: true) {
+  @include open-bold;
+
+  color: $grey--dark;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+
+  @if $include-margin {
+    margin-top: $spacing-s;
+    margin-bottom: $spacing-xs;
+  }
+
+  @include mq(0, $break-phablet) {
+    // none specified in designs
+  }
+
+  @include mq($break-phablet) {
+    // using desktop designs for mobile & tablet (see above)
+  }
+}
+
+@mixin p($include-margin: true) {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+  color: $grey--dark;
+
+  @if $include-margin {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+  }
+}
+
+// For use on <ul> elements that you want to have "standard" browser styling
+@mixin initial-ul-list-styling {
+  list-style-type: disc;
+  padding-left: $spacing-l;
+}
+
+@mixin link-no-underline-unless-hover {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    @include open-bold;
+
+    text-decoration: underline;
+  }
+}

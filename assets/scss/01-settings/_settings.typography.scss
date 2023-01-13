@@ -1,0 +1,22 @@
+// Font families
+$font-family: "Open Sans", sans-serif;
+$font-family-base: $font-family;
+$font-family-headers: "Century Gothic Bold", "AppleGothic", sans-serif;
+$font-family-bold: "Open Sans Bold", sans-serif;
+$font-family-semibold: "Open Sans Semibold", sans-serif;
+
+// Font Weights
+$font-weight-body: 400;
+$font-weight-normal: $font-weight-body;
+$font-weight-semibold: 500;
+$font-weight-bold: 600;
+
+// Font sizes
+$font-size-tiny: 0.75rem;
+$font-size-small: 0.85rem;
+$font-size-standard: 1rem;
+$font-size-large: 1.25rem;
+$font-size-x-large: 2rem;
+
+// Font declarations (i.e. size + family + weight)
+$font-semibold: $font-weight-semibold 1rem $font-family-semibold;

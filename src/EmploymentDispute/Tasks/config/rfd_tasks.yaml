@@ -1,0 +1,696 @@
+tasks:
+  reasons_for_dispute:
+    data_key: rfd
+    template: app/task-list/rfd.html.twig
+    form:
+      wages:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Wages owed
+          help: >
+            [You|The claimant] can make this claim if [your|the] employer has not paid [your|the] full wage or has taken money from [your|their] wages without good reason.
+            <p>Read more about <a href="https://www.acas.org.uk/pay-and-wages" target="_blank">wages owed (opens in a new window or tab)</a></p>
+      holiday:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Holiday pay
+          help: >
+            [You| The claimant] can make this claim if [your|their] employer owes [you|them] holiday pay for any reason.
+            <p>Read more about <a href="https://www.acas.org.uk/checking-holiday-entitlement/calculating-holiday-pay" target="_blank">holiday pay (opens in a new window or tab)</a></p>
+      redundancy:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Redundancy pay
+          help: >
+            [You|The claimant] can make this claim if [your|their] employer owes [you|them] redundancy pay. [You|They] must have worked for [your|their] employer for 2 years to make this claim.
+            <p>Read more about <a href="https://www.acas.org.uk/your-rights-during-redundancy/redundancy-pay" target="_blank">redundancy pay (opens in a new window or tab)</a></p>
+      discrimination:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Discrimination
+          help: >
+            [You|The claimant] can make this claim if [you|they] have been discriminated against based on age, disability, gender reassignment, marriage or civil partnership, pregnancy and maternity, race, religion or belief, sex, or sexual orientation.
+            <p>Read more about <a href="https://www.acas.org.uk/discrimination-and-the-law" target="_blank">discrimination (opens in a new window or tab)</a></p>
+      unfair_dismissal:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Unfair dismissal
+          help: >
+            To make this claim [you|the claimant] must have been legally classed as an employee, and in most cases have worked for [your|their] employer for 2 years.
+            <p>Read more about <a href="https://www.acas.org.uk/dismissals/unfair-dismissal" target="_blank">unfair dismissal (opens in a new window or tab)</a></p>
+      constructive_dismissal:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Constructive dismissal
+          help: >
+            [You|The claimant] can make this claim if [your|their] employer has breached [your|their] contract in such a way that [you|they] felt forced to resign. In most cases [you|the claimant] must have worked for [your|their] employer for 2 years to make this claim.
+            <p>Read more about <a href="https://www.acas.org.uk/dismissals/constructive-dismissal" target="_blank">constructive dismissal (opens in a new window or tab)</a></p>
+      wrongful_dismissal:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Wrongful dismissal
+          help: >
+            [You|The claimant] can make this claim if [your|their] employer breached [your|their] employment contract, for example by dismissing [you|them] without notice, or with less than the minimum notice period.
+            <p>Read more about <a href="https://www.acas.org.uk/dismissals/unfair-dismissal" target="_blank">wrongful dismissal (opens in a new window or tab)</a></p>
+      equal_pay:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Equal pay
+          help: >
+            [You|The claimant] might be able to make this claim if [your|their] employer paid [you|them] less than someone of the opposite sex who was doing work that was equal to [yours|theirs].
+            <p>Read more about <a href="https://www.acas.org.uk/equal-pay" target="_blank">equal pay (opens in a new window or tab)</a></p>
+      whistleblowing:
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+        options:
+          label: Whistleblowing
+          help: >
+            Whistleblowing needs to relate to a Public Interest Disclosure ([you|they] raised a concern that was in the public interest).
+            <p>Read more about <a href="https://www.acas.org.uk/archive/whistleblowing" target="_blank">whistleblowing (opens in a new window or tab)</a></p>
+      other:
+        options:
+          label: Other
+        type: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+      other_text:
+        type: Symfony\Component\Form\Extension\Core\Type\TextType
+    data_class: App\EmploymentDispute\Tasks\Data\ReasonsForDisputeData
+    label: Reasons for the dispute
+    title: What is the reason for the dispute? (optional)
+  t51_wages:
+    template_options:
+      no_title_display: true
+    data_key: wages
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\MoneyType
+        options:
+          help: Enter the amount. You do not have to be exact.
+          label: How much money do[ you|es the claimant] think [you|they] are owed? (optional)
+          currency: GBP
+          scale: 0
+    data_class: App\EmploymentDispute\Tasks\Data\MoneyTaskData
+    label:
+      myself: How much money do you think you are owed?
+      other: How much money does the claimant think they are owed?
+    title:
+      myself: How much money do you think you are owed? (optional)
+      other: How much money does the claimant think they are owed? (optional)
+    review: Wages owed
+  t52_why_wages_owed:
+    data_key: wages_reason
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 400
+          label: Why do [you|they] think [you|they] are owed this money? (optional)
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label:  Why do [you|they] think [you|they] are owed this money?
+    title: Why do [you|they] think [you|they] are owed this money? (optional)
+    review: Why money is owed
+  t53_when_wages_owed:
+    data_key: wages_date
+    template_options:
+      no_title_display: true
+    form:
+      start:
+        type: App\Form\Type\GovukDateType
+        options:
+          label: When should [you|they] have received this money? (optional)
+          help: For example 27 03 2007
+    data_class: App\EmploymentDispute\Tasks\Data\DateTaskData
+    label: When should [you|the claimant] have received this money?
+    title: When should [you|they] have received this money? (optional)
+    review: When it should have been paid
+  t53b_when_redundancy_owed:
+    data_key: redundancy_date
+    template_options:
+      no_title_display: true
+    form:
+      start:
+        type: App\Form\Type\GovukDateType
+        options:
+          label: When should [you|the claimant] have received [your|their] redundancy payment? (optional)
+          help: For example 27 03 2007
+    data_class: App\EmploymentDispute\Tasks\Data\DateTaskData
+    label: When should [you|the claimant] have received [your|their] redundancy payment?
+    title: When should [you|the claimant] have received [your|their] redundancy payment? (optional)
+    review: When should the redundancy payment have been received
+  t54_internal_procedures:
+    weight: 100
+    data_key: t54_internal_procedures
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: "Have [you|they] previously raised the problem with [your|their] employer? (optional)"
+          help: For example, have [you|they] raised a grievance or an appeal relating to this claim.
+          extra_maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+          extra_info_label: How did [your|their] employer respond?
+          extra_info_help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          no_text:
+              <p>See if there's another way to solve the problem, for example <a href="https://www.acas.org.uk/how-to-raise-a-problem-at-work" target="_blank">raising the problem informally (opens in a new window or tab)</a> with [your|the claimant's] line manager or <a href="https://www.acas.org.uk/grievance-procedure-step-by-step" target="_blank">raising a formal grievance (opens in a new window or tab)</a>.</p>
+              <p><strong>In most cases, you have 3 months minus 1 day to make a claim from the date the problem at work happened.</strong></p>
+              <p>If [you|they] raise the problem with [your|their] employer first, the time limit for making an employment tribunal claim does not change. [You|They] should make sure [you|they] have enough time before deciding whether to raise the problem with [your|their] employer.</p>
+              <p>For help, <a href="https://www.acas.org.uk/contact" target="_blank">contact the Acas helpline (opens in a new window or tab)</a>, speak to a solicitor or get advice from Citizens Advice.</p>
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: "Have [you|they] previously raised the problem with [your|their] employer?"
+    review: Internal procedures
+  t55_holiday_pay:
+    data_key: holiday_pay
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\MoneyType
+        options:
+          help: Enter the amount. You do not have to be exact.
+          label: How much holiday pay do[ you|es the claimant] think [you|they] are owed? (optional)
+          currency: GBP
+    data_class: App\EmploymentDispute\Tasks\Data\MoneyTaskData
+    label: How much holiday pay do[ you|es the claimant] think [you|they] are owed?
+    title: How much holiday pay do[ you|es the claimant] think [you|they] are owed? (optional)
+    review: Holiday pay owed
+  t56_holiday_year:
+    data_key: holiday_year
+    template_options:
+      prefix: >
+        <p>[Your|The claimant's] holiday year should be set in [your|their] employment contract. For example, it might run from 1 January to 31 December.</p>
+
+        <p>If it's not set out in [your|their] contract, it will start:</p>
+        <ul>
+          <li>
+            on the first day of a new job (if started after 1 October 1998)
+          </li>
+          <li>
+            on 1 October (if started on or before 1 October 1998)
+          </li>
+        </ul>
+        <p>
+          Find out more about calculating <a href="https://www.gov.uk/holiday-entitlement-rights/calculate-leave-entitlement" target="_blank">leave entitlement on GOV.UK (opens in a new window or tab)</a>
+        </p>
+    form:
+      start:
+        type: App\Form\Type\GovukDateType
+        options:
+          label: Start date
+          help: For example 27 03 2007
+      end:
+        type: App\Form\Type\GovukDateType
+        options:
+          label: End date
+          help: For example 27 03 2007
+    data_class: App\EmploymentDispute\Tasks\Data\HolidayDateTaskData
+    label: When does [your|the claimant's] holiday year start and end?
+    title: When does [your|the claimant's] holiday year start and end? (optional)
+    review: Holiday year
+  t57_more_than_two_years:
+    data_key: more_than_two_years
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ChoiceExtraType
+        options:
+          label: Ha[ve you|s the claimant] worked for [your|their] employer for more than 2 years? (optional)
+          help: You can find [your|the claimant's] start date on [your|their] contract or letter of employment, and the leaving date on [your|their] P45. Include any time spent on probation. In most cases [you|the claimant] must have worked for their employer for 2 years to make this claim.
+          no_text: >
+            <p><strong>[You|The claimant] can still try early conciliation, but if [you|they] have not worked for [your|their] employer for 2 years it might be more difficult for the claim to be successful. For help, <a href="https://www.acas.org.uk/contact" target="_blank">contact the Acas helpline (opens in a new window or tab)</a>, speak to a solicitor or get advice from Citizens Advice.</strong></p>
+    data_class: App\EmploymentDispute\Tasks\Data\ChoiceExtraTaskData
+    label: Ha[ve you|s the claimant] worked for [your|their] employer for more than 2 years?
+    title: Ha[ve you|s the claimant] worked for [your|their] employer for more than 2 years? (optional)
+    review: More than 2 years
+  t58_termination_date:
+    data_key: termination_date
+    template_options:
+      no_title_display: true
+    form:
+      start:
+        type: App\Form\Type\GovukDateType
+        options:
+          label: What was [your|the claimant's] 'effective date of termination'? (optional)
+          help: This is either the last day of [your|their] notice period, or the date [you|they] were dismissed if [your|the] employer did not give [you|them] notice. For example, 16 8 2022.
+    data_class: App\EmploymentDispute\Tasks\Data\DateTaskData
+    label: What was [your|the claimant's] 'effective date of termination'?
+    title: What was [your|the claimant's] 'effective date of termination'? (optional)
+    review: Date of termination
+  t59_redundancy_pay:
+    data_key: redundancy_pay
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\MoneyType
+        options:
+          help: Enter the amount. You do not have to be exact.<br />Find out how to <a href="https://www.gov.uk/calculate-your-redundancy-pay" target="_blank">calculate your statutory redundancy pay on GOV.UK (opens in a new window or tab)</a>
+          help_html: true
+          label: How much redundancy pay [are you|is the claimant] owed? (optional)
+          currency: GBP
+    data_class: App\EmploymentDispute\Tasks\Data\MoneyTaskData
+    label:  How much redundancy pay [are you|is the claimant] owed?
+    title:  How much redundancy pay [are you|is the claimant] owed? (optional)
+    review: Redundancy pay owed
+  t60_notice_period:
+    data_key: notice_period
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          choices:
+            Yes: yes
+            No: no
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Did [you|the claimant] work a notice period?
+    title: Did [you|the claimant] work a notice period? (optional)
+    review: Notice period
+  t61_why_discrimated:
+    data_key: discrimated
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          help: Select all the reasons that you think apply. By law, [you|the claimant] can only claim discrimination for these reasons, called 'protected characteristics'.
+          help_html: true
+          choices:
+            id: why_discriminated
+          multiple: true
+          expanded: true
+    data_class: App\EmploymentDispute\Tasks\Data\ArrayTaskData
+    label: What [do you|does the claimant] believe is the reason behind the discrimination at work?
+    title: What [do you|does the claimant] believe is the reason behind the discrimination at work? (optional)
+    review: Reason for discrimination
+  t62_when_discriminated:
+    data_key: when_discriminated
+    template_options:
+      no_title_display: true
+    form:
+      start:
+        type: App\Form\Type\GovukDateType
+        options:
+          help: >
+            <p><strong>If it has been over 3 months since the most recent incident, it may be difficult for [your|the] claim to be successful as [your|the] time limit will have passed for making a claim to an employment tribunal. For help, <a href="https://www.acas.org.uk/contact" target="_blank">contact the Acas helpline (opens in a new window or tab)</a>, speak to a solicitor or get advice from Citizens Advice.</strong></p>
+            <p class="govuk-hint">For example, 27 3 2007</p>
+          help_html: true
+          label: When was the last time [you|the claimant] felt discriminated against at work? (optional)
+    data_class: App\EmploymentDispute\Tasks\Data\DateTaskData
+    label: When was the last time [you|the claimant] felt discriminated against at work?
+    title: When was the last time [you|the claimant] felt discriminated against at work? (optional)
+    review: When last discriminated
+  t63_one_off:
+    data_key: one_off
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          choices:
+            Yes: yes
+            No: no
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Was this a one-off incident?
+    title: Was this a one-off incident? (optional)
+    review: One-off incident
+  t64_discrimination_details:
+    data_key: discrimination_details
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: Give details on what happened (optional)
+          help: >
+            <p>Tell us as much as you feel able to at this time. For example, tell us what happened, when it happened, who was involved and why [you think|the claimant thinks] it's discrimination.</p>
+            <p>You can give more detail when you speak to your Acas conciliator. Any information you provide is confidential – we will not share it with [your|the] employer without your permission. We will speak to you before we speak to [your|the claimant's] employer.</p>
+          help_html: true
+          maxlength: 800
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Give details on what happened
+    title: Give details on what happened (optional)
+    review: Discrimination details
+  t65_reason_for_dismissal:
+    data_key: reason_for_dismissal
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: What reason was given for [your|the claimant's] dismissal? (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: What reason was given for [your|the claimant's] dismissal?
+    title: What reason was given for [your|the claimant's] dismissal? (optional)
+    review: Reason for dismissal
+  t66_why_dismissal_unfair:
+    data_key: why_dismissal_unfair
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: Why do[ you|es the claimant] think the dismissal was unfair? (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Why do[ you|es the claimant] think the dismissal was unfair?
+    title: Why do[ you|es the claimant] think the dismissal was unfair? (optional)
+    review: Why is dismissal unfair
+  t67_internal_procedures_dismissal:
+    weight: 100
+    data_key: internal_procedures_dismissal
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: Did [your|the] employer go through a dismissal procedure before dismissing [you|the claimant]? (optional)
+          extra_maxlength: 400
+          maxlength_error: What happened? must be {{ limit }} characters or less
+          extra_info_label: What happened?
+          extra_info_help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          no_text:
+              <p>See if there's another way to solve the problem, for example <a href="https://www.acas.org.uk/how-to-raise-a-problem-at-work" target="_blank">raising the problem informally (opens in a new window or tab)</a> with [your|the claimant's] line manager or <a href="https://www.acas.org.uk/grievance-procedure-step-by-step" target="_blank">raising a formal grievance (opens in a new window or tab)</a>.</p>
+              <p><strong>In most cases, you have 3 months minus 1 day to make a claim from the date the problem at work happened.</strong></p>
+              <p>If the internal procedures take longer than 3 months then it is better to use Acas early conciliation. For help, <a href="https://www.acas.org.uk/contact" target="_blank">contact the Acas helpline (opens in a new window or tab)</a>, speak to a solicitor or get advice from Citizens Advice.</p>
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: Did [your|the] employer go through a dismissal procedure before dismissing [you|the claimant]?
+    title: Did [your|the] employer go through a dismissal procedure before dismissing [you|the claimant]? (optional)
+    review: Internal procedure before dismissal
+  t68_dismissal_appeal:
+    data_key: dismissal_appeal
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          choices:
+            Yes: yes
+            No: no
+    label: Ha[ve you|s the claimant] appealed against the dismissal?
+    title: Ha[ve you|s the claimant] appealed against the dismissal? (optional)
+    review: Dismissal appealed
+  t74_failing_providing_equal_pay:
+    data_key: failing_providing_equal_pay
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: How did [your|the claimant's] employer fail to provide equal pay? (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label:
+      myself: How did your employer fail to provide equal pay?
+      other: How did the claimant's employer fail to provide equal pay?
+    title:
+      myself: How did your employer fail to provide equal pay? (optional)
+      other: How did the claimant's employer fail to provide equal pay? (optional)
+    review: Fail to provide equal pay
+  t75_oposite_sex_comparison:
+    data_key: oposite_sex_comparison
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          multiple: false
+          choices:
+            id: yes_no
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label:
+      myself: Are you comparing your pay to a person of the opposite sex?
+      other: Are you comparing the claimant's pay to a person of the opposite sex?
+    title:
+      myself: Are you comparing your pay to a person of the opposite sex? (optional)
+      other: Are you comparing the claimant's pay to a person of the opposite sex? (optional)
+    review: Opposite sex comparison
+  t76_similar_claim:
+    data_key: similar_claim
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          multiple: false
+          choices:
+            id: yes_no
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label:
+      myself: Have other people in your organisation made a similar claim?
+      other: Have other people in the claimant's organisation made a similar claim?
+    title:
+      myself: Have other people in your organisation made a similar claim? (optional)
+      other: Have other people in the claimant's organisation made a similar claim? (optional)
+    review: Similar claim
+  t77_raised_with:
+    data_key: raised_with
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          help: Select all that apply.
+          choices:
+            id: raised_with
+          multiple: true
+          expanded: true
+          label_html: true
+    data_class: App\EmploymentDispute\Tasks\Data\ArrayTaskData
+    label: Who did [you|the claimant] raise it with?
+    title: Who did [you|the claimant] raise it with? (optional)
+    review: Raised with
+  t78_what_is_the_concern:
+    data_key: what_is_the_concern
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: What was [your|the claimant's] concern about (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator. Any information you provide is confidential – we will not share it with [your|the] employer without your permission. We will speak to you before we speak to [your|the claimant's] employer.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: What was [your|the claimant's] concern about?
+    title: What was [your|the claimant's] concern about (optional)
+    review: What is the concern
+  t79_why_is_it_about_whistleblowing:
+    data_key: why_is_it_about_whistleblowing
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          help: Select all that apply.
+          choices:
+            id: is_it_about_whistleblowing
+          multiple: true
+          expanded: true
+    data_class: App\EmploymentDispute\Tasks\Data\ArrayTaskData
+    label: Why [do you feel your|does the claimant feel their] claim is about whistleblowing?
+    title: Why [do you feel your|does the claimant feel their] claim is about whistleblowing? (optional)
+    review: Why is it about whistleblowing
+  t80_what_is_the_detriment:
+    data_key: what_is_the_detriment
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: What is the detriment [you|the claimant] faced because of whistleblowing? (optional)
+          help: A detriment could be a financial loss, dismissal or any action at work that left [you|the claimant] harmed or disadvantaged. Keep it brief, you can give more detail when you speak to your Acas conciliator. We will speak to you before we speak to [your|the claimant's] employer.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: What is the detriment [you|the claimant] faced because of whistleblowing?
+    title: What is the detriment [you|the claimant] faced because of whistleblowing? (optional)
+    review: What is the detriment
+  t81_date_of_detriment:
+    data_key: date_of_detriment
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: Do[ you|es the claimant] know the most recent date when [you|they] suffered the detriment? (optional)
+          field_type: date
+          help: This is the date when [you|they] were treated less favourably or put at a disadvantage. For example, [you|they] made a complaint and as a result 6 months later [you|they] were [demoted|dismissed]. The day of the [demotion|dismissal] is the date of the detriment.
+          extra_info_label: Enter date
+          extra_info_help: For example 27 3 2007
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: Do[ you|es the claimant] know the most recent date when [you|they] suffered the detriment?
+    title: Do[ you|es the claimant] know the most recent date when [you|they] suffered the detriment? (optional)
+    review: Date of detriment
+  t83_dispute_details:
+    data_key: dispute_details
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: Give details about the dispute (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 800
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Give details about the dispute
+    title: Give details about the dispute (optional)
+    review: Dispute details
+  t84_dispute_date:
+    data_key: dispute_date
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: Do[ you|es the claimant] know when the dispute happened? (optional)
+          field_type: date
+          extra_info_label: Enter date
+          extra_info_help: For example 27 3 2007
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: Do[ you|es the claimant] know when the dispute happened?
+    title: Do[ you|es the claimant] know when the dispute happened? (optional)
+    review: Dispute date
+  t85_other_information:
+    data_key: other_information
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: Is there any other information you want to give us? (optional)
+          extra_maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+          extra_info_label: What happened?
+          extra_info_help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: Is there any other information you want to give us?
+    title: Is there any other information you want to give us? (optional)
+    review: Any other information
+  t69_resignation_date:
+    data_key: resignation_date
+    template_options:
+      no_title_display: true
+    form:
+      start:
+        type: App\Form\Type\GovukDateType
+        options:
+          label: When did [you|the claimant] resign? (optional)
+          help: For example 27 03 2007
+    data_class: App\EmploymentDispute\Tasks\Data\DateTaskData
+    label: When did [you|the claimant] resign?
+    title: When did [you|the claimant] resign? (optional)
+    review: Resignation date
+  t70_no_option_but_resign:
+    data_key: no_option_but_resign
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: Why did [you|the claimant] feel [you|they] had no option but to resign? (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Why did [you|the claimant] feel [you|they] had no option but to resign?
+    title: Why did [you|the claimant] feel [you|they] had no option but to resign? (optional)
+    review: No option but to resign
+  t71_about_notice_pay:
+    data_key: about_notice_pay
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: Is this claim about notice pay? (optional)
+          field_type: money
+          currency: GBP
+          scale: 0
+          help_html: true
+          help: <a href="https://www.acas.org.uk/final-pay-when-someone-leaves-a-job" target=_blank>Find out more about notice pay (opens in a new window or tab)</a>
+          extra_info_help: Enter the amount of notice pay. You do not have to be exact.
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: Is this claim about notice pay?
+    title: Is this claim about notice pay? (optional)
+    review: Is about notice pay
+  t72_employment_contract:
+    data_key: employment_contract
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          expanded: true
+          multiple: false
+          choices:
+            id: yes_no
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: Did [you|the claimant] have an employment contract?
+    title: Did [you|the claimant] have an employment contract? (optional)
+    review: Employment contract
+  t73_clause_was_breached:
+    data_key: clause_was_breached
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: App\Form\Type\CharacterCountType
+        options:
+          label: What clause in [your|the cliamant's] contract was breached? (optional)
+          help: Keep it brief. You can give more detail when you speak to your Acas conciliator.
+          maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: What clause in [your|the cliamant's] contract was breached?
+    title: What clause in [your|the cliamant's] contract was breached? (optional)
+    review: What clause was breached
+  t82_internal_procedures_whistleblowing:
+    weight: 100
+    template_options:
+      no_title_display: true
+    data_key: internal_procedures_whistleblowing
+    form:
+      data:
+        type: App\Form\Type\ExtraInformationType
+        options:
+          label: Did [you|the claimant] raise the detriment [you|they] suffered from whistleblowing with [your|their] employer? (optional)
+          help: For example, [you|they] raised a grievance or an appeal relating to this claim.
+          extra_maxlength: 400
+          maxlength_error: The text must be {{ limit }} characters or less
+          extra_info_label: How did [your|their] employer respond?
+          extra_info_help: Keep it brief. You can give more detail when you speak to your Acas conciliator. We will speak to you before we speak to [your|the claimant's] employer.
+          no_text:
+            <p>See if there's another way to solve the problem, for example <a href="https://www.acas.org.uk/how-to-raise-a-problem-at-work" target="_blank">raising the problem informally (opens in a new window or tab)</a> with [your|the claimant's] line manager or <a href="https://www.acas.org.uk/grievance-procedure-step-by-step" target="_blank">raising a formal grievance (opens in a new window or tab)</a>.</p>
+            <p><strong>In most cases, you have 3 months minus 1 day to make a claim from the date the problem at work happened.</strong></p>
+            <p>If [you raise|the claimant raises] the problem with [your|their] employer first, the time limit for making an employment tribunal claim does not change. [You|They] should make sure [you|they] have enough time before deciding whether to raise the problem with [your|their] employer. For help, <a href="https://www.acas.org.uk/contact" target="_blank">contact the Acas helpline (opens in a new window or tab)</a>, speak to a solicitor or get advice from Citizens Advice.</p>
+    data_class: App\EmploymentDispute\Tasks\Data\ExtraInformationTaskData
+    label: Ha[ve you|s the claimant] been through any internal procedures relating to this whistleblowing claim?
+    title: Did [you|the claimant] raise the detriment [you|they] suffered from whistleblowing with [your|their] employer? (optional)
+    review: Internal procedures (whistleblowing)
+
+
+

@@ -1,0 +1,39 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Translation
+{% endblock %}
+
+{% block body %}
+    <h1>Translation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ translation.id }}</td>
+            </tr>
+            <tr>
+                <th>Domain</th>
+                <td>{{ translation.domain }}</td>
+            </tr>
+            <tr>
+                <th>Locale</th>
+                <td>{{ translation.locale }}</td>
+            </tr>
+            <tr>
+                <th>Key</th>
+                <td>{{ translation.key }}</td>
+            </tr>
+            <tr>
+                <th>Translation</th>
+                <td>{{ translation.translation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('translation_index') }}">back to list</a>
+
+    <a href="{{ path('translation_edit', {'id': translation.id}) }}">edit</a>
+
+    {{ include('translation/_delete_form.html.twig') }}
+{% endblock %}

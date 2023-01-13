@@ -1,0 +1,124 @@
+.download-report {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: $spacing-l;
+
+  @include mq($break-desktop) {
+    flex-flow: row nowrap;
+  }
+
+  @include print {
+    display: none;
+  }
+}
+
+
+.download-report__full-report {
+  flex-basis: 100%;
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
+
+  @include mq($break-desktop) {
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-basis: auto;
+    margin-right: 20px;
+  }
+
+  .fa-arrow-alt-to-bottom {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
+.download-report__text {
+  @include open-semi-bold;
+
+  margin-left: $spacing-xs;
+}
+
+.download-report__download-report {
+  flex-basis: 100%;
+
+  @include mq($break-desktop) {
+    flex-basis: auto;
+  }
+}
+
+.download-report__download-report {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  @include mq($break-desktop) {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+
+.download-report__publish-info {
+  p {
+    margin: 0;
+  }
+}
+
+.download-report__icon-wrapper {
+  font-size: $icon-size--l;
+  margin-right: $spacing-l;
+}
+
+.download-report__publish-info-date {
+  @include p;
+}
+
+.download-report__or-text {
+  @include mq(0, $break-desktop) {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: $spacing-l;
+    margin-bottom: $spacing-l;
+  }
+
+  @include mq($break-desktop) {
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
+
+.download-report__link {
+  text-decoration: none;
+  
+  &:hover,
+  &:focus {
+    text-decoration: none;
+
+    .download-report__text {
+      text-decoration: underline;
+    }
+  }
+
+  .fa-arrow-alt-to-bottom {
+    display: inline-block;
+    width: 12px;
+    height: 16px;
+    overflow: visible;
+  }
+}
+
+
+.overview-download-report {
+  .download-report {
+    background-color: $grey--light;
+    padding: 20px;
+  }
+}

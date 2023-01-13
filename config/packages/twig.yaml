@@ -1,0 +1,10 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        code_expiry_mins: "%env(GOV_NOTIFY_VERIFICATION_CODE_EXPIRY_MINUTES)%"
+        gtm_code: "%env(GTM_CODE)%"
+        subpath: "%env(SUBPATH)%"
+
+when@test:
+    twig:
+        strict_variables: true

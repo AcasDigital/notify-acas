@@ -1,0 +1,33 @@
+
+.back-to-top {
+  display: block;
+  width: 100%;
+  margin-bottom: $spacing-l;
+
+  @include mq($break-desktop) {
+    margin-bottom: $spacing-xl;
+  }
+
+  .back-to-top__link {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+
+    .fas {
+      color: $black;
+      display: inline-block;
+      margin-right: $spacing-m;
+      line-height: inherit;
+    }
+
+    &:hover,
+    &:focus { 
+      text-decoration: none;
+
+      .back-to-top__text {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+	{% import 'app/components/back-link.html.twig' as backLink %}
+	{{ backLink.renderBack(backUrl) }}
+{% endblock %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block page_title %}
+    {# Be careful before updating this, there's some twig files extending this file, who are spitting out the <h1> themselves, search: "extends 'app/task_base.html.twig'" #}
+{% endblock %} 
+{% block content %}
+    
+    {% block form %}
+
+		{% form_theme form 'app/govuk_form_theme.html.twig' %}
+        {{ form_start(form) }}
+        
+        <fieldset class="govuk-fieldset">
+            {% if templateOptions.no_title_display is not defined %}
+            <legend>
+                <h1>{{ title|raw }}</h1>
+            </legend>
+            {% endif %}
+
+
+            {% block prefix %}
+              {% if templateOptions.prefix is defined %}
+                  <p>{{ templateOptions.prefix|raw }}</p>
+              {% endif %}
+            {% endblock %}
+
+            {{ form_rest(form) }}
+        </fieldset>
+        {% import 'app/components/button.html.twig' as linkButton %}
+        {{ linkButton.renderButton({ label: "Save and continue", type: "primary"}) }}
+        {{ form_end(form) }}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,36 @@
+.admin-header {
+  background-color: $black;
+  color: $white;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: fixed;
+  height: 36px;
+  top: 0;
+  padding: $spacing-s;
+  z-index: $z-admin-bar;
+
+  .admin-header--links {
+    display: inline;
+
+    a {
+      margin-left: $spacing-m;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+}
+
+body.admin-mode {
+  margin-top: 36px;
+}
+
+// Editable text highlight for toggling on the FE when admins are logged in
+.cms-show-all span[data-key] {
+  outline: 2px solid red;
+  outline-offset: 4px;
+}
+// Highlight the toggle button
+.cms-show-all #js-toggle-cms {
+  color: $toggle;
+}

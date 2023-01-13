@@ -1,0 +1,16 @@
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_widget(form) }}
+
+{% if translation %}
+    {% set toggle = editor == 'plain' ? 'wysiwyg' : 'plain' %}
+    {% set path = app.request.query.has('key')
+        ? ('/admin/translation/edit?key=' ~ form.vars.value.key ~ '&editor=' ~ toggle )
+        : ( '/admin/translation/new?editor=' ~ toggle ) %}
+    <p><a href="{{ path }}" data-module="govuk-button" onclick="return confirm('Any unsaved data will be lost when switching editors');">Switch to the {{ toggle }} editor</a></p>
+    <p>Switching between the wysiwyg and the plain text editor can help to add and remove HTML tags in the translation field.</p>
+{% endif %}
+
+<button class="govuk-button" data-module="govuk-button">
+    {{ button_label|default('Save') }}
+</button>
+{{ form_end(form) }}

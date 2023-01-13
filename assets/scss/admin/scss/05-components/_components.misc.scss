@@ -1,0 +1,207 @@
+.main-content-wrapper {
+  @include content-area--restricted;
+
+  @include mq(0, $menu-switch-breakpoint) {
+    margin-top: calc(#{$mobile-header-height} + #{$spacing-l});
+  }
+}
+
+.icon--enforcement-action {
+  color: $rating-red;
+}
+
+.icon--no-action-required {
+  color: $rating-green;
+}
+
+.icon--not-rated {
+  color: $rating-grey;
+}
+
+.icon--star {
+  circle {
+    fill: $rating-green;
+  }
+}
+
+svg.icon {
+  display: inline-block;
+}
+
+.browser-warning--hide {
+  display: none;
+
+  .cms-show-all & {
+    display: block;
+  }
+}
+
+button + button,
+.btn + .btn,
+.btn + .btn--secondary,
+.btn--secondary + .btn--secondary,
+.btn--secondary + .btn {
+  margin-left: $spacing-m;
+}
+
+.archive-rating {
+  .fas,
+  .far {
+    font-size: $icon-size--m;
+    line-height: 30px;
+  }
+
+  .text-with-icon__text {
+    color: $grey--dark;
+  }
+}
+
+.fa-times-circle {
+  color: $rating-red;
+}
+
+// Health and Justice report section on the DPUB report overview page
+.hj-reports__heading {
+  @include h3;
+
+  margin-top: $spacing-xxl;
+  margin-bottom: 0;
+}
+
+// Inherited report rating for regulatory history for overview pages
+.overview-content--inherited-ratings {
+  padding: $spacing-xl;
+  background-color: $grey--light;
+  border-left: 5px solid $grey--medium;
+
+  .rating {
+    border-top-color: $grey--medium;
+  }
+
+  .download-report {
+    border-top: 1px solid $grey--medium;
+  }
+}
+
+.combined-quality {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+  padding: $spacing-l;
+  border-top: 1px solid $grey--medium;
+  border-bottom: 1px solid $grey--medium;
+  background-color: $grey--light;
+}
+
+.inherited-ratings {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+  padding-top: $spacing-l;
+  padding-bottom: $spacing-l;
+  border-top: 2px solid $grey--medium;
+  border-bottom: 2px solid $grey--medium;
+}
+
+.inherited-ratings__header {
+  @include h3;
+
+  margin-top: 0;
+}
+
+.inherited-ratings__link {
+  display: inline-block;
+  margin-right: $spacing-m;
+}
+
+.legal-entitlement {
+  h3 {
+    margin-top: $spacing-xl;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin-top: $spacing-xl;
+    margin-bottom: 10px;
+
+    &.service__section-header {
+      margin-top: 0;
+    }
+  }
+}
+
+.results-download {
+  text-align: center;
+}
+
+.manage-subscriptions__list {
+  padding-left: 40px;
+
+  .manage-subscriptions__form {
+    margin-top: $spacing-s;
+    margin-left: -40px;
+  }
+
+  .manage-subscriptions__list-item {
+    margin-bottom: $spacing-xl;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+#contact-map-iframe {
+  // google maps city grey
+  background-color: #f2f3f4;
+}
+
+.csr-block {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+}
+
+.field--name-field-documents {
+  margin-top: $spacing-l-plus;
+  margin-bottom: $spacing-l-plus;
+
+  .paragraph--type--documents {
+    margin-bottom: $spacing-l;
+    margin-top: $spacing-l;
+
+    .document-info {
+      color: $grey--medium;
+      padding-left: $spacing-s;
+    }
+  }
+}
+
+.node-last-updated {
+  display: block;
+  width: 100%;
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xxl;
+  padding-top: $spacing-l;
+  padding-bottom: $spacing-l;
+
+  border-top: 4px solid $grey--light;
+  border-bottom: 4px solid $grey--light;
+}
+
+main {
+  .page-title {
+    margin-top: 0;
+  }
+}
+
+#block-council-local-tasks {
+  @include content-area;
+}
+
+.paragraph--type--dynamic-content-exposed-filer-ti {
+  #views-exposed-form-events-events-page {
+    .form-item-fulltext {
+      @include mq($break-desktop) {
+        margin-right: 0;
+      }
+    }
+  }
+}

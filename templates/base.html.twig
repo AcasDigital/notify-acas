@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>{% block title %}Find a solution to an employment dispute{% endblock %} | Tell Acas</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('govuk-styles') }}
+            {{ encore_entry_link_tags('styles') }}
+        {% endblock %}
+        {% block javascripts %}
+            {% if is_granted("ROLE_ADMIN") %}
+                {# {{ encore_entry_script_tags('textreplacement') }} #}
+            {% endif %}
+        {% endblock %}
+        {% if gtm_code %}
+            <!-- Google Tag Manager -->
+            <script>
+                (function (w, d, s, l, i) {
+                    w[l] = w[l] || [];
+                    w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+                    var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s),
+                        dl = l != 'dataLayer' ? '&l=' + l : '';
+                    j.async = true;
+                    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                    f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', '{{ gtm_code }}');
+            </script>
+            <!-- End Google Tag Manager -->
+        {% endif %}
+
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ asset(subpath~'/images/favicons/apple-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ asset(subpath~'/images/favicons/apple-icon-60x60.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset(subpath~'/images/favicons/apple-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset(subpath~'/images/favicons/apple-icon-76x76.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset(subpath~'/images/favicons/apple-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{ asset(subpath~'/images/favicons/apple-icon-120x120.png') }}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ asset(subpath~'/images/favicons/apple-icon-144x144.png') }}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{ asset(subpath~'/images/favicons/apple-icon-152x152.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset(subpath~'/images/favicons/apple-icon-180x180.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ asset(subpath~'/images/favicons/android-icon-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(subpath~'/images/favicons/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ asset(subpath~'/images/favicons/favicon-96x96.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset(subpath~'/images/favicons/favicon-16x16.png') }}">
+    </head>
+    <body {% if is_granted("ROLE_ADMIN") %} class="admin-mode" {% endif %}>
+        {% if gtm_code %}
+            <!-- Google Tag Manager (noscript) -->
+            <noscript>
+                <iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_code }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+            <!-- End Google Tag Manager (noscript) -->
+        {% endif %}
+        <script>
+            document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+        </script>
+        <div class="region region--header">
+            {% if is_granted("ROLE_ADMIN") %}
+                {{ include('app/layout/admin-bar.html.twig') }}
+            {% endif %}
+            <a href="#main-content" class="visually-hidden focusable skip-link">Skip to main content</a>
+            <header id="header-main">
+                <div class="header--top">
+                    <div class="region--header-heading container">
+                        {% block headerSection %}
+                            {% include 'app/layout/header.html.twig' %}
+                        {% endblock %}
+                        {% block formBanner %}
+                            {% include 'app/layout/header--form-banner.html.twig' %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="header--bottom">
+                    {% include 'app/layout/header--beta-banner.html.twig' %}
+                </div>
+            </header>
+            {% block breadcrumbs %}{% endblock %}
+        </div>
+            <div class="region region--main">
+                <main class="main__content" id="main-content">
+                    <div class="main-content-wrapper">
+                        {% block body %}
+                            {% import 'app/components/alert.html.twig' as alert %}
+                            {% for message in app.flashes('error') %}
+                                <div class="flash-message--error">
+                                    {{ alert.renderAlert({ type: 'error', title: message, icon: 'fas fa-exclamation-triangle'  }) }}
+                                </div>
+                            {% endfor %}
+                            {% for message in app.flashes('info') %}
+                                <div class="flash-message--info">
+                                    {{ alert.renderAlert({ type: 'info', title: message, icon: 'fas fa-info-circle'  }) }}
+                                </div>
+                            {% endfor %}
+                            {% block page_title %}
+                                <h1>{{ title|raw }}</h1>
+                            {% endblock %}
+                            {% block content %}{% endblock %}
+                        {% endblock %}
+                    </div>
+                </main>
+            </div>
+            <div class="region region--footer">
+                {% include 'app/layout/footer--primary.html.twig' %}
+                {% include 'app/layout/footer--secondary.html.twig' %}
+            </div>
+            {% block deferredScripts %}
+                <script src="https://kit.fontawesome.com/b5ca5df3ee.js" crossorigin="anonymous"></script>
+                <script src="{{ asset('build/govuk-frontend/all.js') }}"></script>
+                <script>
+                    window.GOVUKFrontend.initAll();
+                </script>
+            {% endblock %}
+        </body>
+    </html>

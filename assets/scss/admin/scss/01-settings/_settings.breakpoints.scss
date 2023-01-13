@@ -1,0 +1,8 @@
+// Screen sizes
+$break-mobile: 320px !default;
+$break-phablet: 768px !default;
+$break-desktop: 1024px !default;
+$break-max-width: 1440px !default;
+
+$search-switch: $break-desktop;
+$menu-switch-breakpoint: $break-desktop;

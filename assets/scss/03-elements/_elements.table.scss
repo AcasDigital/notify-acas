@@ -1,0 +1,27 @@
+table {
+  margin: 1em 0 2em;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  thead {
+    background: acas-color("teal-dark");
+    color: acas-color("white");
+    font-family: $font-family-bold;
+    text-align: left;
+    a {
+      color: acas-color("white");
+    }
+  }
+
+  td,
+  th {
+    border: 2px solid acas-color("white");
+    padding: 0.5em 1em;
+  }
+
+  td {
+    background: acas-color("gray-light");
+  }
+}

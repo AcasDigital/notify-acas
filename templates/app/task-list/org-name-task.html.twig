@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+	{% import 'app/components/back-link.html.twig' as backLink %}
+	{{ backLink.renderBack(backUrl) }}
+{% endblock %}
+{% block title %}
+	{{ title }}
+{% endblock %}
+{% block page_title %}{% endblock %}
+{% block content %}
+	{% form_theme form 'app/govuk_form_theme.html.twig' %}
+	{{ form_start(form) }}
+
+	<fieldset class="govuk-fieldset">
+		<legend>
+			<h1>{{ title|raw }}</h1>
+		</legend>
+		{% block prefix %}
+			{% if templateOptions.prefix is defined %}
+				<p>{{ templateOptions.prefix|raw }}</p>
+			{% endif %}
+		{% endblock %}
+		<div class="govuk-form-group">
+
+			{{ form_row(form.orgName) }}
+			{{ form_row(form.stillWorkingForOrg) }}
+		</div>
+	</fieldset>
+
+	{% import 'app/components/button.html.twig' as linkButton %}
+	{{ linkButton.renderButton({ label: "Save and continue", type: "primary"}) }}
+	{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert" aria-live="polite">{{ flash_error }}</div>
+    {% endfor %}
+    <h1 class="govuk-heading-l">Reset your password</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        <div class="govuk-inset-text">
+                Enter your email address and we will send you a
+                link to reset your password.
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">Send password reset email</button>
+    {{ form_end(form) }}
+{% endblock %}

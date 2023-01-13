@@ -1,0 +1,345 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @include open-regular;
+
+  font-size: 16px;
+
+  @include print {
+    margin-top: 8mm;
+    margin-bottom: 18mm;
+  }
+}
+
+@page {
+  margin-top: 8mm;
+  margin-bottom: 18mm;
+}
+
+h1 {
+  @include h1;
+}
+
+h2 {
+  @include h2;
+
+  .field--name-field-title & {
+    margin-top: 0;
+  }
+}
+
+h3 {
+  @include h3;
+}
+
+h4 {
+  @include h4;
+}
+
+h5 {
+  @include h5;
+}
+
+h6 {
+  @include h6;
+}
+
+p {
+  @include p;
+}
+
+main {
+  p {
+    margin-top: $spacing-l-plus;
+    margin-bottom: $spacing-l-plus;
+  }
+}
+
+strong {
+  @include open-bold;
+}
+
+a {
+  @include link-no-underline-unless-hover;
+
+  color: $links;
+
+  &:visited {
+    color: $links;
+  }
+
+  &:focus {
+    @include common-focus-styles;
+  }
+}
+
+button {
+  &:focus {
+    @include common-focus-styles;
+
+    outline-offset: 0;
+  }
+}
+
+.btn,
+.button {
+  @include primary-button;
+
+  &:focus {
+    @include common-focus-styles;
+
+    outline-offset: 0;
+  }
+}
+
+.btn--secondary {
+  @include secondary-button;
+
+  &:focus {
+    @include common-focus-styles;
+
+    outline-offset: 0;
+  }
+}
+
+li:not([class]) {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+}
+
+code {
+  display: block;
+  background-color: $grey--light;
+  border: 1px solid $grey--medium;
+  padding-top: $spacing-l;
+  padding-right: $spacing-l;
+  padding-bottom: $spacing-l;
+  padding-left: $spacing-l;
+  word-break: break-all;
+  word-break: break-word;
+}
+
+.cms-show-all span[data-key] {
+  outline: 2px solid red;
+  outline-offset: 4px;
+}
+
+@mixin cqc-bullets {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    position: absolute;
+    top: 9px;
+    left: -22px;
+    width: 10px;
+    height: 10px;
+    background-color: $brand-primary;
+    border-radius: 100%;
+    border: 1px solid $brand-primary;
+    color: $brand-primary;
+    content: "";
+  }
+
+  // nested ul
+  ul {
+    li {
+      &::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: $white;
+        border-radius: 100%;
+        border: 1px solid $brand-primary;
+      }
+    }
+  }
+}
+
+ul:not([class]) {
+  >li {
+    @include cqc-bullets;
+  }
+}
+
+li {
+  @include p;
+}
+
+table {
+  display: block;
+  table-layout: fixed;
+  max-width: 100%;
+  overflow-x: auto;
+  border-spacing: 0px;
+  border-collapse: collapse;
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  thead {
+    background-color: $panel--cqc;
+  }
+
+  td {
+    border: 1px solid $grey--medium;
+  }
+
+  th {
+    @include p(false);
+
+    color: $grey--dark;
+    border: 1px solid $grey--medium;
+    background-color: $panel--cqc;
+  }
+
+  th,
+  td {
+    @include p(false);
+
+    padding: $spacing-l;
+    vertical-align: top;
+    text-align: left;
+    // word-break: break-all;
+  }
+}
+
+@mixin pullquote-style {
+  margin: $spacing-xl 0;
+  padding-top: $spacing-l-plus;
+  padding-right: 22px;
+  padding-bottom: $spacing-l-plus;
+  padding-left: 23px;
+  position: relative;
+  background-color: $panel--cqc;
+  font-size: 16px;
+  line-height: 28px; // This is the line-height of the font used in the quote.
+  letter-spacing: -0.3px;
+
+  >* {
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+    color: $grey--dark;
+  }
+}
+
+@mixin blockquote-style {
+  margin-top: $spacing-xl;
+  margin-right: 0;
+  margin-bottom: $spacing-xl;
+  margin-left: 0;
+  letter-spacing: 0.5px;
+
+  >* {
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 0.5px;
+    color: $brand-primary;
+  }
+}
+
+@mixin quote-style {
+  margin-top: $spacing-xl;
+  margin-right: 0;
+  margin-bottom: $spacing-xl;
+  margin-left: 0;
+  color: $brand-primary;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+
+  >* {
+    color: $brand-primary;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+}
+
+blockquote {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+
+  >* {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:not([class]) {
+    @include blockquote-style;
+  }
+
+  &.cqc-pullquote {
+    @include pullquote-style;
+  }
+
+  &.no-source {
+    @include blockquote-style;
+  }
+
+  &.cqc-blockquote {
+    @include blockquote-style;
+  }
+
+  &.cqc-quote {
+    @include quote-style;
+  }
+}
+
+address {
+  color: $grey--medium;
+}
+
+@mixin common-date-styling {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: $spacing-l;
+  color: $grey--dark;
+  font-size: 16px;
+}
+
+.field--name-field-date {
+  @include common-date-styling;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.views-field-field-date {
+  @include common-date-styling;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.views-field-created {
+  @include common-date-styling;
+}
+
+time {
+  color: $grey--dark;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+dt {
+  @include open-semi-bold;
+}
+
+dd {
+  margin-bottom: $spacing-l;
+}

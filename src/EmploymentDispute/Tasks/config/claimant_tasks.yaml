@@ -1,0 +1,82 @@
+tasks:
+  claimant_name:
+    data_key: legal_name
+    # template: app/task-list/phone-task.html.twig
+    template_options:
+      prefix: <p class="govuk-hint">Enter [your|the claimant's] full name as it appears on [your|their] passport, birth certificate or driving licence.</p>
+    form:
+      fullName:
+        type: App\Form\Type\FullNameType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\ClaimantFullNameTaskData
+    label:
+      myself: Your full name
+      other: Claimant's full name
+    title:
+      certificate:
+        myself: What is your full name?
+        other: What is the claimant's full name?
+      ec:
+        myself: What is your full name?
+        other: What is the claimant's full name?
+  claimant_email:
+    data_key: claimant_email
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\EmailType
+        options:
+          label: "Email"
+    data_class: App\EmploymentDispute\Tasks\Data\EmailTaskData
+    label:
+      myself: Your email address
+      other: Claimant email address
+    title:
+      myself: What is your email address?
+      other: Claimant email
+  claimant_email_optional:
+    data_key: claimant_email
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\EmailType
+        options:
+          label: "Email"
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalEmailTaskData
+    label:
+      myself: Your email address
+      other: Claimant email address
+    title:
+      myself: What is your email address?
+      other: Claimant email
+  claimant_address:
+    data_key: claimant_address
+    template: app/task-list/address-task.html.twig
+    template_options:
+      address_hint: You can also enter [your|the claimant's] address below. You will need to do this if [you do|the claimant does] not live in the UK.
+    form:
+      address:
+        type: App\Form\Type\AddressType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\AddressTaskData
+    label:
+      myself: Your address
+      other: Claimant address
+    title:
+      myself: What is your address?
+      other: What is the claimant's address?
+  claimant_phone:
+    data_key: claimant_phone
+    template: app/task-list/phone-task.html.twig
+    form:
+      phone:
+        type: App\Form\Type\PhoneWithoutVerificationType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\PhoneWithoutVerificationTaskData
+    label:
+      myself: Your phone number
+      other: Claimant phone number
+    title:
+      myself: What is your phone number?
+      other: Claimant phone number

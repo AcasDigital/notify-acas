@@ -1,0 +1,45 @@
+{% extends 'app/task_base.html.twig' %}
+{% block content %}
+{% form_theme form 'app/govuk_form_theme.html.twig' %}
+{{ form_start(form) }}
+
+<fieldset class="govuk-fieldset">
+    <legend>
+        <h1>{{ title|raw }}</h1>
+    </legend>
+    <div class="govuk-form-group">
+        <p class="govuk-hint">You will need your save and return code and memorable word to return to your form.</p>
+    </div>
+    <div id="validation" class="govuk-form-group">
+        {% set validationMessage = null %}
+        {% if errors|length > 0 %}
+        {% for error in errors %}
+            {% set validationMessage = error.message %}
+            {# business logic validation error div start #}
+            <div class="govuk-form-group govuk-form-group--error">
+                <span id="" role="alert" aria-live="polite" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>
+                    {{error.message}}
+                </span>
+        {% endfor %}
+        {% endif %}
+
+        {{ form_row(form.SRNnumber) }}
+        {{ form_row(form.memorableWord) }}
+
+        {# confirmation code business logic validation error div end #}
+        {% if validationMessage %}
+            </div>
+        {% endif %}
+    </div>
+</fieldset>
+
+{% import 'app/components/button.html.twig' as linkButton %}
+{{ linkButton.renderButton({ label: "Find your form", type: "primary"}) }}
+{{ form_end(form) }}
+
+<div class="govuk-hint">
+    <p>Forgot your memorable word? <a href="{{ path('reset_memorable_from_start') }}">Reset memorable word.</a></p>
+    <p>If you do not have these details, you can <a href="{{ path('app_index') }}">start a new application.</a></p>
+</div>
+{% endblock %}
+

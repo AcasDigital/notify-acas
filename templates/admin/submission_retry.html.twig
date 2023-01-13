@@ -1,0 +1,57 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Editable text list"  %}
+{% block title %}
+    Show form submission
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.5.8/jsoneditor.min.js" integrity="sha512-5H3t5grsfqf/zmXQs4/sGpEzyQ1NPj6QFKrO61H9Ncuym7h2fSxvRoCbLjRLC0ZHE//BrutcVWVIoV3RxMXVVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.5.8/jsoneditor.css" integrity="sha512-E6olMBhwTrRNTslKCBSvXqi8COvvyzPqEVco7Mj7bNQis3DOwJgG5l5f8kGGZUKDQ/f79mEhGXh/wUa4zuOQSg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock %}
+{% block body %}
+    <a href="{{ path('admin_form_show', {id: employmentDispute.id}) }}" class="govuk-back-link">back to submission</a>
+    <h1 class="govuk-heading-l">
+        {{ employmentDispute.id }}
+    </h1>
+    <div class="govuk-inset-text">
+		This will queue up the form for submissions to CRM. The date and time of submission and the case reference number will remain the same as the first submission.
+    </div>
+    {{ form_start(form)}}
+    <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary" role="button">
+            <span class="govuk-details__summary-text">
+                Customize JSON Payload
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            <div class="sr-only">
+                {{ form_widget(form.payload)}}
+            </div>
+            <div id="jsoneditor"></div>
+        </div>
+    </details>
+    <div>
+        <h3>Last submission response - submitted: {{ submission ? submission.created|date : 'date not available'}}</h3>
+        <pre>{{ submission ? submission.response : 'response not available'}}</pre>
+    </div>
+
+    {% if employmentDispute.status != 'queued' %}
+        <button onclick="document.getElementById('form_payload').value = JSON.stringify(editor.get()); " class="govuk-button govuk-button--warning">Submit to CRM</button>
+    {% endif %}
+    {{ form_end(form) }}
+
+    <script>
+        // create the editor
+        const container = document.getElementById("jsoneditor")
+        const options = {}
+        const editor = new JSONEditor(container, options)
+        // set json
+        const initialJson = {{ payload|raw }};
+        editor.set(initialJson)
+        // get json
+        const updatedJson = editor.get()
+    </script>
+{% endblock %}

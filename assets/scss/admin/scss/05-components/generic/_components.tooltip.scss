@@ -1,0 +1,81 @@
+
+.tooltip {
+  display: inline;
+
+  @include print {
+    display: none;
+  }
+
+  &:hover,
+  &:focus {
+    // Hide tooltip content until it's focused/hovered
+    .tooltip__content {
+      visibility: visible;
+    }
+
+    .tooltip__arrow::before {
+      visibility: visible;
+    }
+  }
+
+  .tooltip__content {
+    max-width: 600px;
+    visibility: hidden;
+    background-color: $grey--medium;
+    color: $white;
+    font-size: 16px;
+    line-height: 1.2em;
+    padding: 8px;
+    display: block;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px transparentize($grey--medium, .8);
+  }
+
+  .tooltip__arrow {
+    display: block;
+
+    &::before {
+      visibility: hidden;
+    }
+  }
+
+  .tooltip__icon {
+    cursor: pointer;
+    color: $grey--medium;
+  }
+}
+
+.tooltip__arrow { 
+  visibility: hidden;
+}
+
+.tooltip__arrow,
+.tooltip__arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  visibility: hidden;
+}
+
+
+.tooltip__arrow::before {
+  content: '';
+  transform: rotate(45deg);
+}
+
+.tooltip__content[data-popper-placement^='top'] .tooltip__arrow {
+  bottom: -4px;
+}
+
+.tooltip__content[data-popper-placement^='bottom'] .tooltip__arrow {
+  top: -4px;
+}
+
+.tooltip__content[data-popper-placement^='left'] .tooltip__arrow {
+  right: -4px;
+}
+
+.tooltip__content[data-popper-placement^='right'] .tooltip__arrow {
+  left: -4px;
+}

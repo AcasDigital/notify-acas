@@ -1,0 +1,24 @@
+video {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+  display: block;
+}
+
+iframe {
+  width: 100%;
+  margin: 0 0 $spacing-l;
+  overflow-y: auto;
+}
+
+img.migrated-node,
+.migrated-node img {
+  width: auto;
+  height: auto;
+}

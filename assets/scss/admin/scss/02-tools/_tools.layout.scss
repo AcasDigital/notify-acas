@@ -1,0 +1,460 @@
+@mixin mq($min, $max: 0) {
+  @if $min == 0 {
+    @media all and (max-width: #{$max - 1}) {
+      @content;
+    }
+  } @else if $max == 0 {
+    @media all and (min-width: #{$min}) {
+      @content;
+    }
+  } @else {
+    @media all and (min-width: #{$min}) and (max-width: #{$max - 1}) {
+      @content;
+    }
+  }
+}
+
+@mixin print {
+  @media only print {
+    @content;
+  }
+}
+
+@mixin content-area {
+  max-width: $break-max-width;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include mq(0, $break-phablet) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @include mq($break-phablet) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@mixin content-area--restricted {
+  @include content-area;
+
+  max-width: 1200px;
+}
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@mixin ie11 {
+  @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+@mixin word-wrapping {
+  // Preferentially hyphenates, otherwise will break the word.
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+@mixin old-edge {
+  /* Microsoft Edge Browser 12-18 (All versions before Chromium) */
+  @supports (-ms-ime-align: auto) {
+    @content;
+  }
+}
+
+/*************************
+        GRID LAYOUT 
+************************
+*/
+
+// Grid Layout Mobile (see further below for left/right offset)
+@mixin mob-1-col {
+  @include mq(0, $break-desktop) {
+    flex-basis: 16.667%;
+    width: 16.667%;
+    padding-left: $mobile-grid-spacing;
+    padding-right: $mobile-grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@mixin mob-2-col {
+  @include mq(0, $break-desktop) {
+    flex-basis: 33.333%;
+    width: 33.333%;
+    padding-left: $mobile-grid-spacing;
+    padding-right: $mobile-grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin mob-3-col {
+  @include mq(0, $break-desktop) {
+    flex-basis: 50%;
+    width: 50%;
+    padding-left: $mobile-grid-spacing;
+    padding-right: $mobile-grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin mob-4-col {
+  @include mq(0, $break-desktop) {
+    flex-basis: 66.667%;
+    width: 66.667%;
+    padding-left: $mobile-grid-spacing;
+    padding-right: $mobile-grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin mob-5-col {
+  @include mq(0, $break-desktop) {
+    flex-basis: 83.333%;
+    width: 83.333%;
+    padding-left: $mobile-grid-spacing;
+    padding-right: $mobile-grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin mob-6-col {
+  @include mq(0, $break-desktop) {
+    flex-basis: 100%;
+    width: 100%;
+    padding-left: $mobile-grid-spacing;
+    padding-right: $mobile-grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Grid Layout Mobile: Left Offset
+@mixin mob-left-offset-1 {
+  @include mq(0, $break-desktop) {
+    margin-left: 16.667%;
+  }
+}
+@mixin mob-left-offset-2 {
+  @include mq(0, $break-desktop) {
+    margin-left: 33.333%;
+  }
+}
+@mixin mob-left-offset-3 {
+  @include mq(0, $break-desktop) {
+    margin-left: 50%;
+  }
+}
+@mixin mob-left-offset-4 {
+  @include mq(0, $break-desktop) {
+    margin-left: 66.667%;
+  }
+}
+@mixin mob-left-offset-5 {
+  @include mq(0, $break-desktop) {
+    margin-left: 83.333%;
+  }
+}
+
+// Grid Layout Mobile: Right Offset
+@mixin mob-right-offset-1 {
+  @include mq(0, $break-desktop) {
+    margin-right: 16.667%;
+  }
+}
+@mixin mob-right-offset-2 {
+  @include mq(0, $break-desktop) {
+    margin-right: 33.333%;
+  }
+}
+@mixin mob-right-offset-3 {
+  @include mq(0, $break-desktop) {
+    margin-right: 50%;
+  }
+}
+@mixin mob-right-offset-4 {
+  @include mq(0, $break-desktop) {
+    margin-right: 66.667%;
+  }
+}
+@mixin mob-right-offset-5 {
+  @include mq(0, $break-desktop) {
+    margin-right: 83.333%;
+  }
+}
+
+// Grid Layout Desktop (see further below for left/right offset)
+@mixin desk-1-col {
+  @include mq($break-desktop) {
+    flex-basis: 8.333%;
+    width: 8.333%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-2-col {
+  @include mq($break-desktop) {
+    flex-basis: 16.667%;
+    width: 16.667%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-3-col {
+  @include mq($break-desktop) {
+    flex-basis: 25%;
+    width: 25%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-4-col {
+  @include mq($break-desktop) {
+    flex-basis: 33.333%;
+    width: 33.333%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-5-col {
+  @include mq($break-desktop) {
+    flex-basis: 41.667%;
+    width: 41.667%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-6-col {
+  @include mq($break-desktop) {
+    flex-basis: 50%;
+    width: 50%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-7-col {
+  @include mq($break-desktop) {
+    flex-basis: 58.333%;
+    width: 58.333%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-8-col {
+  @include mq($break-desktop) {
+    flex-basis: 66.667%;
+    width: 66.667%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-9-col {
+  @include mq($break-desktop) {
+    width: 75%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-10-col {
+  @include mq($break-desktop) {
+    flex-basis: 83.333%;
+    width: 83.333%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-11-col {
+  @include mq($break-desktop) {
+    flex-basis: 91.667%;
+    width: 91.667%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@mixin desk-12-col {
+  @include mq($break-desktop) {
+    flex-basis: 100%;
+    width: 100%;
+    padding-left: $grid-spacing;
+    padding-right: $grid-spacing;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Grid Layout Desktop: Left Offset
+@mixin desk-left-offset-1 {
+  @include mq($break-desktop) {
+    margin-left: 8.333%;
+  }
+}
+@mixin desk-left-offset-2 {
+  @include mq($break-desktop) {
+    margin-left: 16.667%;
+  }
+}
+@mixin desk-left-offset-3 {
+  @include mq($break-desktop) {
+    margin-left: 25%;
+  }
+}
+@mixin desk-left-offset-4 {
+  @include mq($break-desktop) {
+    margin-left: 33.333%;
+  }
+}
+@mixin desk-left-offset-5 {
+  @include mq($break-desktop) {
+    margin-left: 41.667%;
+  }
+}
+@mixin desk-left-offset-6 {
+  @include mq($break-desktop) {
+    margin-left: 50%;
+  }
+}
+@mixin desk-left-offset-7 {
+  @include mq($break-desktop) {
+    margin-left: 58.333%;
+  }
+}
+@mixin desk-left-offset-8 {
+  @include mq($break-desktop) {
+    margin-left: 66.667%;
+  }
+}
+@mixin desk-left-offset-9 {
+  @include mq($break-desktop) {
+    margin-left: 75%;
+  }
+}
+@mixin desk-left-offset-10 {
+  @include mq($break-desktop) {
+    margin-left: 83.333%;
+  }
+}
+@mixin desk-left-offset-11 {
+  @include mq($break-desktop) {
+    margin-left: 91.667%;
+  }
+}
+
+// Grid Layout Mobile: Right Offset
+@mixin desk-right-offset-1 {
+  @include mq($break-desktop) {
+    margin-right: 8.333%;
+  }
+}
+@mixin desk-right-offset-2 {
+  @include mq($break-desktop) {
+    margin-right: 16.667%;
+  }
+}
+@mixin desk-right-offset-3 {
+  @include mq($break-desktop) {
+    margin-right: 25%;
+  }
+}
+@mixin desk-right-offset-4 {
+  @include mq($break-desktop) {
+    margin-right: 33.333%;
+  }
+}
+@mixin desk-right-offset-5 {
+  @include mq($break-desktop) {
+    margin-right: 41.667%;
+  }
+}
+@mixin desk-right-offset-6 {
+  @include mq($break-desktop) {
+    margin-right: 50%;
+  }
+}
+@mixin desk-right-offset-7 {
+  @include mq($break-desktop) {
+    margin-right: 58.333%;
+  }
+}
+@mixin desk-right-offset-8 {
+  @include mq($break-desktop) {
+    margin-right: 66.667%;
+  }
+}
+@mixin desk-right-offset-9 {
+  @include mq($break-desktop) {
+    margin-right: 75%;
+  }
+}
+@mixin desk-right-offset-10 {
+  @include mq($break-desktop) {
+    margin-right: 83.333%;
+  }
+}
+@mixin desk-right-offset-11 {
+  @include mq($break-desktop) {
+    margin-right: 91.667%;
+  }
+}
+
+@mixin ie11 {
+  @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+@mixin handle-overflow {
+  // Handling text overflow
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  // End of text overflow handling
+}

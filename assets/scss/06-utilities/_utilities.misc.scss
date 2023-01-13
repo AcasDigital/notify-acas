@@ -1,0 +1,172 @@
+.text-small {
+  @include text-small;
+}
+
+.webform-wizard-pages-links {
+  display: none;
+}
+
+.form-name {
+  @include text-small;
+  color: acas-color('gray-dark');
+  padding-bottom: 0.75em;
+  padding-top: 0.75em;
+}
+
+.panel-heading {
+  display: none;
+}
+
+.text-tiny {
+  font-size: $font-size-tiny;
+}
+
+.main__content {
+  .standout {
+    @include h4(false);
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-family: $font-family-bold;
+    padding-top: 0;
+
+    .standout__icon {
+      padding-right: 5px;
+      padding-top: 5px;
+      min-width: 26px;
+    }
+  }
+}
+
+.print-page-wrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.print-page {
+  @include print-hide;
+  @include anchor-link-styling;
+
+  padding: 0;
+  background-color: transparent;
+  text-decoration: underline;
+  border: none;
+}
+
+.disabled-link {
+  pointer-events: none;
+  cursor: default;
+}
+
+.govuk-tag {
+  font-family: $font-family-bold;
+  
+  @include print {
+    color: #000 !important;
+    background-color: transparent !important;
+  }
+}
+
+.govuk-form-group {
+  > .govuk-error-message {
+    display: none;
+  }
+
+  &.govuk-form-group--error {
+    > .govuk-error-message {
+      display: block;
+    }
+  }
+}
+
+.app-task-list__items {
+  @media (min-width: 768px) {
+    padding-left: 30px !important;
+  }
+}
+
+.app-task-list {
+  @media (min-width: 768px) {
+    padding-left: 30px !important;
+  }
+
+  .govuk-hint {
+    margin-bottom: 32px;
+  }
+}
+
+.task-list-repeated {
+  .app-task-list__items {
+    margin-bottom: 1.5rem;
+  }
+
+  .app-task-list__items--has-selected-type {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    @media (min-width: 768px) {
+      margin-left: 30px;
+      margin: 0 0 0 30px;
+    }
+  }
+
+  .btn-secondary {
+    @media (min-width: 768px) {
+      margin-left: 30px;
+      margin: 0 0 0 30px;
+    }
+  }
+}
+
+.app-task-list__items--no-selection + .app-task-list__items--no-selection {
+  .app-task-list__item {
+    border-top: none;
+  }
+}
+
+.app-task-list__items--no-selection + .app-task-list__items--has-selected-type {
+  margin-top: 45px;
+}
+
+.govuk-date-input__item {
+  &:nth-child(3) {
+    // the year input
+    min-width: 85px;
+    max-width: 85px;
+  }
+
+  input {
+    // @TODO refactory.. I'm flying in 2 hours..
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    height: 2.5rem;
+    margin-top: 0;
+    padding: 5px;
+    border: 2px solid #0b0c0c;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    // Specific for these dates
+    min-width: 56px;
+
+    &:focus {
+      outline: 3px solid #fd0;
+      outline-offset: 0;
+      -webkit-box-shadow: inset 0 0 0 2px;
+      box-shadow: inset 0 0 0 2px;
+    }
+  }
+}

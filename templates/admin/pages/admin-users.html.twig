@@ -1,0 +1,32 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Manage users"  %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="govuk-heading-l">{{ title }}</h1>
+
+    <a href="{{ path('admin_users_new') }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+        Add user
+    </a>
+
+    <dl class="govuk-summary-list">
+        {% for user in pagination %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__value">
+                    {{ user.email }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Administrator
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="{{ path('admin_users_edit', { id: user.id }) }}">Edit</a>
+                </dd>
+            </div>
+        {% endfor %}
+    </dl>
+
+    {{ knp_pagination_render(pagination) }}
+
+{% endblock %}

@@ -1,0 +1,150 @@
+@mixin list-item-with-icon-and-text__list {
+  display: block;
+}
+
+@mixin list-item-with-icon-and-text__list-item {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: $spacing-l;
+
+  @include mq($break-desktop) {
+    margin-bottom: $spacing-xl;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+@mixin list-item-with-icon-and-text__icon-wrapper {
+  margin-right: $spacing-m;
+  flex-grow: 0;
+  flex-basis: auto;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin list-item-with-icon-and-text__icon($icon-size: 50px) {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  font-size: $icon-size;
+  flex-basis: $icon-size;
+  flex-shrink: 1;
+  height: $icon-size;
+  overflow: visible;
+
+  svg {
+    height: $icon-size;
+    width: $icon-size;
+  }
+}
+
+@mixin list-item-with-icon-and-text__content {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+@mixin list-item-with-icon-and-text__title {
+  @include h4;
+
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin list-item-with-icon-and-text__description {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@mixin common-focus-styles {
+  outline: 3px solid $link-focus;
+  outline-offset: 2px;
+}
+
+// Overriding some default behaviours
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 3px solid $link-focus;
+}
+
+@mixin button-common {
+  border-radius: $spacing-xl;
+  display: inline-block;
+  padding-top: $spacing-m;
+  padding-right: $spacing-xl;
+  padding-bottom: $spacing-m;
+  padding-left: $spacing-xl;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    @include common-focus-styles;
+
+    text-decoration: underline;
+  }
+}
+
+@mixin primary-button(
+  $btn-text-color: $white,
+  $btn-bg-color: $brand-primary,
+  $btn-bg-color--hover: $brand-primary--dark
+) {
+  @include button-common;
+
+  background-color: $btn-bg-color;
+  border: 1px solid $btn-bg-color;
+  color: $btn-text-color;
+
+  &:hover {
+    background-color: $btn-bg-color--hover;
+    color: $btn-text-color;
+  }
+
+  // Applicable for <a> using button styling
+  &:visited {
+    color: $btn-text-color;
+  }
+
+  &:focus {
+    background-color: $btn-bg-color--hover;
+  }
+}
+
+@mixin secondary-button(
+  $btn-text-color: $brand-primary,
+  $btn-bg-color: $white,
+  $btn-bg-color--hover: $grey--light,
+  $btn-text-color-hover: $brand-primary--dark
+) {
+  @include button-common;
+
+  background-color: $btn-bg-color;
+  border: 1px solid $btn-text-color;
+  color: $btn-text-color;
+
+  &:hover {
+    background-color: $btn-bg-color--hover;
+    color: $btn-text-color-hover;
+  }
+
+  // Applicable for <a> using button styling
+  &:visited {
+    color: $btn-text-color;
+  }
+
+  &:focus {
+    background-color: $btn-bg-color--hover;
+    color: $btn-text-color-hover;
+  }
+}

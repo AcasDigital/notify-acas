@@ -1,0 +1,21 @@
+// Screen sizes
+$break-mobile: 320px !default;
+$break-tablet: 768px !default;
+$break-desktop: 992px !default;
+$break-desktop--large: 1200px !default;
+$break-max-width: 1396px !default;
+
+// @TODO Below migrated from BBD ACAS, refactor out
+$container-tablet: 750px !default;
+$container-sm: $container-tablet !default;
+
+// Medium screen / desktop
+$container-desktop: 970px !default;
+$container-md: $container-desktop !default;
+
+// Large screen / wide desktop
+$container-large-desktop: 1200px !default;
+$container-lg: $container-large-desktop !default;
+
+$container-extralarge-desktop: 1396px !default;
+$container-xl: $container-extralarge-desktop !default;

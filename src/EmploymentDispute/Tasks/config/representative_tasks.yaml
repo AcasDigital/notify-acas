@@ -1,0 +1,115 @@
+tasks:
+  representative_name_optional:
+    data_key: representative_name
+    template_options:
+      # note: escape single quote by doubling it
+      prefix: '<p class="govuk-hint">[Only enter details of someone who has agreed to speak with us on your behalf. Do not enter the details of someone who is just helping you with your claim. Do not enter your employer''s details here.|]</p>'
+    form:
+      fullName:
+        type: App\Form\Type\FullNameType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalFullNameTaskData
+    label:
+      myself: Representative's name
+      other: Your name
+    title:
+      myself: What is your representative's name? ​​(optional)
+      other: What is your name?
+  representative_name:
+    data_key: representative_name
+    template_options:
+      prefix: '<p class="govuk-hint">[Only enter details of someone who has agreed to speak with us on your behalf. Do not enter the details of someone who is just helping you with your claim. Do not enter your employer''s details here.|]</p>'
+    form:
+      fullName:
+        type: App\Form\Type\FullNameType
+        options:
+          label: false
+          help: We will contact your representative instead of you to talk about your dispute.
+    data_class: App\EmploymentDispute\Tasks\Data\FullNameTaskData
+    label:
+      myself: Representative's name
+      other: Your name
+    title:
+      myself: What is your representative's name?
+      other: What is your name?
+  representative_email_optional:
+    data_key: representative_email
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\EmailType
+        options:
+          label: "Email"
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalEmailTaskData
+    label:
+      myself: Representative's email
+      other: Your email address
+    title:
+      myself: Enter the representative's email
+      other: Enter your email
+  representative_email:
+    data_key: representative_email
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\EmailType
+        options:
+          label: "Email"
+    data_class: App\EmploymentDispute\Tasks\Data\EmailTaskData
+    label:
+      myself: Representative's email
+      other: Your email address
+    title:
+      myself: Enter the representative's email
+      other: Enter your email
+  representative_phone:
+    data_key: representative_phone
+    template: app/task-list/phone-task.html.twig
+    form:
+      phone:
+        type: App\Form\Type\PhoneWithoutVerificationType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\PhoneWithoutVerificationTaskData
+    label:
+      myself: Representative's phone number
+      other: Your phone number
+    title:
+      other: What is your phone number?
+      myself: Representative's phone number
+  representative_contact_details:
+    data_key: representative_contact_details
+    template_options:
+      prefix: <p class="govuk-hint">You will get a quicker response about your dispute if you provide your representative's contact details.</p>
+    form:
+      email:
+        type: Symfony\Component\Form\Extension\Core\Type\EmailType
+        options:
+          label: Email address
+      phone:
+        type: Symfony\Component\Form\Extension\Core\Type\TextType
+        options:
+          label: Phone number (include extension)
+    data_class: App\EmploymentDispute\Tasks\Data\ContactDetailsTaskData
+    label:
+      myself: Representative's contact details
+      other: Your contact details
+    title:
+      other: Your contact details (optional)
+      myself: What are your representative's contact details (optional)?
+  representative_address:
+    data_key: representative_address
+    template: app/task-list/address-task.html.twig
+    template_options:
+      address_hint: You can also enter your address below. You will need to do this if you do not live in the UK.
+    form:
+      address:
+        type: App\Form\Type\OptionalAddressType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalAddressTaskData
+    label:
+      myself: Representative's address
+      other: Your address
+    title:
+      other: What is your address (optional)?
+      myself: Your representative's address (optional)

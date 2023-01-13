@@ -1,0 +1,244 @@
+// Generic Footer
+#footer_upper {
+  font-size: 0.75em;
+
+  display: none;
+}
+
+.footer_upper {
+  border-top: 5px solid #007c85;
+  padding: 38px 0;
+}
+
+.footer__wrapper {
+  @include print-hide;
+
+  background: #f7f7f7;
+
+  .container {
+    @include content-area;
+  }
+
+  ul {
+    margin: 0;
+
+    li {
+      list-style-type: none;
+
+      a {
+        text-decoration: underline;
+        display: inline-block;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        color: #000;
+
+        &:focus {
+          background: #007c85;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// Priamry Footer - Wrapper
+.region-footer-upper {
+  @include mq($break-tablet) {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+// Primary Footer - Social Media
+#block-socialmedialinks {
+  @include print-hide;
+
+  @include mq(0, $break-tablet) {
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-bottom: 30px;
+  }
+
+  @include mq($break-tablet) {
+    flex-basis: calc(100% / 3);
+    margin-bottom: 30px;
+  }
+
+  .footer-logo {
+    &:hover,
+    &:focus {
+      background: transparent;
+    }
+
+    img {
+      max-width: 10rem;
+    }
+  }
+
+  .social-media-links--platforms {
+    li {
+      display: inline-block;
+      text-align: center;
+      padding: 0;
+      margin-top: 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      margin-left: 5px;
+    }
+
+    a {
+      height: 45px;
+      line-height: 45px;
+      width: 45px;
+      background: #007c85;
+      color: #f7f7f7;
+      border-radius: 22px;
+      font-size: 13px;
+      padding-top: 5px;
+
+      &:focus {
+        background: #f7f7f7;
+        color: #007c85;
+      }
+    }
+
+    img {
+      padding-bottom: 10px;
+    }
+  }
+
+  #footer_upper__inner ul a {
+    text-decoration: underline;
+    display: inline-block;
+  }
+}
+
+// Primary Footer - Subscribe for updates
+#block-footercalltoaction1 {
+  @include print-hide;
+
+  @include mq(0, $break-tablet) {
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-bottom: 30px;
+  }
+
+  @include mq($break-tablet) {
+    flex-basis: 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+  }
+
+  .footer_action {
+    padding-bottom: 10px;
+
+    @include mq($break-tablet) {
+      padding-left: 30px;
+    }
+
+    // Sign up for emails button
+    a {
+      cursor: pointer;
+      background: #f7f7f7;
+      border: 1px solid #007c85;
+      color: #007c85;
+      display: inline-block;
+      padding: 10px;
+      padding: 10.6875px;
+      min-width: 7em;
+      text-align: center;
+      width: fit-content;
+      text-decoration: none;
+      font-size: 1.25em;
+
+      &:hover,
+      &:focus {
+        background: #007c85;
+        border: 1px solid #fff;
+        color: #fff;
+      }
+    }
+
+    .description {
+      p {
+        line-height: normal;
+        color: #000;
+        font-size: 12pt;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+      }
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: normal;
+      margin: 0;
+    }
+  }
+}
+
+// Primary Footer - Secondary Links
+#block-secondaryfooter {
+  @include mq(0, $break-tablet) {
+    padding-right: 15px;
+    padding-bottom: 0;
+    padding-left: 15px;
+  }
+
+  @include mq($break-tablet) {
+    flex-basis: 16.667%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  ul {
+    li {
+      padding-top: 0;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// Secondary Footer
+#block-acas-footer {
+  // border-top: 4px solid #007c85;
+
+  @include mq(0, $break-tablet) {
+    padding-top: 30px;
+    padding-left: 15px;
+  }
+  @include mq($break-tablet) {
+    padding: 28px 0;
+    padding: 28.5px 0;
+  }
+}
+
+#footer__inner {
+  font-size: 0.75em;
+
+  @include mq(0, $break-tablet) {
+    padding-bottom: 45px;
+  }
+
+  ul {
+    li {
+      padding-top: 5px;
+      padding-right: 30px;
+
+      @include mq(0, $break-tablet) {
+        margin-bottom: 7px;
+      }
+
+      @include mq($break-tablet) {
+        display: inline-block;
+      }
+    }
+  }
+}

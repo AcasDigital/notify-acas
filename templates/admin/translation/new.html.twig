@@ -1,0 +1,15 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Create new text
+{% endblock %}
+
+{% set activeRoute = 'translation_index' %}
+
+{% block body %}
+    <a class="govuk-back-link" href="{{ path('translation_index') }}">back to list</a>
+
+    <h1>Create new text</h1>
+
+    {{ include('admin/translation/_form.html.twig', {'button_label': 'Save', 'translation': true, 'formType': 'new' }) }}
+
+{% endblock %}

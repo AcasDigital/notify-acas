@@ -1,0 +1,22 @@
+.region.region-top-bar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid acas-color("gray");
+  overflow: auto;
+
+  @include print-hide;
+}
+
+.block-beta-banner {
+  @include text-small;
+  color: acas-color("gray-dark");
+  width: 100%;
+}
+
+.beta-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+  background: acas-color("teal");
+  color: acas-color("white");
+  text-transform: uppercase;
+}

@@ -1,0 +1,23 @@
+<header class="govuk-header govuk-header__container" role="banner" data-module="govuk-header">
+  <div class="govuk-width-container flex-container">
+    <div class="govuk-header__logo">
+      <a href="{{ path('healthcheck') }}" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <span>ACAS</span>
+          <span class="govuk-header__logotype-text sr-only">ACAS</span>
+        </span>
+      </a>
+    </div>
+    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+      <div class="login-details">
+          <div class="logged-in-as">
+              Logged in as
+              {{ app.user.email }},
+          </div>
+          <div class="header-logout">
+              <a href="{{ path('app_logout') }}" class="header-logout-link">Logout</a></div>
+          </div>
+      </div>
+    {% endif %}
+
+</header>

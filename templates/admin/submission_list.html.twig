@@ -1,0 +1,136 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Notification Forms"  %}
+{% block title %}
+	{{ title}}
+{% endblock %}
+{% block body %}
+	<h1 class="govuk-heading-l">{{ title }}</h1>
+	<div class="govuk-tabs" data-module="govuk-tabs">
+		<h2 class="govuk-tabs__title">
+			Contents
+		</h2>
+		<ul class="govuk-tabs__list">
+			<li class="govuk-tabs__list-item {% if app.request.query.get('status') == null %}govuk-tabs__list-item--selected{% endif %}">
+				<a class="govuk-tabs__tab" href="{{ path('admin_submission_list') }}">
+					All
+				</a>
+			</li>
+			<li class="govuk-tabs__list-item {% if app.request.query.get('status') == 'draft' %}govuk-tabs__list-item--selected{% endif %}">
+				<a class="govuk-tabs__tab" href="{{ path('admin_submission_list', {status: 'draft'}) }}">
+					Drafts
+				</a>
+			</li>
+			<li class="govuk-tabs__list-item {% if app.request.query.get('status') == 'queued' %}govuk-tabs__list-item--selected{% endif %}">
+				<a class="govuk-tabs__tab" href="{{ path('admin_submission_list', {status: 'queued'}) }}">
+					Queued
+				</a>
+			</li>
+			<li class="govuk-tabs__list-item {% if app.request.query.get('status') == 'paused' %}govuk-tabs__list-item--selected{% endif %}">
+				<a class="govuk-tabs__tab" href="{{ path('admin_submission_list', {status: 'paused'}) }}">
+					Paused
+				</a>
+			</li>
+			<li class="govuk-tabs__list-item {% if app.request.query.get('status') == 'submitted' %}govuk-tabs__list-item--selected{% endif %}">
+				<a class="govuk-tabs__tab" href="{{ path('admin_submission_list', {status: 'submitted'}) }}">
+					Submitted
+				</a>
+			</li>
+			<li class="govuk-tabs__list-item {% if app.request.query.get('status') == 'failed' %}govuk-tabs__list-item--selected{% endif %}">
+				<a class="govuk-tabs__tab" href="{{ path('admin_submission_list', {status: 'failed'}) }}">
+					Failed
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="" id="past-day">
+		<div class="govuk-form-group">
+			<details class="govuk-details" data-module="govuk-details" {% if filters.filtersApplied %} open="" {% endif %}>
+				<summary class="govuk-details__summary" role="button">
+					<span class="govuk-details__summary-text">
+						Filters
+					</span>
+				</summary>
+				<div class="govuk-details__text">
+					{{ form_start(form) }}
+					<div style="display: flex; justify-content: space-between">
+						<div>
+							{{ form_row(form.caseNumber) }}
+							{{ form_row(form.returnCode) }}
+							{{ form_row(form.hasFailedSubmissions) }}
+						</div>
+						<div>
+							{{ form_row(form.claimentOrRepFirstName) }}
+							{{ form_row(form.claimentOrRepLastName) }}
+							{{ form_row(form.respondentName) }}
+						</div>
+						<div>
+							{{ form_row(form.dateFrom) }}
+							{{ form_row(form.dateTo) }}
+						</div>
+					</div>
+					<p class="govuk-form-group submission-search-buttons-wrapper">
+						<button class="govuk-button govuk-button">
+							Filter
+						</button>
+						<a href="{{ path('admin_submission_list') }}" class="govuk-button govuk-button--secondary">
+							Clear
+						</a>
+					</p>
+					{{ form_end(form) }}
+				</div>
+			</details>
+		</div>
+		{% if app.request.query.get('status') == 'failed' %}
+			<a class="govuk-button" href="{{ path('admin_form_retry_all') }}">Retry all failed submissions</a>
+		{% endif %}
+		<div class="govuk-inset-text">Number of records: {{ no_of_records }}</div>
+		<dl class="govuk-summary-list">
+			<table class="govuk-table govuk-table--translations">
+				<thead class="govuk-table__head">
+					<tr class="govuk-table__row">
+						<th scope="col" class="govuk-table__header">Return Code (ID)</th>
+						<th scope="col" class="govuk-table__header">Created</th>
+						<th scope="col" class="govuk-table__header">Modified</th>
+						<th scope="col" class="govuk-table__header">Status</th>
+						<th scope="col" class="govuk-table__header">Case Number</th>
+						<th scope="col" class="govuk-table__header">Submitted</th>
+						<th scope="col" class="govuk-table__header">Actions</th>
+					</tr>
+				</thead>
+				<tbody class="govuk-table__body">
+					{% for submission in pagination %}
+						<tr class="govuk-table__row">
+							<th scope="row" class="govuk-table__header govuk-table__header--translation-key">{{ submission.id }}</th>
+							<td class="govuk-table__cell govuk-table__cell--translation-content">{{ submission.created|date }}</td>
+							<td class="govuk-table__cell govuk-table__cell--translation-content">{{ submission.modified|date }}</td>
+							<td class="govuk-table__cell govuk-table__cell--translation-content">
+								{% if submission.status == 'submitted' %}
+									<strong class="govuk-tag govuk-tag--green">Submitted</strong>
+								{% elseif submission.status == 'queued' %}
+									<strong class="govuk-tag govuk-tag--purple">Queued</strong>
+								{% elseif submission.status == 'failed' %}
+									<strong class="govuk-tag govuk-tag--red">Failed</strong>
+									<div>Error {{ submission.getLastErrorMessage['code']|default('500') }} - {{ submission.getLastErrorMessage['error']|default('Unknown') }}</div>
+								{% elseif submission.status == 'paused' %}
+									<strong class="govuk-tag govuk-tag--purple">Paused</strong>
+								{% else %}
+									<strong class="govuk-tag govuk-tag--grey">{{ submission.status }}</strong>
+								{% endif %}
+							</td>
+							<td class="govuk-table__cell govuk-table__cell--translation-content">
+								<strong class="govuk-tag govuk-tag--turquoise">{{ submission.getCaseNumberList|default('NONE SET') }}</strong>
+							</td>
+							<td class="govuk-table__cell govuk-table__cell--translation-content">{{ submission.retrieveSubmissionDateTime is null ? '' : submission.retrieveSubmissionDateTime|date }}
+							</td>
+							<td class="govuk-table__cell">
+								<a href="{{ path('admin_form_show', {id: submission.id }) }}">Details</a>
+								<a href="{{ path('admin_view_form', {id: submission.id }) }}">View Form</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{ knp_pagination_render(pagination) }}
+		</div>
+		{# {{ include('admin/admin-pagination.html.twig') }} #}
+	{% endblock %}

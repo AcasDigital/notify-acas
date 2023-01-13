@@ -1,0 +1,67 @@
+{% macro renderTask (disputeForm, task, review, storage) %}
+{% set notClaimantVerifiedEmail = (task.id != 'claimant_email_optional' and  disputeForm.representing == 'myself') %}
+{% set notRepresentativeVerifiedEmail = (task.id != 'representative_email_optional' and disputeForm.representing == 'other') %}
+{% set claimantVerifiedEmailWithData = (task.id == 'claimant_email_optional' and storage.taskData(task).getData and disputeForm.representing == 'myself') %}
+{% set representativeVerifiedEmailWithData = (task.id == 'representative_email_optional' and storage.taskData(task).getData and disputeForm.representing == 'other') %}
+
+{% if (notClaimantVerifiedEmail or notRepresentativeVerifiedEmail or claimantVerifiedEmailWithData or representativeVerifiedEmailWithData) %}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            {{ task.reviewPageLabel|raw }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ review[task.sectionId][task.id]|nl2br }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+            {% if notClaimantVerifiedEmail or notRepresentativeVerifiedEmail %}
+                <a class="btn-secondary" href="{{ path('app_render_task', { id: disputeForm.id, sectionId: task.sectionId, taskId: task.id }) }}?source=review" aria-label="Change {{ task.reviewPageLabel|raw }}">Change</a>
+            {% endif %}
+        </dd>
+    </div>
+{% endif %}
+{% endmacro %}
+{% extends 'base.html.twig' %}
+{% block title %}Check your answers{% endblock %}
+{% block headerSection %}
+    {% include 'app/layout/header.html.twig' %}
+{% endblock %}
+{% block breadcrumbs %}
+    {% import 'app/components/back-link.html.twig' as backLink %}
+    {{ backLink.renderBack(backUrl) }}
+{% endblock %}
+{% block body %}
+    <h1>Check your answers</h1>
+    {% for section in sections %}
+        {% if (section.id == 'representative' and hideRepresentativeSection == false)
+            or section.id != 'representative' %}
+            <h2>{{ section.reviewPageLabel|raw }}</h2>
+        {% endif %}
+        {% if (section.id == 'representative' and hideRepresentativeSection == false) or section.id != 'representative' %}
+            <dl class="govuk-summary-list">
+            {# {% if section.id == 'multiple' %}
+                {% import 'app/components/link-button.html.twig' as linkButton %}
+                {% for sectionId, tasks in section.tasks(false) %}
+                    {% for task in tasks %}
+                        {{ _self.renderTask(disputeForm, task, review) }}
+                    {% endfor %}
+                {% endfor %}
+                <br/>
+            {% else %} #}
+                    {% for task in section.tasks %}
+                        {{ _self.renderTask(disputeForm, task, review, storage) }}
+                    {% endfor %}
+            {# {% endif %} #}
+            </dl>
+        {% endif %}
+    {% endfor %}
+    <h2>Send your application</h2>
+    <div>By submitting this form you are confirming that, to the best of your knowledge, the details you have provided are correct.</div>
+
+    {% include 'app/layout/print-page.html.twig' %}
+
+    {% import 'app/components/link-button.html.twig' as linkButton %}
+    {{ form_start(submitForm) }}
+        {{ form_row(submitForm.submit, {label: 'Accept and send', disabled: valid})}}
+    {{ form_end(submitForm) }}
+
+{% endblock %}

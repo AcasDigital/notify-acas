@@ -1,0 +1,57 @@
+{% if form|default %}
+    {% form_theme form 'admin/form/govuk_layout.html.twig' %}
+{% endif %}
+<!DOCTYPE html>
+<html lang="en" class="govuk-template ">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="theme-color" content="#0b0c0c">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('adminstyles') }}
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('admin') }}
+        {% endblock %}
+        {# fontawesome icons specific for this repo #}
+        <script src="https://kit.fontawesome.com/99cce2f562.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="govuk-template__body ">
+        <script>
+            document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+        </script>
+        <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+        {{ include('admin/admin-header.html.twig') }}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+        {{ include('admin/admin-navigation.html.twig') }}
+        <div class="app-pane__body app-width-container">
+        {% block subnav %}{% endblock %}
+            <div class="app-pane__content">
+                <main id="main-content" class="app-content" role="main">
+                    {% for message in app.flashes('notice') %}
+                        <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+                            <div class="govuk-notification-banner__content">
+                                <p class="govuk-notification-banner__heading">
+                                    {{ message|raw }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% block body %}{% endblock %}
+                </main>
+            </div>
+            {% block back_to_top %}{% endblock %}
+        </div>
+        {% endif %}
+        <script src="{{ asset('build/govuk-frontend/all.js') }}"></script>
+        <script>
+            window.GOVUKFrontend.initAll();
+        </script>
+    </body>
+</html>

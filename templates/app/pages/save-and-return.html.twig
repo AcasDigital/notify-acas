@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+    {# the user can't go back to the wizard details #}
+{% endblock %}
+{# {% block title %}
+    {{ title }}
+{% endblock %} #}
+{% block content %}
+    {% import 'app/components/callout.html.twig' as callout %}
+    {{ callout.renderCallout({ title: "Your save and return code", content: "<h3>"~returnNumber~"</h3>" })}}
+
+    {% if data.hasSelectedContact('email') %}
+    <p>Your information will be saved as you progress through the form. You can leave the form, then return and continue by following the link we have emailed to you. You will need your save and return code (above) and your memorable word</p>
+    {# certificate journey > post route has no optional email present #}
+    {% elseif data.hasSelectedContact('post') or data.hasSelectedContact('phone') %}
+    <p>Your information will be saved as you progress through the form. You can leave the form, then return and continue it later. You will need your save and return code (above) and your memorable word.</p>
+    {% endif %}
+
+    {% if form is null %}
+    {% include 'app/layout/print-page.html.twig' %}
+
+    {% import 'app/components/link-button.html.twig' as linkButton %}
+    {{ linkButton.renderLinkButton({ label: "Save and continue", type: "primary", url: path('app_task_list', { id: data.id })}) }}
+
+    {% else %}
+        {% form_theme form 'app/govuk_form_theme.html.twig' %}
+        {{ form_start(form) }}
+
+        <div class="govuk-form-group">
+            {{ form_rest(form) }}
+
+            {% include 'app/layout/print-page.html.twig' %}
+
+            {% import 'app/components/button.html.twig' as linkButton %}
+            {{ linkButton.renderButton({ label: "Save and continue", type: "primary"}) }}
+        </div>
+
+        {{ form_end(form) }}
+    {% endif %}
+
+{% endblock %}

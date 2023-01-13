@@ -1,0 +1,133 @@
+// @TODO REFACTOR ALL BELOW
+
+input,
+textarea,
+select,
+button {
+  margin: 0;
+  font-family: $font-family-base;
+  color: initial;
+  display: inline-block;
+  font-size: $font-size-standard;
+  letter-spacing: normal;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-rendering: auto;
+  text-transform: none;
+  word-spacing: normal;
+}
+
+
+input {
+  width: 100%;
+}
+
+.input--restricted-width {
+  max-width: 228px;
+}
+
+textarea {
+  max-width: 100%;
+}
+
+select {
+  background: acas-color("white");
+  height: 2.5em;
+}
+
+@mixin standard-input-styling {
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid acas-color("gray-dark");
+  border-radius: 0.25rem;
+  font-size: $font-size-standard;
+  line-height: 1.5;
+  min-height: 40px;
+  padding: 0.25em 0.5em;
+}
+
+input[type="text"] {
+  @include standard-input-styling;
+}
+
+input[type="password"] {
+  @include standard-input-styling;
+}
+
+input[type="email"] {
+  @include standard-input-styling;
+}
+
+label {
+  display: block;
+  font-family: $font-family-semibold;
+  font-size: 1em;
+}
+
+fieldset#edit-existing-address--wrapper {
+  input:disabled {
+    color: grey;
+  }
+}
+
+@mixin shared-description-styling {
+  color: acas-color("gray-dark");
+  margin-bottom: 10px;
+  font-size: 0.85em;
+}
+
+.fieldset-wrapper {
+  .description {
+    @include shared-description-styling;
+  }
+}
+
+.form-description {
+  @include shared-description-styling;
+}
+
+// REFACTOR CHECKBOXES
+.checkbox {
+  label {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 8px 15px 5px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    line-height: 1.25;
+    display: block;
+    position: relative;
+    min-height: 35px;
+    margin-bottom: 10px;
+    padding: 0px 0 0 40px;
+    clear: left;
+
+    span {
+      float: left;
+      margin: 2px 0;
+
+      &::before {
+        @include checkbox-label-before-psuedo;
+      }
+
+      &::after {
+        @include checkbox-label-after-psuedo;
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    @include checkbox-styling;
+
+    &:hover + span:before,
+    &:focus + span:before {
+      box-shadow: 0 0 0 4px acas-color("teal");
+    }
+  }
+
+  input:checked + span:after {
+    opacity: 1;
+  }
+}

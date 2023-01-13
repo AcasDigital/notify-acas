@@ -1,0 +1,45 @@
+// GDS Colours
+$gov-details: #1d70b8 !default;
+$gov-details--hover: #003078 !default;
+$gov-error: #b10e1e !default;
+$gov-confirmation: #00703c !default;
+$gov-secondary: #f3f2f1 !default;
+$gov-secondary--hover: #dbdad9 !default;
+$gov-warning: #d4351c !default;
+$gov-warning--hover: #aa2a16 !default;
+$gov-focus: #fd0 !default;
+$govuk-hint: #505a5f;
+
+// ACAS colours
+$acas-colours: (
+  "lime": #cedc00,
+  "lime-dark": #8e9e23,
+  "blue": #005eb8,
+  "darkblue": #1e70b8,
+  "maroon": #910048,
+  "teal": #00838d,
+  "teal-light": #34afbe,
+  "teal-lightest": #e5f6f8,
+  "teal-dark": #007c85,
+  "purple": #820282,
+  "black": #000,
+  "white": #fff,
+  "red": #b10e1e,
+  "green": #28a745,
+  "gray-light": #f7f7f7,
+  "gray": #888,
+  "gray-medium-light": #666,
+  "gray-medium": #999,
+  "gray-dark": #4d4d4d,
+) !default;
+
+@function acas-color($key: "primary") {
+  @return map-get($acas-colours, $key);
+}
+
+$link-color: acas-color("teal-dark");
+
+// Admin bar
+$white: #fefefe;
+$black: #111;
+$toggle: acas-color("teal-light");

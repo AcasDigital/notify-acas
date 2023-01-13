@@ -1,0 +1,213 @@
+tasks:
+  wizard_representing:
+    data_key: "wizard_representing"
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          label: false
+          expanded: true
+          empty_data: myself
+          choices:
+            Myself: myself
+            Someone else - I am acting on their behalf: other
+    data_class: App\EmploymentDispute\Tasks\Data\StringTaskData
+    label: Who are you representing? (optional)
+  wizard_relationship:
+    data_key: "wizard_relationship"
+    template_options:
+      prefix: <p class="govuk-hint">The claimant is the person you're acting on behalf of</p>
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          label: false
+          expanded: true
+          choices:
+            Family or friend: family_friend
+            Trade union representative: trade_union
+            Legal representative: legal_representative
+            Other: other
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalStringTaskData
+    label: What is your relationship with the claimant? (optional)
+  wizard_early_conciliation:
+    data_key: "wizard_early_conciliation"
+    template_options:
+      prefix: >
+        <div class="acas-warning-callout">
+          <p>
+            You can use our free early conciliation service to try to resolve your dispute without going to an employment tribunal.
+          </p>
+          <p>
+            Early conciliation is where an Acas conciliator will speak with you and the employer separately about the dispute.
+          </p>
+          <p>
+            Early conciliation is free. It takes place for up to 6 weeks and is quicker than going to an employment tribunal. It also gives you options to solve the dispute that you cannot get from an employment tribunal.
+          </p>
+          <p>
+            If you try early conciliation, your time limit for making a claim to an employment tribunal is paused. If early conciliation does not solve your dispute, you can still make a claim.
+          </p>
+        </div>
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          label: false
+          expanded: true
+          empty_data: no
+          choices:
+            Yes – I want to try early conciliation: yes
+            No – I want a certificate to make a claim to an employment tribunal without trying early conciliation: no
+    data_class: App\EmploymentDispute\Tasks\Data\StringTaskData
+    label: Do you want to solve your problem before tribunal? (optional)
+  wizard_contact_certificate:
+    data_key: "wizard_contact_certificate"
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          help: If you select post it will take longer to get the certificate.
+          label: false
+          expanded: true
+          empty_data: post
+          choices:
+            Email: email
+            Post: post
+    data_class: App\EmploymentDispute\Tasks\Data\StringTaskData
+    label: How would you like get the certificate? (optional)
+  wizard_contact_early_conciliation:
+    data_key: "wizard_contact_early_conciliation"
+    template_options:
+      prefix: <p class="govuk-hint">We can start early conciliation sooner if you provide your phone number and email. We might need to discuss your claim with you and it's often easier to do this over the phone. We will never use your details for any other purpose.</p>
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+        options:
+          label: false
+          expanded: true
+          empty_data: post
+          choices:
+            Phone and email: phone-email
+            Email: email
+            Phone and post: phone-post
+            Post: post
+    data_class: App\EmploymentDispute\Tasks\Data\StringTaskData
+    label: How would you prefer to be contacted? (optional)
+  wizard_address:
+    data_key: wizard_address
+    template: app/task-list/address-task.html.twig
+    template_options:
+      address_hint: You can also enter your address below. You will need to do this if you do not live in the UK.
+    form:
+      address:
+        type: App\Form\Type\AddressType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\AddressTaskData
+    label:
+      certificate:
+        myself: What is your address?
+        other: What is your address?
+      ec:
+        myself: What is your address?
+        other: What is your address?
+    title:
+      certificate:
+        myself: What is your address?
+        other: What is your address?
+      ec:
+        myself: What is your address?
+        other: What is your address?
+  wizard_address_optional:
+    data_key: wizard_address
+    template: app/task-list/address-task.html.twig
+    template_options:
+      address_hint: You can also enter your address below. You will need to do this if you do not live in the UK.
+    form:
+      address:
+        type: App\Form\Type\OptionalAddressType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalAddressTaskData
+    label:
+      certificate:
+        myself: What is your address?
+        other: What is your address?
+      ec:
+        myself: What is your address?
+        other: What is your address?
+    title:
+      certificate:
+        myself: What is your address?
+        other: What is your address?
+      ec:
+        myself: What is your address?
+        other: What is your address?
+  wizard_phone:
+    data_key: wizard_phone
+    template_options:
+      prefix: <p class="govuk-hint">Enter phone numbers you can talk openly and privately on.</p>
+    template: app/task-list/phone-task.html.twig
+    form:
+      phone:
+        type: App\Form\Type\PhoneType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalPhoneTaskData
+    label: What is your phone number?
+  wizard_phone_without_verification:
+    data_key: wizard_phone_without_verification
+    template_options:
+      prefix: <p class="govuk-hint">Enter phone numbers you can talk openly and privately on.</p>
+    template: app/task-list/phone-task.html.twig
+    form:
+      phone:
+        type: App\Form\Type\PhoneWithoutVerificationType
+        options:
+          label: false
+    data_class: App\EmploymentDispute\Tasks\Data\PhoneWithoutVerificationTaskData
+    label: What is your phone number?
+  wizard_email:
+    data_key: wizard_email
+    template_options:
+      prefix: <p class="govuk-hint">We will send you a code to confirm your email address.</p>
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\EmailType
+        options:
+          label: "Email address"
+    label: What is your email address?
+    data_class: App\EmploymentDispute\Tasks\Data\OptionalEmailTaskData
+  wizard_email_verify:
+    data_key: verify
+    data_class: App\EmploymentDispute\Tasks\Data\VerificationEmailTaskData
+    template: app/task-list/email-verify.html.twig
+    form:
+      code:
+        type: Symfony\Component\Form\Extension\Core\Type\TextType
+        options:
+          label: false
+    label: Confirm your email address
+  wizard_phone_verify:
+    data_key: verify
+    data_class: App\EmploymentDispute\Tasks\Data\VerificationPhoneTaskData
+    template: app/task-list/phone-verify.html.twig
+    form:
+      code:
+        type: Symfony\Component\Form\Extension\Core\Type\TextType
+        options:
+          label: false
+    label: Confirm your phone number
+  wizard_memorable_word:
+    data_key: "wizard_memorable_word"
+    template_options:
+      no_title_display: true
+    form:
+      data:
+        type: Symfony\Component\Form\Extension\Core\Type\TextType
+        options:
+          required: false
+          label: Create your memorable word (optional)
+          help: Your information will be saved as you progress through the form. If you want, you can create a memorable word to access your form at a later date. If you do not create a memorable word you will not be able to save and return to your form later. Your memorable word should be 6 characters or more.
+    data_class: App\EmploymentDispute\Tasks\Data\MemorableWordTaskData
+    label: Create your memorable word (optional)

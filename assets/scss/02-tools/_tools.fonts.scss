@@ -1,0 +1,144 @@
+@mixin shared-heading-link {
+  a {
+    font-family: $font-family-headers;
+    color: acas-color("teal");
+  }
+}
+
+@mixin heading-font {
+  font-family: $font-family-headers;
+  font-weight: 400;
+}
+
+@mixin h1($include-margin: true, $include-border: true) {
+  @include shared-heading-link;
+
+  font-family: $font-family-headers;
+  color: acas-color("teal");
+  line-height: 1.25;
+  position: relative;
+  padding-left: 15px;
+  font-size: 1.68rem;
+
+  @if $include-border {
+    border-left: 5px solid acas-color("lime");
+  }
+
+  @if $include-margin {
+    margin-bottom: 50px;
+  }
+
+  @include mq($container-md) {
+    font-size: 2.42rem;
+  }
+}
+
+@mixin h2($include-margin: true) {
+  @include shared-heading-link;
+
+  font-family: $font-family-headers;
+  color: acas-color("teal");
+  font-size: 1.36rem;
+
+  @if $include-margin {
+    margin-bottom: 30px;
+    margin-top: 60px;
+  }
+
+  @include mq($container-md) {
+    font-size: 1.68rem;
+  }
+}
+
+@mixin h3($include-margin: true) {
+  @include shared-heading-link;
+
+  font-family: $font-family-headers;
+  color: acas-color("teal");
+  font-size: 1.1rem;
+
+  @if $include-margin {
+    margin-bottom: 20px;
+  }
+
+  @include mq($container-md) {
+    font-size: 1.2rem;
+  }
+}
+
+@mixin h4($include-margin: true) {
+  @include shared-heading-link;
+
+  font-family: $font-family-headers;
+  color: acas-color("teal");
+  font-size: $font-size-standard;
+
+  @if $include-margin {
+    margin-bottom: 15px;
+  }
+}
+
+@mixin h5($include-margin: true) {
+  @include shared-heading-link;
+
+  font-family: $font-family-headers;
+  font-size: $font-size-standard;
+  color: acas-color("teal");
+
+  @if $include-margin {
+    margin: 0;
+  }
+}
+
+@mixin h6($include-margin: true) {
+  @include shared-heading-link;
+
+  font-family: $font-family-headers;
+  font-size: $font-size-standard;
+  color: acas-color("teal");
+
+  @if $include-margin {
+    margin: 0;
+  }
+}
+
+@mixin p($include-margin: true) {
+  
+  font-size: 1rem;
+  
+  @if $include-margin {
+    margin-bottom: 25px;
+  }
+}
+
+@mixin text-small {
+  font-size: $font-size-small;
+}
+
+@mixin link-no-focus {
+  &:hover,
+  &:focus {
+    background: transparent;
+  }
+}
+
+@mixin shared-list-styles {
+  margin-left: 30px;
+  margin-bottom: 30px;
+
+  li {
+    padding-top: 5px;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+@mixin shared-label-legend-styling {
+  margin-bottom: 10px;
+  display: block;
+  font-family: $font-family-semibold;
+  font-size: $font-size-standard;
+}
+

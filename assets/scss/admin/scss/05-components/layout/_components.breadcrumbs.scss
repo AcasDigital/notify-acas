@@ -1,0 +1,92 @@
+$breadcrumbs-switch-point: $break-desktop;
+
+.breadcrumbs {
+  @include content-area;
+
+  margin-bottom: $spacing-xl;
+
+  @include mq($breadcrumbs-switch-point) {
+    margin-bottom: $spacing-xxxl;
+  }
+
+  .breadcrumbs__list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    @include mq(0, $breadcrumbs-switch-point) {
+      margin-top: 0;
+      margin-bottom: $spacing-l;
+    }
+
+    @include mq($breadcrumbs-switch-point) {
+      margin-top: 0;
+      margin-bottom: $spacing-xxl;
+      // this is to align with the secondary header which has some padding in each link
+      margin-left: 8px;
+    }
+
+    .breadcrumbs__link {
+      color: $black;
+
+      &:hover,
+      &:focus {
+        color: $links;
+      }
+    }
+
+    .breadcrumbs__list-item {
+      @include mq(0, $breadcrumbs-switch-point) {
+        display: none;
+      }
+
+      @include mq($breadcrumbs-switch-point) {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      @include print {
+        display: inline-block;
+      }
+
+      &:nth-last-child(2) {
+        // Second to last child, i.e. the last active link
+        display: inline-block;
+      }
+
+      &:last-child {
+        .fa-chevron-right {
+          display: none;
+        }
+      }
+
+      .fa {
+        color: $grey--dark;
+        font-size: 14px;
+      }
+
+      .fa-chevron-right {
+        @include mq(0, $breadcrumbs-switch-point) {
+          display: none;
+        }
+
+        @include mq($breadcrumbs-switch-point) {
+          margin-right: $spacing-l;
+          margin-left: $spacing-l;
+        }
+      }
+
+      .fa-chevron-left {
+        @include mq(0, $breadcrumbs-switch-point) {
+          margin-right: $spacing-m;
+        }
+
+        @include mq($breadcrumbs-switch-point) {
+          display: none;
+        }
+      }
+    }
+  }
+}

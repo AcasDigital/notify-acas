@@ -1,0 +1,10 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}
+	Reports
+{% endblock %}
+{% block body %}
+	<h1 class="govuk-heading-xl">Reports</h1>
+	<div class="govuk-inset-text">These reports are in the CSV format and represent the state of the data at the point in time of download.</div>
+	<a href="{{ path('admin.reports.usage') }}" class="govuk-button gov">Usage CSV</a>
+	<a href="{{ path('admin.reports.question') }}" class="govuk-button gov">Question CSV</a>
+{% endblock %}

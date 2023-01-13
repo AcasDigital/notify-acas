@@ -1,0 +1,38 @@
+@mixin checkbox-styling {
+  position: absolute;
+  z-index: -1; // hidden
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin: 0;
+}
+
+@mixin checkbox-label-before-psuedo {
+  content: "";
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  background: #fff;
+}
+
+@mixin checkbox-label-after-psuedo {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 5px;
+  left: 5px;
+  width: 0;
+  height: 0;
+  border: 8px solid acas-color("blue");
+  opacity: 0;
+  background: acas-color("blue");
+}

@@ -1,0 +1,141 @@
+.survey {
+  border: 3px solid $panel--cqc;
+  margin-bottom: $spacing-l;
+
+  .tooltip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    .tooltip__icon {
+      color: inherit;
+    }
+  }
+}
+
+.survey__title {
+  @include open-semi-bold;
+
+  background-color: $panel--cqc;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: $spacing-xs $spacing-s;
+  font-size: 19px;
+  line-height: 1.1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: none;
+  width: 100%;
+
+  .survey__title-content {
+    @include open-semi-bold;
+
+    text-align: left;
+    flex-basis: 55%;
+    font-size: 19px;
+    line-height: 1.1em;
+    margin: 0;
+
+    .survey__title-meta {
+      margin-left: 28px;
+    }
+
+    .fas {
+      min-width: 16.63px;
+      margin-right: $spacing-s;
+    }
+  }
+
+  .survey__title-meta {
+    display: block;
+    font-size: 12px;
+  }
+
+  .survey__title-score,
+  .survey__title-comparison {
+    @include open-semi-bold;
+
+    flex-basis: 20%;
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2.5%;
+    color: $brand-primary;
+  }
+
+  .survey__title-comparison {
+    font-size: 16px;
+  }
+}
+
+.survey__content {
+  padding: $spacing-s;
+}
+
+.survey-content__list-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-top: 3px dashed $panel--cqc;
+  padding-top: $spacing-m;
+  padding-bottom: $spacing-m;
+  margin-top: $spacing-m;
+  margin-bottom: $spacing-m;
+
+  &:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .survey-content__primary-content {
+    flex-basis: 55%;
+    font-size: 16px;
+    line-height: 1.5em;
+    padding-right: $spacing-m;
+    padding-left: 28px;
+
+    .survey-primary-content__title {
+      @include open-semi-bold;
+
+      color: $brand-primary;
+      font-size: 16px;
+      line-height: 1.5em;
+      margin: 0;
+    }
+
+    .survey-primary-content__text {
+      font-size: 14px;
+      line-height: 1.5em;
+      margin-top: $spacing-xs;
+      margin-bottom: 0;
+    }
+  }
+
+  .survey-content__score,
+  .survey-content__comparison {
+    @include open-semi-bold;
+
+    flex-basis: 20%;
+    margin: 0;
+    line-height: 1.5em;
+    text-align: right;
+    margin-left: 2.5%;
+  }
+}
+
+
+.accordion:not(.accordion--open) {
+  .fa-chevron-up {
+    display: none;
+  }
+}
+
+.accordion--open {
+  .fa-chevron-down {
+    display: none;
+  }
+}

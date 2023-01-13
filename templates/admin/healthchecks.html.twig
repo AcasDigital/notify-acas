@@ -1,0 +1,51 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "System Health"  %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+	<h1 class="govuk-heading-l">{{ title }}</h1>
+    <dl class="govuk-summary-list">
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header govuk-!-width-one-half"></th>
+                    <th scope="col" class="govuk-table__header"></th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for check in healthchecks %}
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">{{ check.getLabel }}
+                            {% if check.isHealthy != true %}
+                                <p>
+                                    {{ check.errors|join('<br />')|raw }}
+                                </p>
+
+                                {% if check.getLabel == 'Queues' %}
+                                    <form method="post" action="{{ path('admin_clear_failed') }}" onsubmit="return confirm('Are you sure you want to clear the failure queue?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('queueDelete') }}">
+                                        <button role="submit">Clear failed messages</button>
+                                    </form>
+                                {% endif %}
+
+                            {% endif %}
+                        </th>
+                        <td class="govuk-table__cell">
+                            {% if check.isHealthy %}
+                                <strong class="govuk-tag govuk-tag--green">
+                                    Healthy
+                                </strong>
+                            {% else %}
+                                <strong class="govuk-tag govuk-tag--red">
+                                    Unhealthy
+                                </strong>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </dl>
+{% endblock %}

@@ -1,0 +1,69 @@
+security:
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\Admin\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Admin\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            two_factor:
+                auth_form_path: 2fa_login    # The route name you have used in the routes.yaml
+                check_path: 2fa_login_check  # The route name you have used in the routes.yaml
+
+            entry_point: App\Security\TaskListAuthenticationEntryPoint
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                failure_path: app_login
+                default_target_path: healthcheck
+                password_parameter: _inputPassword
+                username_parameter: _inputEmail
+            logout:
+                path: app_logout
+
+            lazy: true
+            provider: app_user_provider
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/notify/idr-bst/admin/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/notify/idr-bst/admin/resend-auth-code, roles: PUBLIC_ACCESS }
+        # This makes the logout route accessible during two-factor authentication. Allows the user to
+        # cancel two-factor authentication, if they need to.
+        - { path: ^/notify/idr-bst/admin/logout, role: PUBLIC_ACCESS }
+        # This ensures that the form can only be accessed when two-factor authentication is in progress.
+        # do we need notify in it? does it need extra config?
+        - { path: ^/notify/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+        - { path: ^/notify/idr-bst/admin, roles: ROLE_ADMIN }
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

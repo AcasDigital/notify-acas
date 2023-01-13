@@ -1,0 +1,324 @@
+// One Trust cookie override
+// banner
+#onetrust-banner-sdk {
+  box-shadow: none !important;
+  border-bottom: 4px solid acas-color('teal') !important;
+
+  &:focus {
+    outline-color: transparent !important;
+    outline-width: 0 !important;
+  }
+}
+
+.ot-sdk-container {
+  max-width: 1396px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 15px !important;
+
+  h2 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.68rem !important;
+    line-height: 1.25 !important;
+
+    @include mq($container-md) {
+      font-size: 1.68rem !important;
+    }
+  }
+
+  p,
+  a {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  @include mq(0, $break-max-width) {
+    max-width: 1200px !important;
+  }
+
+  @include mq(0, $break-desktop--large) {
+    max-width: 970px !important;
+  }
+
+  @include mq(0, $break-desktop) {
+    max-width: 750px !important;
+  }
+
+  @include mq(0, $break-tablet) {
+    width: 100% !important;
+  }
+
+  .ot-sdk-row {
+    display: flex !important;
+    flex-direction: column !important;
+
+    .ot-sdk-columns {
+      position: relative !important;
+      left: auto !important;
+      transform: none !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+
+      @include mq($break-desktop--large) {
+        width: 60% !important;
+      }
+
+      #onetrust-policy {
+        margin: 0 !important;
+
+        #onetrust-policy-text {
+          margin-bottom: 0 !important;
+        }
+      }
+
+      #onetrust-button-group {
+        display: flex !important;
+        flex-direction: row-reverse !important;
+        justify-content: flex-end !important;
+        column-gap: 1em !important;
+        margin-top: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 0.5em !important;
+
+        button {
+          width: auto !important;
+          letter-spacing: normal !important;
+          margin: 0 !important;
+          border-radius: 0 !important;
+          padding: 0.75em !important;
+          font-size: 1rem !important;
+          border: 1px solid acas-color('teal-dark') !important;
+
+          &:hover {
+            opacity: 1 !important;
+            color: acas-color('teal-dark') !important;
+            background-color: acas-color('white') !important;
+          }
+
+          &.cookie-setting-link {
+            border: none !important;
+
+            &:hover {
+              text-decoration: none !important;
+            }
+          }
+        }
+
+        @include mq(0, $break-tablet) {
+          flex-direction: column-reverse !important;
+          row-gap: 0.75em !important;
+          width: 100% !important;
+
+          .cookie-setting-link {
+            text-align: center !important;
+          }
+        }
+      }
+
+      &:last-child {
+        width: 100% !important;
+        margin-left: 0 !important;
+      }
+    }
+  }
+}
+
+// cookie modal
+.ot-pc-scrollbar {
+  * > :focus {
+    outline: none !important;
+  }
+
+  h2 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.68rem !important;
+    line-height: 1.25 !important;
+
+    @include mq($container-md) {
+      font-size: 1.68rem !important;
+    }
+  }
+
+  h3 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+
+    @include mq($container-md) {
+      font-size: 1.2rem !important;
+    }
+  }
+
+  h3 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.2rem !important;
+  }
+
+  h4 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: $font-size-standard !important;
+  }
+
+  p,
+  a,
+  #ot-pc-desc {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  button {
+    width: auto !important;
+    letter-spacing: normal !important;
+    border-radius: 0 !important;
+    padding: 0.75em !important;
+    font-size: 1rem !important;
+
+    &:hover {
+      opacity: 1 !important;
+      color: acas-color('teal-dark') !important;
+      background-color: acas-color('white') !important;
+    }
+  }
+
+  .ot-always-active {
+    color: acas-color('teal-dark') !important;
+    font-size: 1rem !important;
+  }
+
+  .ot-tgl input:checked ~ .ot-switch .ot-switch-nob {
+    background-color: acas-color('teal-lightest') !important;
+    border: 1px solid acas-color('teal') !important;
+  }
+
+  .ot-tgl input:checked ~ .ot-switch .ot-switch-nob:before {
+    background-color: acas-color('teal') !important;
+    border-color: acas-color('teal') !important;
+  }
+}
+
+.ot-btn-container {
+  button {
+    width: auto !important;
+    letter-spacing: normal !important;
+    border-radius: 0 !important;
+    padding: 0.75em !important;
+    font-size: 1rem !important;
+    border: 1px solid acas-color('teal-dark') !important;
+
+    &:hover {
+      opacity: 1 !important;
+      color: acas-color('teal-dark') !important;
+      background-color: acas-color('white') !important;
+    }
+  }
+}
+
+.ot-pc-footer-logo {
+  display: none !important;
+}
+
+// cookie page
+.ot-policy-container {
+  .ot-sdk-show-settings {
+    padding: 0.75em !important;
+    font-size: 1rem !important;
+    letter-spacing: normal !important;
+    border: 1px solid acas-color('teal-dark') !important;
+    background: acas-color('teal-dark') !important;
+    color: acas-color('white') !important;
+    
+    &:hover,
+    &:focus {
+      opacity: 1 !important;
+      color: acas-color('teal-dark') !important;
+      background-color: acas-color('white') !important;
+    }
+  }
+  
+  h1 {
+    line-height: 1.25 !important;
+    font-size: 1.68rem !important;
+
+    @include mq($container-md) {
+      font-size: 2.42rem !important;
+    }
+  }
+
+  h2 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.68rem !important;
+    line-height: 1.25 !important;
+    margin-top: 0 !important;
+
+    @include mq($container-md) {
+      font-size: 1.68rem !important;
+    }
+  }
+
+  h3 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+
+    @include mq($container-md) {
+      font-size: 1.2rem !important;
+    }
+  }
+
+  h3 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: 1.2rem !important;
+  }
+
+  h4 {
+    font-family: $font-family-headers !important;
+    color: acas-color('teal') !important;
+    font-size: $font-size-standard !important;
+  }
+
+  p,
+  a,
+  span,
+  #ot-pc-desc {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    color: acas-color('black') !important;
+
+    &:is(a) {
+      color: acas-color('teal-dark') !important;
+    }
+  }
+
+  .ot-sdk-cookie-policy {
+    margin-top: 0.5em !important;
+  }
+
+  #ot-sdk-cookie-policy-v2 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 0.5em !important;
+
+    section:last-of-type {
+      margin-bottom: 0 !important;
+    }
+
+    table {
+      border-radius: 0 !important;
+      font-size: 1rem !important;
+      line-height: 1.5 !important;
+
+      td {
+        word-break: break-word !important;
+        color: acas-color('black') !important;
+      }
+    }
+  }
+}

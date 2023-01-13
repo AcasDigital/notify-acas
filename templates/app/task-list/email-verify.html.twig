@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block breadcrumbs %}
+    {% import 'app/components/back-link.html.twig' as backLink %}
+    {{ backLink.renderBack(backUrl) }}
+{% endblock %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block page_title %}{% endblock %}
+{% block content %}
+
+
+{% form_theme form 'app/govuk_form_theme.html.twig' %}
+{{ form_start(form) }}
+<fieldset class="govuk-fieldset">
+    <legend>
+        <h1>{{ title|raw }}</h1>
+    </legend>
+    <p>We have sent a code to:
+        <strong>{{ data.getOptionalTaskEmailData('wizard_email').getData() }}</strong>
+    </p>
+    <p>The code will expire in {{ code_expiry_mins }} minutes.</p>
+    <p>If you use a browser to access your email, you may need to open a new window or tab to see the code.</p>
+
+
+    <div id="validation" class="govuk-form-group">
+        <label class="govuk-label" for="form_code">Confirmation code</label>
+        <p id="email-hint" class="govuk-hint">For example, 60193</p>
+
+        {% set validationMessage = null %}
+        {% for message in app.flashes('validation') %}
+            {% set validationMessage = message %}
+            {# confirmation code business logic validation error div start #}
+            <div class="govuk-form-group govuk-form-group--error">
+                <span id="" role="alert" aria-live="polite" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>{{ message }}</span>
+        {% endfor %}
+
+        {# confirmation code form field #}
+        {{ form_row(form.code) }}
+        {# Add special error help text for expired code #}
+        {% set isExpired = false %}
+        {% if form_errors(form.code)|split('expired')|length > 1 %}
+            {% set isExpired = true %}
+        {% endif %}
+        {% if isExpired %}
+            <p class="govuk-hint"><a href="{{ path('app_wizard_code_resend', {type: 'email'}) }}">The confirmation code has expired. Request a new code.</a></p>
+        {% endif %}
+
+        {# confirmation code business logic validation error div end #}
+        {% if validationMessage %}
+            </div>
+        {% endif %}
+    </div>
+
+    {% if isExpired != true %}
+      <h2 class="h3">If you have not received an email</h2>
+      <p>The email may take a few minutes to arrive.</p>
+      <p>Check your spam or junk folder. If it still has not arrived, you can <a href="{{ path('app_wizard_code_resend', {type: 'email'}) }}">request a new code</a> or <a href="{{ backUrl }}">provide another email address</a>.</p>
+    {% endif %}
+
+
+</fieldset>
+
+{% import 'app/components/button.html.twig' as linkButton %}
+{{ linkButton.renderButton({ label: "Confirm and continue", type: "primary"}) }}
+{{ form_end(form) }}
+{% endblock %}

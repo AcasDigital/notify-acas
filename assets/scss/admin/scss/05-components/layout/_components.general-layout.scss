@@ -1,0 +1,31 @@
+.layout-container {
+  @include mq(0, $menu-switch-breakpoint) {
+    margin-top: calc(#{$spacing-l} + #{$mobile-header-height});
+  }
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  > header {
+    // this is required otherwise the fixed header offset makes the page larger than 100% of the viewport height
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
+
+  > main,
+  > .main-content-wrapper {
+    @include content-area--restricted;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  > footer {
+    flex-shrink: 0;
+  }
+}

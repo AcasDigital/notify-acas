@@ -1,0 +1,73 @@
+.form-type-radio {
+  label {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 8px 15px 5px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+
+    line-height: 1.25;
+    display: block;
+    position: relative;
+    min-height: 35px;
+    margin-bottom: 10px;
+    padding: 0px 0 0 40px;
+    clear: left;
+
+    span {
+      float: left;
+      margin: 2px 0;
+
+      &::before {
+        content: "";
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 26px;
+        height: 26px;
+        border: 2px solid currentColor;
+        border-radius: 50%;
+        background: transparent;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 5px;
+        left: 5px;
+        width: 0;
+        height: 0;
+        border: 8px solid acas-color("blue");
+        border-radius: 50%;
+        opacity: 0;
+        background: acas-color("blue");
+      }
+    }
+  }
+
+  input[type="radio"] {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin: 0;
+    opacity: 0;
+
+    &:hover + span:before,
+    &:focus + span:before {
+      box-shadow: 0 0 0 4px acas-color("teal");
+    }
+  }
+
+  input:checked + span:after {
+    opacity: 1;
+  }
+}

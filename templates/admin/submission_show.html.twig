@@ -1,0 +1,130 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% set title = "Editable text list"  %}
+{% block title %}
+	Show form submission
+{% endblock %}
+{% block body %}
+	<a href="{{ path('admin_submission_list') }}" class="govuk-back-link">back to all submissions</a>
+	<h1 class="govuk-heading-l">
+		{{ employmentDispute.id }}
+	</h1>
+	<br/>
+	<span class="govuk-caption-m">
+		Case Number:
+		<strong class="govuk-tag govuk-tag--turquoise">{{ employmentDispute.caseNumberList|default('NONE SET') }}</strong>
+	</span>
+	<span class="govuk-caption-m">
+		Type:
+		<strong>{{ employmentDispute.type }}</strong>
+	</span>
+	<span class="govuk-caption-m">
+		Created:
+		{{ employmentDispute.created|date }}
+	</span>
+	<span class="govuk-caption-m">
+		Modified:
+		{{ employmentDispute.modified|date }}
+	</span>
+	<span class="govuk-caption-m">
+		Status:
+		{% if employmentDispute.status == 'submitted' %}
+			<strong class="govuk-tag govuk-tag--green">Submitted</strong>
+		{% elseif employmentDispute.status == 'queued' %}
+			<strong class="govuk-tag govuk-tag--purple">Queued</strong>
+		{% elseif employmentDispute.status == 'failed' %}
+			<strong class="govuk-tag govuk-tag--red">Failed</strong>
+		{% else %}
+			<strong class="govuk-tag govuk-tag--grey">{{ employmentDispute.status }}</strong>
+		{% endif %}
+	</span>
+	<br/>
+	{% if employmentDispute.isRetryable() and employmentDispute.status != 'queued' %}
+		{% if employmentDispute.status == 'paused' %}
+			<a class="govuk-button  govuk-button--warning" href="{{ path('admin_form_retry', {id: employmentDispute.id, type: 'forced' })}}">Edit and force submission</a>
+		{% else %}
+			<a class="govuk-button  govuk-button--warning" href="{{ path('admin_form_retry', {id: employmentDispute.id})}}">Edit and retry submission</a>
+		{% endif %}
+	{% endif %}
+	<div class="govuk-tabs" data-module="govuk-tabs">
+		<h2 class="govuk-tabs__title">
+			Contents
+		</h2>
+		<ul class="govuk-tabs__list">
+			{% if submissions|length > 0 %}
+				<li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+					<a class="govuk-tabs__tab" href="#submissions">
+						CRM Submissions
+					</a>
+				</li>
+			{% endif %}
+			<li class="govuk-tabs__list-item">
+				<a class="govuk-tabs__tab" href="#payload">
+					Current Payload
+				</a>
+			</li>
+			{% if employmentDispute.type != 'certificate' %}
+				<li class="govuk-tabs__list-item">
+					<a class="govuk-tabs__tab" href="#incident">
+						Current Incident Info
+					</a>
+				</li>
+			{% endif %}
+			<li class="govuk-tabs__list-item">
+				<a class="govuk-tabs__tab" href="#manage">
+					Manage Status
+				</a>
+			</li>
+		</ul>
+		{% if submissions|length > 0 %}
+			<div class="govuk-tabs__panel" id="submissions">
+				<h2 class="govuk-heading-m">CRM Submissions</h2>
+				{% for submission in submissions %}
+					<details class="govuk-details" data-module="govuk-details">
+						<summary class="govuk-details__summary" role="button">
+							{% if submission.status == 'success' %}
+								<strong class="govuk-tag govuk-tag--green">Success</strong>
+							{% else %}
+								<strong class="govuk-tag govuk-tag--red">Failure</strong>
+							{% endif %}
+							<span class="govuk-details__summary-text">
+								Submission #{{ loop.index }}
+								-
+								{{ submission.created|date }}
+							</span>
+						</summary>
+						<div class="govuk-details__text">
+							<h3>Request</h3>
+							<pre>{{ submission.payload|formatJson }}</pre>
+							<h3>Response</h3>
+							<pre>{{ submission.response }}</pre>
+						</div>
+					</details>
+				{% endfor %}
+			</div>
+		{% endif %}
+		<div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="payload">
+			<h2 class="govuk-heading-m">Current Payload</h2>
+			<div class="govuk-inset-text">
+				This is generated from the current content in the form - not what has previously been submitted.
+			</div>
+			<pre>{{ payload|formatJson }}</pre>
+		</div>
+		{% if employmentDispute.type != 'certificate' %}
+			<div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="incident">
+				<h2 class="govuk-heading-m">Current Incident Info</h2>
+				<div class="govuk-inset-text">
+					This is generated from the current content in the form - not what has previously been submitted.
+				</div>
+				<pre>{{ incidentInfo|nl2br }}</pre>
+			</div>
+		{% endif %}
+		<div class="govuk-tabs__panel" id="manage">
+			<h2 class="govuk-heading-m">Manage Form Status</h2>
+            <div class="govuk-inset-text">Changing the status does not send any data to CRM, it only updates the status within this application. For example, changing the status from Draft to Submitted here will not perform a submission.</div>
+			{{ form_start(form) }}
+			{{ form_row(form.status, {'label': 'Change form status' }) }}
+			<button type="submit" class="govuk-button">Update status</button>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

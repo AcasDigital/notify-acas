@@ -1,0 +1,39 @@
+{% macro getCurrentClass(route, activeRoute = null) %}
+	{% if activeRoute|default(app.request.attributes.get('_route')) ==  route %}
+		app-navigation__list-item--current
+	{% endif %}
+{% endmacro %}
+{% if app.user %}
+	<div class="app-navigation">
+		<div class="govuk-width-container">
+			<nav class="govuk-clearfix">
+				<ul class="app-navigation__list app-navigation__list--first-level app-width-container">
+					{# add app-navigation__list-item--has-children for <li> with children #}
+					{# below the <a></a> need: <ul class="app-navigation__list app-navigation__list--second-level app-width-container"> #}
+
+						<li class="app-navigation__list-item {{ _self.getCurrentClass('healthcheck',  activeRoute|default ) }}"> <a class="govuk-link govuk-link--no-visited-state govuk-link--no-underline app-navigation__link" href="{{ path('healthcheck') }}" data-topnav="Healthcheck">System Health</a>
+					</li>
+
+					<li class="app-navigation__list-item {{ _self.getCurrentClass('admin_submission_list',  activeRoute|default ) }}">
+						<a class="govuk-link govuk-link--no-visited-state govuk-link--no-underline app-navigation__link" href="{{ path('admin_submission_list') }}" data-topnav="Manage users">Notification Forms</a>
+					</li>
+
+					<li class="app-navigation__list-item {{ _self.getCurrentClass('admin_jobs',  activeRoute|default ) }}">
+						<a class="govuk-link govuk-link--no-visited-state govuk-link--no-underline app-navigation__link" href="{{ path('admin_jobs') }}" data-topnav="Manage users">Scheduled Jobs</a>
+					</li>
+
+					<li class="app-navigation__list-item {{ _self.getCurrentClass('admin.reports',  activeRoute|default ) }}">
+						<a class="govuk-link govuk-link--no-visited-state govuk-link--no-underline app-navigation__link" href="{{ path('admin.reports') }}" data-topnav="Reports">Reports</a>
+					</li>
+
+					<li class="app-navigation__list-item {{ _self.getCurrentClass('admin_users',  activeRoute|default ) }}">
+						<a class="govuk-link govuk-link--no-visited-state govuk-link--no-underline app-navigation__link" href="{{ path('admin_users') }}" data-topnav="Manage users">Manage users</a>
+					</li>
+					<li class="app-navigation__list-item {{ _self.getCurrentClass('admin_settings',  activeRoute|default ) }}">
+						<a class="govuk-link govuk-link--no-visited-state govuk-link--no-underline app-navigation__link" href="{{ path('admin_settings') }}" data-topnav="Manage users">Settings</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+{% endif %}

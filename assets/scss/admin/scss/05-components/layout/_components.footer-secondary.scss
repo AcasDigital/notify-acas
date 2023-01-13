@@ -1,0 +1,108 @@
+#footer--secondary {
+  @include content-area;
+
+  .footer-secondary__social-links {
+    @include mq(0, $break-desktop) {
+      margin-top: $spacing-xxl;
+      margin-bottom: $spacing-l;
+    }
+    @include mq($break-desktop) {
+      margin-top: $spacing-xxxl;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  // Social Media Links
+  .footer-social__list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .footer-social__list-item {
+    margin-right: $spacing-l;
+    margin-bottom: $spacing-l;
+    margin-left: $spacing-l;
+
+    @include mq($break-desktop) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .footer-social__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    color: $black;
+
+    &:hover,
+    &:focus {
+      .icon--twitter g {
+        fill: $twitter;
+      }
+      .icon--facebook g {
+        fill: $facebook;
+      }
+      .icon--youtube g {
+        fill: $youtube;
+      }
+    }
+    .icon--twitter g {
+      fill: $grey--medium;
+    }
+    .icon--facebook g {
+      fill: $grey--medium;
+    }
+    .icon--youtube g {
+      fill: $grey--medium;
+    }
+
+    .icon {
+      flex-basis: 30px;
+    }
+  }
+
+  // Secondary Site links
+  .footer-secondary-site-links__list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .footer-secondary-site-links__link {
+    @include h5;
+    @include link-no-underline-unless-hover;
+
+    font-weight: normal;
+    color: $black;
+
+    &:hover,
+    &:focus {
+      color: $links;
+    }
+  }
+
+  .footer-secondary-site-links__list-item {
+    margin-right: $spacing-l;
+    margin-bottom: $spacing-l;
+    margin-left: $spacing-l;
+  }
+
+  // Copyright
+  .footer-secondary__copyright {
+    text-align: center;
+    margin-top: $spacing-m;
+    margin-bottom: 0;
+  }
+}
+
+.footer-secondary__social-links,
+.footer-secondary__site-links {
+  @include print {
+    display: none;
+  }
+}

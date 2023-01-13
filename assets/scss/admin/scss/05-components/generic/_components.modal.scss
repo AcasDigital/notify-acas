@@ -1,0 +1,122 @@
+.body-modal--active {
+  // lock page
+  overflow-y: hidden;
+
+  .modal-wrapper {
+    background-color: transparentize($black, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: $z-modal-wrapper;
+  }
+
+  .modal {
+    // Absolute centering
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: auto;
+    min-width: 50vw;
+    max-width: 90vw;
+    background-color: $white;
+    z-index: $z-modal-content;
+    padding: $spacing-l;
+
+    @include mq($break-max-width) {
+      padding: $spacing-xl;
+      height: auto;
+      max-width: 800px;
+      min-width: 0;
+      width: auto;
+    }
+  }
+
+  .modal__body {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+.modal__header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $spacing-l;
+
+  .modal__title {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .modal__close {
+    cursor: pointer;
+    padding: $spacing-xs;
+    margin-left: $spacing-l;
+    font-size: $icon-size--l;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.modal__footer {
+  margin-top: $spacing-l;
+  display: flex;
+
+  @include mq($break-desktop) {
+    justify-content: flex-end;
+  }
+
+  .btn {
+    @include mq(0, $break-desktop) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.modal-rating__text {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modal-rating__list-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: $spacing-l;
+
+  @include mq($break-desktop) {
+    margin-bottom: $spacing-xl;
+  }
+
+  + .modal-rating__list-item {
+    margin-top: $spacing-l;
+  }
+}
+
+.modal-rating__icon {
+  margin-right: $spacing-l;
+  font-size: $icon-size--l;
+  width: $icon-size--l;
+  height: $icon-size--l;
+  overflow: visible;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.body--mobile-menu--active {
+  .site-header--mobile__logo-wrapper {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+}

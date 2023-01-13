@@ -1,0 +1,294 @@
+.rating {
+  border-top: 1px solid $grey--light;
+  padding-top: $spacing-l;
+  padding-bottom: $spacing-m;
+  margin-top: $spacing-m;
+  margin-bottom: $spacing-m;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  @include mq($break-desktop) {
+    align-items: flex-start;
+    flex-flow: row nowrap;
+  }
+
+  @include print {
+    padding-top: $spacing-s;
+    padding-bottom: $spacing-s;
+    margin-top: $spacing-s;
+    margin-bottom: $spacing-s;
+    border-top: 2px dashed $grey--light;
+  }
+}
+
+.rating__content {
+  flex-grow: 1;
+  flex-basis: 280px;
+  margin-right: $spacing-l;
+
+  @include mq($break-desktop) {
+    flex-shrink: 1;
+  }
+}
+
+.rating__title-link {
+  @include link-no-underline-unless-hover;
+
+  word-break: break-word;
+}
+
+.rating__title-span {
+  color: $black;
+}
+
+.rating__rating {
+  display: flex;
+  align-items: center;
+
+  &:hover,
+  &:focus {
+    .rating__value {
+      color: $links;
+    }
+  }
+
+  @include mq(0, $break-desktop) {
+    flex-grow: 1;
+    flex-basis: 100%;
+    flex-flow: row nowrap;
+  }
+
+  @include mq($break-desktop) {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    margin-left: $spacing-l;
+  }
+}
+
+.rating__value {
+  margin-top: 0;
+  margin-bottom: 0;
+  // matches h3 line-height
+  line-height: 30px;
+}
+
+.rating__icon {
+  margin-top: 1px;
+  margin-left: $spacing-m;
+  // font-size & width+height in case it's <svg> or <i>
+  font-size: $icon-size--m;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.rating__date {
+  display: inline-block;
+  margin-right: $spacing-m;
+  color: $grey--medium;
+}
+
+.rating__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.rating__subtitle {
+  @include h5;
+
+  margin-top: $spacing-xs;
+  margin-bottom: 0;
+}
+
+.rating-state--outstanding,
+.rating-state--good,
+.rating-state--no-action {
+  .fas,
+  .far,
+  .fal {
+    color: $rating-green;
+  }
+
+  circle {
+    fill: $rating-green;
+  }
+}
+
+.rating-state--requires-improvement {
+  .fas,
+  .far,
+  .fal {
+    color: $rating-orange;
+  }
+
+  circle {
+    fill: $rating-orange;
+  }
+}
+
+.rating-state--no-rating,
+.rating-state--compliance,
+.rating-state--must-improve {
+  .fas,
+  .far,
+  .fal {
+    color: $rating-grey;
+  }
+
+  circle {
+    fill: $rating-grey;
+  }
+}
+
+.rating-state--inadequate,
+.rating-state--enforcement-action {
+  .fas,
+  .far,
+  .fal {
+    color: $rating-red;
+  }
+
+  circle {
+    fill: $rating-red;
+  }
+}
+
+.rating-state {
+  cursor: pointer;
+
+  &:focus {
+    @include common-focus-styles;
+  }
+}
+
+main {
+  .ratings {
+    margin-top: $spacing-s;
+
+    @include mq($break-desktop) {
+      margin-top: $spacing-xl;
+    }
+
+    &.ratings--service-overview {
+      margin-top: $spacing-l;
+
+      .rating {
+        flex-flow: row nowrap;
+      }
+      .rating__rating {
+        @include mq(0, $break-desktop) {
+          flex-basis: 280px;
+        }
+
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+.ratings-info {
+  display: none;
+
+  @include mq($break-desktop) {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  .ratings-info__prompt {
+    margin-left: $spacing-m;
+  }
+
+  .fa-circle {
+    @include mq($break-desktop) {
+      font-size: $icon-size--m;
+    }
+  }
+}
+
+.ratings--provider-services {
+  .rating {
+    padding-top: $spacing-s;
+    padding-bottom: $spacing-s;
+    margin: 0;
+    border-top: none;
+    border-bottom: 1px solid $grey--light;
+  }
+
+  .rating__title {
+    @include p;
+    @include open-semi-bold;
+
+    margin: 0;
+  }
+
+  h3 {
+    @include p;
+    @include open-semi-bold;
+
+    margin: 0;
+  }
+}
+
+.paragraph--type--latest-inspection {
+  .ratings--homepage {
+    margin-top: $spacing-l;
+
+    .rating {
+      @include open-semi-bold;
+
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-top: 0;
+    }
+
+    .rating__rating {
+      margin-left: 0;
+    }
+
+    .rating__icon {
+      margin-left: 0;
+      margin-right: $spacing-m;
+
+      font-size: 32px;
+      width: 32px;
+      height: 30px;
+
+      .icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .rating + .rating {
+      margin-top: 12px;
+    }
+
+    .rating-state {
+      cursor: default;
+    }
+  }
+
+  .field--name-field-title {
+    margin-bottom: $spacing-xl;
+  }
+
+  .field--name-field-description {
+    margin-top: $spacing-l;
+    margin-bottom: $spacing-l;
+    color: $grey--medium;
+
+    p {
+      color: $grey--medium;
+    }
+  }
+}

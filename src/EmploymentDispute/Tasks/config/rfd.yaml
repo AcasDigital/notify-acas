@@ -1,0 +1,59 @@
+rfd:
+  wages:
+    - t51_wages
+    - t52_why_wages_owed
+    - t53_when_wages_owed
+    - t54_internal_procedures
+  holiday:
+    - t56_holiday_year
+    - t55_holiday_pay
+    - t52_why_wages_owed
+    - t53_when_wages_owed
+    - t54_internal_procedures
+  redundancy:
+    - t57_more_than_two_years
+    - t58_termination_date
+    - t59_redundancy_pay
+    - t53b_when_redundancy_owed
+    - t60_notice_period
+    - t54_internal_procedures
+  discrimination:
+    - t61_why_discrimated
+    - t62_when_discriminated
+    - t63_one_off
+    - t64_discrimination_details
+  unfair_dismissal:
+    - t57_more_than_two_years
+    - t58_termination_date
+    - t65_reason_for_dismissal
+    - t66_why_dismissal_unfair
+    - t67_internal_procedures_dismissal
+    - t68_dismissal_appeal
+  constructive_dismissal:
+    - t57_more_than_two_years
+    - t69_resignation_date
+    - t70_no_option_but_resign
+    - t54_internal_procedures
+  wrongful_dismissal:
+    - t58_termination_date
+    - t71_about_notice_pay
+    - t72_employment_contract
+    - t73_clause_was_breached
+    - t54_internal_procedures
+  equal_pay:
+    - t74_failing_providing_equal_pay
+    - t75_oposite_sex_comparison
+    - t76_similar_claim
+    - t54_internal_procedures
+  whistleblowing:
+    - t77_raised_with
+    - t78_what_is_the_concern
+    - t79_why_is_it_about_whistleblowing
+    - t80_what_is_the_detriment
+    - t81_date_of_detriment
+    - t82_internal_procedures_whistleblowing
+  other:
+    - t83_dispute_details
+    - t84_dispute_date
+    - t54_internal_procedures
+    - t85_other_information

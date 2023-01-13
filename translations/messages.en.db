@@ -1,0 +1,2 @@
+// This file is not used for translation content but as a pointer resource file for the translation service to load the translation from the database.
+// See: https://symfony.com/doc/current/reference/dic_tags.html#translation-loader

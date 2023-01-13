@@ -1,0 +1,223 @@
+#site-header--mobile {
+  @include mq(0, $menu-switch-breakpoint) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $brand-primary;
+    height: $mobile-header-height;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $z-mobile-menu;
+  }
+
+  @include mq(0, $break-phablet) {
+    padding: $spacing-l;
+  }
+
+  @include mq($break-phablet, $break-desktop) {
+    padding: $spacing-l $spacing-xl;
+  }
+
+  @include mq($menu-switch-breakpoint) {
+    display: none;
+  }
+
+  .site-header--mobile__logo-wrapper {
+    flex-grow: 1;
+
+    svg {
+      max-width: 138px;
+    }
+  }
+
+  #open-search,
+  #open-menu {
+    border: none;
+    background-color: transparent;
+    margin-right: 0;
+    padding-right: 0;
+    padding-left: 0;
+    margin-left: $spacing-l-plus;
+    color: $white;
+    font-size: $icon-size--l;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @include print {
+      display: none;
+    }
+  }
+
+  .site-header__mobile-extra-link {
+    color: $black;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: $spacing-l-plus;
+    margin-bottom: $spacing-l-plus;
+
+    .site-header__mobile-extra-link--text {
+      padding-left: $spacing-m;
+    }
+
+    &:hover,
+    &:focus {
+      // prevents ugly text decoration between icon & text
+      text-decoration: none;
+
+      .site-header__mobile-extra-link--text {
+        text-decoration: underline;
+      }
+    }
+
+    .site-header__mobile-extra-link--icon {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+    }
+  }
+
+  .site-main-menu__list {
+    margin-bottom: $spacing-l-plus;
+    padding-bottom: $spacing-l-plus;
+    border-bottom: 1px solid $grey--light;
+  }
+}
+
+.site-header__desktop-logo-link {
+  @include print {
+    g,
+    svg,
+    path {
+      fill: $brand-primary;
+    }
+  }
+}
+
+#mobile-flyout {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: -#{$break-phablet};
+  transition: width 1s ease, opacity 1s ease, right 1s ease;
+  height: 100vh;
+  z-index: $z-mobile-nav;
+  display: block;
+  background-color: $white;
+  overflow: hidden;
+  border-left: 1px solid $black;
+  width: 100%;
+  // max-width: 360px;
+
+  @include mq($break-phablet) {
+    right: -1024px;
+  }
+
+  @include print {
+    display: none;
+  }
+
+  &.mobile-flyout--active {
+    opacity: 1;
+    right: 0px;
+  }
+
+  .site-main-menu__link,
+  .site-header__mobile-extra-link {
+    @include open-semi-bold;
+
+    color: $black;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+  }
+
+  .mobile-menu__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $mobile-header-height;
+    background-color: $brand-primary;
+    padding-top: $spacing-l;
+    padding-right: $spacing-xl;
+    padding-bottom: $spacing-l;
+    padding-left: $spacing-l;
+  }
+
+  .mobile-flyout__content-wrapper {
+    padding-top: $spacing-xl;
+    padding-right: $spacing-xl;
+    padding-bottom: $spacing-l;
+    padding-left: $spacing-xl;
+    max-height: calc(100vh - #{$mobile-header-height});
+    overflow-y: auto;
+  }
+
+  .site-main-menu__item {
+    margin-top: 0;
+    margin-bottom: $spacing-l-plus;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .fa-times {
+    font-size: $icon-size--l;
+    line-height: 1em;
+    color: $white;
+  }
+
+  .mobile-care-services-text {
+    @include open-bold;
+
+    margin-top: $spacing-xl;
+    margin-bottom: 0;
+  }
+
+  .mobile-care-services-link-wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+#close-mobile-menu {
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mobile-flyout__content {
+  display: none;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 1s ease;
+  height: 0;
+}
+
+.mobile-flyout--menu {
+  .mobile-flyout__content--menu {
+    display: block;
+    overflow: visible;
+    height: auto;
+    opacity: 1;
+  }
+}
+
+.mobile-flyout--search {
+  .mobile-flyout__content--search {
+    display: block;
+    overflow: visible;
+    height: auto;
+    opacity: 1;
+  }
+}

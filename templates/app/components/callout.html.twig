@@ -1,0 +1,13 @@
+{% macro renderCallout(callout) %}
+  <div class="acas-warning-callout">
+    <h2 class="acas-warning-callout__label">
+      {% if callout.title is defined and callout.title is not null %}
+        {{ callout.title }}
+      {% endif %}
+    </h2>
+
+    {% if callout.content is defined and callout.content is not null %}
+      {{ callout.content|raw }}
+    {% endif %}
+  </div>
+{% endmacro %}

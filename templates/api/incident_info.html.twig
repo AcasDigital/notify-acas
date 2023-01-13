@@ -1,0 +1,200 @@
+Preferred method of first contact: {{ contact_method }}
+{# Is this claim part of an existing claim? [EXISTING_CLAIM] #}
+{# Related case ID: [RELATED_CASE_ID] #}
+
+{% for org in org_info|default([]) %}
+	{% if org['not_trading'] is defined and org['not_trading'] == 1 and org['name'] is defined %}
+		{{ org['name'] }} is no longer in business.
+	{% endif %}
+	{% if org['currently_employed'] is defined and org['currently_employed'] == 1 and org['name'] is defined %}
+		Claimant is CURRENTLY EMPLOYED by {{ org['name'] }}
+	{% endif %}
+{% endfor %}
+
+Summary
+===========
+{% if reasons_for_dispute is defined %}
+	Reason for the dispute: {{ reasons_for_dispute }}
+{% endif %}
+{% if t61_why_discrimated is defined %}
+	Discrimination because of: {{ t61_why_discrimated }}
+{% endif %}
+
+What are they seeking?
+===========
+{% set show_total = 0 %}
+{% if t51_wages is defined %}
+	{% set show_total = show_total + 1 %}
+	Owed £{{ t51_wages }} in wages.
+{% endif %}
+{% if t55_holiday_pay is defined %}
+	{% set show_total = show_total + 1 %}
+	Owed £{{ t55_holiday_pay}} in holiday pay.
+{% endif %}
+{% if t59_redundancy_pay is defined %}
+	{% set show_total = show_total + 1 %}
+	Owed £{{ t59_redundancy_pay }} in redundancy pay.
+{% endif %}
+
+{% if total_owed is defined and show_total > 1 %}
+	Owed £{{ total_owed }} in total
+{% endif %}
+{% if t60_notice_period is defined %}
+	{% if t60_notice_period == 'yes' %}
+		Claimant has worked a noticed period
+	{% elseif t60_notice_period == 'no' %}
+		Claimant did NOT work a noticed period
+	{% endif %}
+{% endif %}
+{% if t72_employment_contract is defined %}
+	{% if t72_employment_contract == 'yes' %}
+		Claimant has a contract with this employer
+	{% elseif t72_employment_contract == 'no' %}
+		Claimant does not have a contract with this employer
+	{% endif %}
+{% endif %}
+
+Relevant dates:
+===========
+{% if t56_holiday_year is defined and (t56_holiday_year.start or t56_holiday_year.end) %}
+	Holiday year starts on {{ t56_holiday_year.start ?: 'N/A' }} and ends on {{ t56_holiday_year.end ?: 'N/A' }}
+{% endif %}
+{% if t53_when_wages_owed is defined and t53_when_wages_owed.start %}
+	When should the claimant have received this money: {{ t53_when_wages_owed.start }}
+{% endif %}
+{% if t53b_when_redundancy_owed is defined and t53b_when_redundancy_owed.start %}
+	When should the claimant have received the redundancy payment: {{ t53b_when_redundancy_owed.start }}
+{% endif %}
+{% if t62_when_discriminated is defined and t62_when_discriminated.start  %}
+	Most recent discrimination on: {{ t62_when_discriminated.start }}
+{% endif %}
+{% if t57_more_than_two_years is defined %}
+	{% if 'yes' == t57_more_than_two_years %}
+		Claimant has worked two years or more for this employer
+	{% elseif ('no' == t57_more_than_two_years) %}
+		Claimant has NOT worked two years or more for this employer
+	{% endif %}
+{% endif %}
+{% if t58_termination_date is defined and t58_termination_date.start %}
+	Date of termination: {{ t58_termination_date.start }}
+{% endif %}
+{% if t69_resignation_date is defined and t69_resignation_date.start %}
+	Resignation date: {{ t69_resignation_date.start }}
+{% endif %}
+{% if t81_date_of_detriment is defined %}
+	{% if t81_date_of_detriment.extra %}
+		Most recent date of whistleblowing detriment: {{ t81_date_of_detriment.content ? t81_date_of_detriment.content|date('d-m-Y') : 'N/A' }}
+	{% else %}
+		Most recent date of whistleblowing detriment: Claimant does NOT know
+	{% endif %}
+{% endif %}
+{% if t84_dispute_date is defined %}
+	{% if t84_dispute_date.extra %}
+		Dispute date: {{ t84_dispute_date.content ? t84_dispute_date.content|date('d-m-Y') : 'N/A' }}
+	{% else %}
+		Dispute date: Claimant does NOT know
+	{% endif %}
+{% endif %}
+
+Formal procedures followed
+===========
+{% if t54_internal_procedures is defined %}
+	{% if t54_internal_procedures.extra %}
+		Claimant has been through internal procedures. Claimant said the employer responded the following: {{ t54_internal_procedures.content ?: 'N/A' }}
+	{% else %}
+		Claimant has NOT been through internal procedures.
+	{% endif %}
+{% endif %}
+{% if t67_internal_procedures_dismissal is defined %}
+	{% if t67_internal_procedures_dismissal.extra %}
+		Employer went through internal procedures before dismissal. Claimant said the following happened: {{ t67_internal_procedures_dismissal.content ?: 'N/A' }}
+	{% else %}
+		Employer did NOT go through internal procedures before dismissal.
+	{% endif %}
+{% endif %}
+{% if t82_internal_procedures_whistleblowing is defined %}
+	{% if t82_internal_procedures_whistleblowing.extra %}
+		Claimant has been through internal procedures relating to the whistleblowing claim. Claimant said the employer responded the following: {{ t82_internal_procedures_whistleblowing.content ?: 'N/A' }}
+	{% else  %}
+		Claimant has NOT been through internal procedures relating to the whistleblowing claim.
+	{% endif %}
+{% endif %}
+
+Details:
+===========
+{% if t52_why_wages_owed is defined %}
+	Owed money because: {{ t52_why_wages_owed }}
+{% endif %}
+{% if t64_discrimination_details is defined %}
+	Discrimination details: {{ t64_discrimination_details }}
+{% endif %}
+{% if t63_one_off is defined %}
+	{% if t63_one_off == 'yes' %}
+		The discrimination was a one-off incident
+	{% elseif t63_one_off == 'no' %}
+		The discrimination was NOT a one-off incident
+	{% endif %}
+{% endif %}
+{% if t65_reason_for_dismissal is defined %}
+	Employer explanation for dismissal: {{ t65_reason_for_dismissal }}
+{% endif %}
+{% if t66_why_dismissal_unfair is defined %}
+	Why was the dismissal unfair: {{ t66_why_dismissal_unfair }}
+{% endif %}
+{% if t68_dismissal_appeal is defined %}
+	{% if t68_dismissal_appeal == 'yes' %}
+		Claimant has appealed against the dismissal
+	{% elseif t68_dismissal_appeal == 'no' %}
+		Claimant has NOT appealed against the dismissal
+	{% endif %}
+{% endif %}
+{% if t70_no_option_but_resign is defined %}
+	Why the claimant had no option but to resign: {{ t70_no_option_but_resign }}
+{% endif %}
+{% if t71_about_notice_pay is defined %}
+	{% if t71_about_notice_pay.extra %}
+		The claim is about notice pay and the amount is {{ t71_about_notice_pay.content ? '£' : '' }}{{ t71_about_notice_pay.content ?: 'N/A' }}
+	{% else %}
+		The claim is NOT about notice pay
+	{% endif %}
+{% endif %}
+{% if t73_clause_was_breached is defined %}
+	Clause breached: {{ t73_clause_was_breached }}
+{% endif %}
+{% if t74_failing_providing_equal_pay is defined %}
+	Failure to provide equal pay: {{ t74_failing_providing_equal_pay }}
+{% endif %}
+{% if t75_oposite_sex_comparison is defined %}
+	{% if t75_oposite_sex_comparison == 'yes' %}
+		Claimant is comparing their pay to a person of the opposite sex
+	{% elseif t75_oposite_sex_comparison == 'no' %}
+		Claimant is NOT comparing their pay to a person of the opposite sex
+	{% endif %}
+{% endif %}
+{% if t76_similar_claim is defined %}
+	{% if t76_similar_claim == 'yes' %}
+		Other people have made a similar claim in their organisation
+	{% elseif t76_similar_claim == 'no' %}
+		NO other people have made a similar claim in their organisation
+	{% endif %}
+{% endif %}
+{% if t77_raised_with is defined %}
+	Raised with: {{ t77_raised_with }}
+{% endif %}
+{% if t78_what_is_the_concern is defined %}
+	The whistleblowing concern is about: {{ t78_what_is_the_concern }}
+{% endif %}
+{% if t79_why_is_it_about_whistleblowing is defined %}
+	The claimant thinks it is about whistleblowing because of: {{ t79_why_is_it_about_whistleblowing }}
+{% endif %}
+{% if t80_what_is_the_detriment is defined %}
+	The whistleblowing detriment is: {{ t80_what_is_the_detriment }}
+{% endif %}
+{% if t83_dispute_details is defined %}
+	Details about the dispute: {{ t83_dispute_details }}
+{% endif %}
+{% if t85_other_information is defined %}
+	{% if t85_other_information.extra %}
+		More details: {{ t85_other_information.content ?: 'N/A'}}
+	{% endif %}
+{% endif %}
